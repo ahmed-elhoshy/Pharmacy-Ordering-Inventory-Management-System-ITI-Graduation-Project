@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\PharmacySystem.InfastructureLayer",
+    "\\PharmacySystem.InfastructureLayer\\Data",
+    "\\PharmacySystem.InfastructureLayer\\Data\\DBContext"
+  ],
+  "SelectedNode": "\\PharmacySystem.InfastructureLayer\\Data\\DBContext\\PharmaDbContext.cs",
+  "PreviewInSolutionExplorer": false
+}

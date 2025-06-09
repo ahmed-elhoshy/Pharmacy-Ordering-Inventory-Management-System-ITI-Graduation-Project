@@ -1,0 +1,6 @@
+@PharmacySystem.PresentationLayer_HostAddress = http://localhost:5252
+
+GET {{PharmacySystem.PresentationLayer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

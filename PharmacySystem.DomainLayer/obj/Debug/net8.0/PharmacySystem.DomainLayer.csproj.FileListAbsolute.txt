@@ -1,0 +1,12 @@
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.deps.json
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.dll
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.pdb
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.AssemblyInfoInputs.cache
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.AssemblyInfo.cs
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.csproj.CoreCompileInputs.cache
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.dll
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\refint\PharmacySystem.DomainLayer.dll
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.pdb
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\ref\PharmacySystem.DomainLayer.dll
+D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.csproj.AssemblyReference.cache
