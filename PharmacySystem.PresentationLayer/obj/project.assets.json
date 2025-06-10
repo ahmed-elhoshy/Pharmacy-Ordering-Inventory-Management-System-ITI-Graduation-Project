@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "AutoMapper/14.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Azure.Core/1.38.0": {
         "type": "package",
         "dependencies": {
@@ -1656,6 +1672,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "AutoMapper": "14.0.0",
           "PharmacySystem.DomainLayer": "1.0.0"
         },
         "compile": {
@@ -1698,6 +1715,21 @@
     }
   },
   "libraries": {
+    "AutoMapper/14.0.0": {
+      "sha512": "OC+1neAPM4oCCqQj3g2GJ2shziNNhOkxmNB9cVS8jtx4JbgmRzLcUOxB9Tsz6cVPHugdkHgCaCrTjjSI0Z5sCQ==",
+      "type": "package",
+      "path": "automapper/14.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.14.0.0.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/net8.0/AutoMapper.dll",
+        "lib/net8.0/AutoMapper.xml"
+      ]
+    },
     "Azure.Core/1.38.0": {
       "sha512": "IuEgCoVA0ef7E4pQtpC3+TkPbzaoQfa77HlfJDmfuaJUCVJmn7fT0izamZiryW5sYUFKizsftIxMkXKbgIcPMQ==",
       "type": "package",
@@ -4635,23 +4667,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Shaban Hassan\\.nuget\\packages\\": {},
+    "C:\\Users\\Ramboo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\programing\\Projects\\Gradation Project ITI 9 Months\\Pharmacy System Project\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj",
+      "projectUniqueName": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj",
       "projectName": "PharmacySystem.PresentationLayer",
-      "projectPath": "D:\\programing\\Projects\\Gradation Project ITI 9 Months\\Pharmacy System Project\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj",
-      "packagesPath": "C:\\Users\\Shaban Hassan\\.nuget\\packages\\",
-      "outputPath": "D:\\programing\\Projects\\Gradation Project ITI 9 Months\\Pharmacy System Project\\PharmacySystem.PresentationLayer\\obj\\",
+      "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj",
+      "packagesPath": "C:\\Users\\Ramboo\\.nuget\\packages\\",
+      "outputPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Shaban Hassan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ramboo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4660,18 +4692,17 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\programing\\Projects\\Gradation Project ITI 9 Months\\Pharmacy System Project\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj": {
-              "projectPath": "D:\\programing\\Projects\\Gradation Project ITI 9 Months\\Pharmacy System Project\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj"
+            "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj": {
+              "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj"
             },
-            "D:\\programing\\Projects\\Gradation Project ITI 9 Months\\Pharmacy System Project\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj": {
-              "projectPath": "D:\\programing\\Projects\\Gradation Project ITI 9 Months\\Pharmacy System Project\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj"
+            "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj": {
+              "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj"
             }
           }
         }
@@ -4686,7 +4717,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -4722,7 +4753,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

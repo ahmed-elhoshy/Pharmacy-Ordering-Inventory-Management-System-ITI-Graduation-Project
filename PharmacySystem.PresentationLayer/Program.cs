@@ -1,6 +1,7 @@
 using E_Commerce.DomainLayer;
 using E_Commerce.DomainLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using PharmacySystem.ApplicationLayer.MappingConfig;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,11 @@ builder.Services.AddDbContext<PharmaDbContext>(options =>
 
 #region Services Registration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+#endregion
+
+#region AutoMapper Configuration
+builder.Services.AddAutoMapper(typeof(MapperConfig)); 
+
 #endregion
 
 
