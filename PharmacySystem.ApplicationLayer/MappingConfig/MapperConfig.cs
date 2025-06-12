@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
@@ -32,6 +33,9 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
                 .ForMember(dest => dest.AreaId, opt => opt.MapFrom(src => src.Id))
                 .ReverseMap()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.AreaName));
+           
+            CreateMap<WareHouseMedicien, WarehouseMedicineDto>()
+            .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Medicine.Name)).ReverseMap();
         }
     }
 }

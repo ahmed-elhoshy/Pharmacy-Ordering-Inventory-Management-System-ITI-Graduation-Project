@@ -4,21 +4,65 @@
 # Build results
 bin/
 obj/
+[Bb]uild/
+[Ll]og/
+artifacts/
 
 # User-specific files
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
+*.userprefs
 
 # ASP.NET specific
 project.lock.json
 project.fragment.lock.json
-artifacts/
+project.assets.json
 
-# Visual Studio Code workspace
+# IIS Express
+.vs/
+*.iisexpress/
+
+# Web publish
+*.Publish.xml
+*.pubxml
+*.publishproj
+
+# Rider (JetBrains)
+.idea/
+
+# Visual Studio Code
 .vscode/
 
-# Other
+# Backup & logs
 *.log
-*.vs/
+*.bak
+*.tmp
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+**/packages/*
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Others
+TestResults/
+*.cache
+*.dbmdl
+*.mdf
+*.ldf
+*.sqlite
+
+# Windows image thumbs
+Thumbs.db
+ehthumbs.db
+
+# OS generated
+.DS_Store
+Icon?
+desktop.ini

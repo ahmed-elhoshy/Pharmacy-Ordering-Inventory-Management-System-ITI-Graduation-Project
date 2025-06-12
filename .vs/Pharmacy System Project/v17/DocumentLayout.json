@@ -1,5 +1,6 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "WorkspaceRootPath": "D:\\pharmacy-system\\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\\",
   "Documents": [
     {
@@ -24,6 +25,136 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|d:\\pharmacy-system\\pharmacy-ordering-inventory-management-system-iti-graduation-project\\pharmacysystem.presentationlayer\\controllers\\medicinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+=======
+  "WorkspaceRootPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.presentationlayer\\controllers\\warehousecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|solutionrelative:pharmacysystem.presentationlayer\\controllers\\warehousecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.applicationlayer\\dtos\\warehouses\\read\\readwarehousedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|solutionrelative:pharmacysystem.applicationlayer\\dtos\\warehouses\\read\\readwarehousedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.applicationlayer\\services\\warehouseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|solutionrelative:pharmacysystem.applicationlayer\\services\\warehouseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.applicationlayer\\mappingconfig\\mapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|solutionrelative:pharmacysystem.applicationlayer\\mappingconfig\\mapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B418194F-E56F-4F02-9A5E-4117F026983F}|PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.infastructurelayer\\data\\interfacesimplementaion\\warehouserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B418194F-E56F-4F02-9A5E-4117F026983F}|PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj|solutionrelative:pharmacysystem.infastructurelayer\\data\\interfacesimplementaion\\warehouserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\interfaces\\iwarehouserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\interfaces\\iwarehouserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.applicationlayer\\dtos\\warehouses\\read\\readwarehouseareadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|solutionrelative:pharmacysystem.applicationlayer\\dtos\\warehouses\\read\\readwarehouseareadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.applicationlayer\\dtos\\warehouses\\read\\readwarehousedetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|solutionrelative:pharmacysystem.applicationlayer\\dtos\\warehouses\\read\\readwarehousedetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.presentationlayer\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|solutionrelative:pharmacysystem.presentationlayer\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.applicationlayer\\dtos\\warehousemedicines\\warehousemedicinedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|solutionrelative:pharmacysystem.applicationlayer\\dtos\\warehousemedicines\\warehousemedicinedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\entities\\warehousemedicine .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\entities\\warehousemedicine .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\common\\paginatedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\common\\paginatedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\entities\\warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\entities\\warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\entities\\warehousearea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\entities\\warehousearea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\interfaces\\imedicinrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\interfaces\\imedicinrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B418194F-E56F-4F02-9A5E-4117F026983F}|PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.infastructurelayer\\data\\interfacesimplementaion\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B418194F-E56F-4F02-9A5E-4117F026983F}|PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj|solutionrelative:pharmacysystem.infastructurelayer\\data\\interfacesimplementaion\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B418194F-E56F-4F02-9A5E-4117F026983F}|PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.infastructurelayer\\data\\interfacesimplementaion\\medicinerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B418194F-E56F-4F02-9A5E-4117F026983F}|PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj|solutionrelative:pharmacysystem.infastructurelayer\\data\\interfacesimplementaion\\medicinerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\entities\\pharmacy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\entities\\pharmacy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\interfaces\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\interfaces\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B418194F-E56F-4F02-9A5E-4117F026983F}|PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.infastructurelayer\\data\\iunitofworkimplementation\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B418194F-E56F-4F02-9A5E-4117F026983F}|PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj|solutionrelative:pharmacysystem.infastructurelayer\\data\\iunitofworkimplementation\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B418194F-E56F-4F02-9A5E-4117F026983F}|PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.infastructurelayer\\data\\config\\warehouseareaconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B418194F-E56F-4F02-9A5E-4117F026983F}|PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj|solutionrelative:pharmacysystem.infastructurelayer\\data\\config\\warehouseareaconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\entities\\medicine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\entities\\medicine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.presentationlayer\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|solutionrelative:pharmacysystem.presentationlayer\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.presentationlayer\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|solutionrelative:pharmacysystem.presentationlayer\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.domainlayer\\entities\\area.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F8FCD67-C281-4426-A7CA-0D389267113C}|PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj|solutionrelative:pharmacysystem.domainlayer\\entities\\area.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.applicationlayer\\dtos\\warehouses\\update\\updatewarehouseareadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|solutionrelative:pharmacysystem.applicationlayer\\dtos\\warehouses\\update\\updatewarehouseareadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.applicationlayer\\dtos\\warehouses\\create\\createwarehouseareadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|solutionrelative:pharmacysystem.applicationlayer\\dtos\\warehouses\\create\\createwarehouseareadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.applicationlayer\\dtos\\warehouses\\update\\updatewarehousedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|solutionrelative:pharmacysystem.applicationlayer\\dtos\\warehouses\\update\\updatewarehousedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.applicationlayer\\dtos\\warehouses\\create\\createwarhousedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA205B4E-58FF-4AF6-9169-ED82BC25F2C9}|PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj|solutionrelative:pharmacysystem.applicationlayer\\dtos\\warehouses\\create\\createwarhousedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|h:\\pharmacy warhouse graduation project iti\\pharmacysystem.presentationlayer\\controllers\\medicinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+>>>>>>> 4fc89f0a2b7e5d1d49ef64089eb146d39b0bce9f
       "RelativeMoniker": "D:0:0:{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}|PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj|solutionrelative:pharmacysystem.presentationlayer\\controllers\\medicinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -34,6 +165,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 184,
+<<<<<<< HEAD
           "SelectedChildIndex": 3,
           "Children": [
             {
@@ -74,6 +206,17 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-12T13:26:28.208Z",
               "EditorCaption": ""
+=======
+          "SelectedChildIndex": 18,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+>>>>>>> 4fc89f0a2b7e5d1d49ef64089eb146d39b0bce9f
             },
             {
               "$type": "Document",
@@ -89,6 +232,7 @@
               "EditorCaption": ""
             },
             {
+<<<<<<< HEAD
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "IMedicinRepository.cs",
@@ -113,6 +257,460 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-11T13:13:28.728Z",
               "EditorCaption": ""
+=======
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "WarehouseRepository.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\WarehouseRepository.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\WarehouseRepository.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\WarehouseRepository.cs",
+              "RelativeToolTip": "PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\WarehouseRepository.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowCUAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T16:15:07.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WarehouseService.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\Services\\WarehouseService.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.ApplicationLayer\\Services\\WarehouseService.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\Services\\WarehouseService.cs",
+              "RelativeToolTip": "PharmacySystem.ApplicationLayer\\Services\\WarehouseService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAkwDMAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T21:55:53.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReadWareHouseDTO.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWareHouseDTO.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWareHouseDTO.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWareHouseDTO.cs",
+              "RelativeToolTip": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWareHouseDTO.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T19:35:59.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MapperConfig.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\MappingConfig\\MapperConfig.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.ApplicationLayer\\MappingConfig\\MapperConfig.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\MappingConfig\\MapperConfig.cs",
+              "RelativeToolTip": "PharmacySystem.ApplicationLayer\\MappingConfig\\MapperConfig.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAABUAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T19:51:21.236Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WarehouseController.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\Controllers\\WarehouseController.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.PresentationLayer\\Controllers\\WarehouseController.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\Controllers\\WarehouseController.cs",
+              "RelativeToolTip": "PharmacySystem.PresentationLayer\\Controllers\\WarehouseController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T18:10:41.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IWarehouseRepository.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Interfaces\\IWarehouseRepository.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Interfaces\\IWarehouseRepository.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Interfaces\\IWarehouseRepository.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Interfaces\\IWarehouseRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T14:15:26.577Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ReadWareHouseAreaDTO.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWareHouseAreaDTO.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWareHouseAreaDTO.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWareHouseAreaDTO.cs",
+              "RelativeToolTip": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWareHouseAreaDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T19:42:52.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ReadWarehouseDetailsDTO.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWarehouseDetailsDTO.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWarehouseDetailsDTO.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWarehouseDetailsDTO.cs",
+              "RelativeToolTip": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Read\\ReadWarehouseDetailsDTO.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T17:12:52.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\Program.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.PresentationLayer\\Program.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\Program.cs",
+              "RelativeToolTip": "PharmacySystem.PresentationLayer\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T17:24:08.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "WarehouseMedicineDto.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\WarehouseMedicines\\WarehouseMedicineDto.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.ApplicationLayer\\DTOs\\WarehouseMedicines\\WarehouseMedicineDto.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\WarehouseMedicines\\WarehouseMedicineDto.cs",
+              "RelativeToolTip": "PharmacySystem.ApplicationLayer\\DTOs\\WarehouseMedicines\\WarehouseMedicineDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T20:57:08.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "WareHouseMedicine .cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\WareHouseMedicine .cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Entities\\WareHouseMedicine .cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\WareHouseMedicine .cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Entities\\WareHouseMedicine .cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T17:17:21.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PaginatedResult.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Common\\PaginatedResult.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Common\\PaginatedResult.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Common\\PaginatedResult.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Common\\PaginatedResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T21:00:51.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "WareHouse.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\WareHouse.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Entities\\WareHouse.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\WareHouse.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Entities\\WareHouse.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwCEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T17:29:26.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "WareHouseArea.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\WareHouseArea.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Entities\\WareHouseArea.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\WareHouseArea.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Entities\\WareHouseArea.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T17:51:46.167Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\GenericRepository.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\GenericRepository.cs",
+              "RelativeToolTip": "PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\GenericRepository.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwBMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T17:30:43.589Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "MedicineRepository.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\MedicineRepository.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\MedicineRepository.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\MedicineRepository.cs",
+              "RelativeToolTip": "PharmacySystem.InfastructureLayer\\Data\\InterfacesImplementaion\\MedicineRepository.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowAwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T15:02:37.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IMedicinRepository.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Interfaces\\IMedicinRepository.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Interfaces\\IMedicinRepository.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Interfaces\\IMedicinRepository.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Interfaces\\IMedicinRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T14:13:41.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Interfaces\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Interfaces\\IGenericRepository.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Interfaces\\IGenericRepository.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Interfaces\\IGenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T14:11:49.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "User.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Entities\\User.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\User.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T15:49:45.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Pharmacy.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\Pharmacy.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Entities\\Pharmacy.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\Pharmacy.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Entities\\Pharmacy.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T15:49:55.217Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\Data\\IUnitOfWorKImplementation\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.InfastructureLayer\\Data\\IUnitOfWorKImplementation\\UnitOfWork.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\Data\\IUnitOfWorKImplementation\\UnitOfWork.cs",
+              "RelativeToolTip": "PharmacySystem.InfastructureLayer\\Data\\IUnitOfWorKImplementation\\UnitOfWork.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T15:02:11.641Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "WareHouseAreaConfiguration.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\Data\\Config\\WareHouseAreaConfiguration.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.InfastructureLayer\\Data\\Config\\WareHouseAreaConfiguration.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\Data\\Config\\WareHouseAreaConfiguration.cs",
+              "RelativeToolTip": "PharmacySystem.InfastructureLayer\\Data\\Config\\WareHouseAreaConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T17:30:22.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Medicine.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\Medicine.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Entities\\Medicine.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\Medicine.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Entities\\Medicine.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T17:59:37.449Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Interfaces\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Interfaces\\IUnitOfWork.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Interfaces\\IUnitOfWork.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Interfaces\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T14:15:44.854Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\appsettings.json",
+              "RelativeDocumentMoniker": "PharmacySystem.PresentationLayer\\appsettings.json",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\appsettings.json",
+              "RelativeToolTip": "PharmacySystem.PresentationLayer\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-11T14:06:20.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "PharmacySystem.PresentationLayer\\Properties\\launchSettings.json",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\Properties\\launchSettings.json",
+              "RelativeToolTip": "PharmacySystem.PresentationLayer\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-11T14:06:05.59Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Area.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\Area.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.DomainLayer\\Entities\\Area.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\Entities\\Area.cs",
+              "RelativeToolTip": "PharmacySystem.DomainLayer\\Entities\\Area.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T18:11:21.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "UpdateWareHouseDTO.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Update\\UpdateWareHouseDTO.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Update\\UpdateWareHouseDTO.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Update\\UpdateWareHouseDTO.cs",
+              "RelativeToolTip": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Update\\UpdateWareHouseDTO.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T19:44:58.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "CreateWareHouseAreaDTO.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Create\\CreateWareHouseAreaDTO.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Create\\CreateWareHouseAreaDTO.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Create\\CreateWareHouseAreaDTO.cs",
+              "RelativeToolTip": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Create\\CreateWareHouseAreaDTO.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T18:15:25.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "UpdateWareHouseAreaDTO.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Update\\UpdateWareHouseAreaDTO.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Update\\UpdateWareHouseAreaDTO.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Update\\UpdateWareHouseAreaDTO.cs",
+              "RelativeToolTip": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Update\\UpdateWareHouseAreaDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T19:45:25.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "CreateWarhouseDTO.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Create\\CreateWarhouseDTO.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Create\\CreateWarhouseDTO.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Create\\CreateWarhouseDTO.cs",
+              "RelativeToolTip": "PharmacySystem.ApplicationLayer\\DTOs\\Warehouses\\Create\\CreateWarhouseDTO.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T19:36:39.406Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "MedicineController.cs",
+              "DocumentMoniker": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\Controllers\\MedicineController.cs",
+              "RelativeDocumentMoniker": "PharmacySystem.PresentationLayer\\Controllers\\MedicineController.cs",
+              "ToolTip": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\Controllers\\MedicineController.cs",
+              "RelativeToolTip": "PharmacySystem.PresentationLayer\\Controllers\\MedicineController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T19:46:54.115Z"
+>>>>>>> 4fc89f0a2b7e5d1d49ef64089eb146d39b0bce9f
             }
           ]
         }

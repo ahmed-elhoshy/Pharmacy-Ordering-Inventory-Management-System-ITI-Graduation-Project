@@ -10,6 +10,7 @@ D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\Ph
 D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.pdb
 D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\ref\PharmacySystem.DomainLayer.dll
 D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.csproj.AssemblyReference.cache
+<<<<<<< HEAD
 D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.DomainLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.deps.json
 D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.DomainLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.dll
 D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.DomainLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.pdb
@@ -23,3 +24,18 @@ D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-
 D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\refint\PharmacySystem.DomainLayer.dll
 D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.pdb
 D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.DomainLayer\obj\Debug\net8.0\ref\PharmacySystem.DomainLayer.dll
+=======
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.deps.json
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.dll
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.pdb
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.csproj.AssemblyReference.cache
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.GeneratedMSBuildEditorConfig.editorconfig
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.AssemblyInfoInputs.cache
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.AssemblyInfo.cs
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.csproj.CoreCompileInputs.cache
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.sourcelink.json
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.dll
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\obj\Debug\net8.0\refint\PharmacySystem.DomainLayer.dll
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\obj\Debug\net8.0\PharmacySystem.DomainLayer.pdb
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.DomainLayer\obj\Debug\net8.0\ref\PharmacySystem.DomainLayer.dll
+>>>>>>> 4fc89f0a2b7e5d1d49ef64089eb146d39b0bce9f
