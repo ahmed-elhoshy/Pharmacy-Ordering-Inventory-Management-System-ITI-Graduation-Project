@@ -815,23 +815,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ramboo\\.nuget\\packages\\": {},
+    "C:\\Users\\Musta\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj",
+      "projectUniqueName": "D:\\pharmacy-system\\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj",
       "projectName": "PharmacySystem.DomainLayer",
-      "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj",
-      "packagesPath": "C:\\Users\\Ramboo\\.nuget\\packages\\",
-      "outputPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\obj\\",
+      "projectPath": "D:\\pharmacy-system\\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj",
+      "packagesPath": "C:\\Users\\Musta\\.nuget\\packages\\",
+      "outputPath": "D:\\pharmacy-system\\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\\PharmacySystem.DomainLayer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Ramboo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Musta\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -885,7 +885,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

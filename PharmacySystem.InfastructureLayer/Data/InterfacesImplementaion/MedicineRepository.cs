@@ -1,6 +1,7 @@
 ﻿#region MyRegion
 using E_Commerce.InfrastructureLayer.Data.DBContext.Repositories;
 using Microsoft.EntityFrameworkCore;
+using PharmacySystem.ApplicationLayer.DTOs.Medicines;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Interfaces;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
@@ -34,6 +35,8 @@ namespace E_Commerce.InfrastructureLayer.Data.GenericClass
             };
             return await query.ToListAsync();
         }
+
+
         public async Task<IReadOnlyList<Medicine>> SearchMedicinesAsync(string? searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))

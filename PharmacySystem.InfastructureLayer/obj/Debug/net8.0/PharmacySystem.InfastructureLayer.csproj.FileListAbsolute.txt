@@ -17,3 +17,23 @@ D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\Ph
 D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\ref\PharmacySystem.InfastructureLayer.dll
 D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.InfastructureLayer\bin\Debug\net8.0\PharmacySystem.InfastructureLayer.runtimeconfig.json
 D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\PharmacySystem.InfastructureLayer.genruntimeconfig.cache
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\bin\Debug\net8.0\PharmacySystem.InfastructureLayer.deps.json
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\bin\Debug\net8.0\PharmacySystem.InfastructureLayer.runtimeconfig.json
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\bin\Debug\net8.0\PharmacySystem.InfastructureLayer.dll
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\bin\Debug\net8.0\PharmacySystem.InfastructureLayer.pdb
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\bin\Debug\net8.0\PharmacySystem.ApplicationLayer.dll
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.dll
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\bin\Debug\net8.0\PharmacySystem.ApplicationLayer.pdb
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.pdb
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\PharmacySystem.InfastructureLayer.csproj.AssemblyReference.cache
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\PharmacySystem.InfastructureLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\PharmacySystem.InfastructureLayer.AssemblyInfoInputs.cache
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\PharmacySystem.InfastructureLayer.AssemblyInfo.cs
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\PharmacySystem.InfastructureLayer.csproj.CoreCompileInputs.cache
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\PharmacySystem.InfastructureLayer.sourcelink.json
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\Pharmacy.9D9358BA.Up2Date
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\PharmacySystem.InfastructureLayer.dll
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\refint\PharmacySystem.InfastructureLayer.dll
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\PharmacySystem.InfastructureLayer.pdb
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\PharmacySystem.InfastructureLayer.genruntimeconfig.cache
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.InfastructureLayer\obj\Debug\net8.0\ref\PharmacySystem.InfastructureLayer.dll

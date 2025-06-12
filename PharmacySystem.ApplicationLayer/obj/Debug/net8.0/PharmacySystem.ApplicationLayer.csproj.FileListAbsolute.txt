@@ -13,3 +13,19 @@ D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\Ph
 D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\refint\PharmacySystem.ApplicationLayer.dll
 D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\PharmacySystem.ApplicationLayer.pdb
 D:\programing\Projects\Gradation Project ITI 9 Months\Pharmacy System Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\ref\PharmacySystem.ApplicationLayer.dll
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\bin\Debug\net8.0\PharmacySystem.ApplicationLayer.deps.json
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\bin\Debug\net8.0\PharmacySystem.ApplicationLayer.dll
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\bin\Debug\net8.0\PharmacySystem.ApplicationLayer.pdb
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.dll
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\bin\Debug\net8.0\PharmacySystem.DomainLayer.pdb
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\PharmacySystem.ApplicationLayer.csproj.AssemblyReference.cache
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\PharmacySystem.ApplicationLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\PharmacySystem.ApplicationLayer.AssemblyInfoInputs.cache
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\PharmacySystem.ApplicationLayer.AssemblyInfo.cs
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\PharmacySystem.ApplicationLayer.csproj.CoreCompileInputs.cache
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\PharmacySystem.ApplicationLayer.sourcelink.json
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\Pharmacy.14A68E45.Up2Date
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\PharmacySystem.ApplicationLayer.dll
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\refint\PharmacySystem.ApplicationLayer.dll
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\PharmacySystem.ApplicationLayer.pdb
+D:\pharmacy-system\Pharmacy-Ordering-Inventory-Management-System-ITI-Graduation-Project\PharmacySystem.ApplicationLayer\obj\Debug\net8.0\ref\PharmacySystem.ApplicationLayer.dll
