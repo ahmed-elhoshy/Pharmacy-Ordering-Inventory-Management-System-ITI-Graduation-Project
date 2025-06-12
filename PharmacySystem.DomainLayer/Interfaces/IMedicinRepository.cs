@@ -7,8 +7,7 @@ namespace PharmacySystem.DomainLayer.Interfaces
         public Task<IReadOnlyList<Medicine>> SearchMedicinesAsync(string? searchTerm);
         public Task<IReadOnlyList<Medicine>> FilterMedicine(string? desc, string? name, string? sort);
 
-          public Task<List<Medicine>> GetMedicineStatsByAreaAsync(int areaId); 
-
+       
 
     }
 }
