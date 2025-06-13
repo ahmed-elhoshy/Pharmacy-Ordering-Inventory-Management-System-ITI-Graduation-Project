@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Create;
 
 namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create
 {
@@ -22,5 +23,8 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create
         public string UserId { get; set; }
 
         public List<CreateWareHouseAreaDTO> WareHouseAreas { get; set; } = new();
+
+        public List<CreateWarehouseMedicineDTO> WareHouseMedicines { get; set; } = new();
+
     }
 }

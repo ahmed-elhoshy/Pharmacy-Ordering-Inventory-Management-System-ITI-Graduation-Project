@@ -23,12 +23,22 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
 
         public async Task<IEnumerable<WareHouse>> GetAllAsync()
         {
-            return await _dbContext.WareHouses.Include(w => w.WareHouseAreas).ToListAsync();
+            return await _dbContext.WareHouses.Include(w => w.WareHouseAreas).ThenInclude(w => w.Area).ToListAsync();
         }
         
         public async Task<WareHouse?> GetByIdAsync(int id)
         {
-            return await _dbContext.WareHouses.FindAsync(id);
+            return await _dbContext.WareHouses
+               .Include(w => w.WareHouseAreas).ThenInclude(wa => wa.Area)
+               .FirstOrDefaultAsync(w => w.Id == id);
+        } public async Task<WareHouse?> GetWarehouseByIdDetailsAsync(int id)
+        {
+            return await _dbContext.WareHouses
+                .Include(w => w.User)
+                .Include(w => w.ApprovedByAdmin)
+                .Include(w => w.WareHouseAreas).ThenInclude(wa => wa.Area)
+                .Include(w => w.WareHouseMedicines).ThenInclude(wm => wm.Medicine)
+                .FirstOrDefaultAsync(w => w.Id == id);
         }
 
         public async Task<IEnumerable<WareHouse>> GetWarehousesByAreaAsync(int areaId)
@@ -78,11 +88,35 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
             return await _dbContext.WareHouses.AnyAsync(w => w.Id == id);
         }
 
-        public async Task UpdateAsync(WareHouse warehouse)
-        { 
-             _dbContext.WareHouses.Update(warehouse);
+        public async Task UpdateAsync(WareHouse updated)
+        {
+            var existing = await _dbContext.WareHouses
+                .Include(w => w.WareHouseAreas)
+                .Include(w => w.WareHouseMedicines)
+                .FirstOrDefaultAsync(w => w.Id == updated.Id);
+
+            if (existing == null)
+                throw new Exception("Warehouse not found");
+
+            // Update scalar properties
+            existing.Address = updated.Address;
+            existing.Governate = updated.Governate;
+            existing.IsTrusted = updated.IsTrusted;
+            existing.IsWarehouseApproved = updated.IsWarehouseApproved;
+            existing.UserId = updated.UserId;
+            existing.ApprovedByAdminId = updated.ApprovedByAdminId;
+
+            // Remove and replace areas
+            _dbContext.WareHouseAreas.RemoveRange(existing.WareHouseAreas);
+            existing.WareHouseAreas = updated.WareHouseAreas;
+
+            // Remove and replace medicines
+            _dbContext.WareHouseMediciens.RemoveRange(existing.WareHouseMedicines);
+            existing.WareHouseMedicines = updated.WareHouseMedicines;
+
             await _dbContext.SaveChangesAsync();
         }
+
         public async Task DeleteAsync(int id)
         {
             var warehouse = await _dbContext.WareHouses.FindAsync(id);

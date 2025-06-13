@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines
+namespace PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Read
 {
     public class WarehouseMedicineDto
     {

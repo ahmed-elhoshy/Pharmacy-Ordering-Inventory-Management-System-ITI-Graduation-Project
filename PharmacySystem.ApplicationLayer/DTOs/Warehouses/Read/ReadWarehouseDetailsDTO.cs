@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Read;
 using PharmacySystem.DomainLayer.Entities;
 
 namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read
@@ -18,6 +19,6 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read
         public string? ApprovedByAdminName { get; set; }
 
         public List<string> AreaNames { get; set; } = new();
-        public List<WareHouseMedicien> Medicines { get; set; } = new();
+        public List<WarehouseMedicineDto> Medicines { get; set; } = new();
     }
 }
