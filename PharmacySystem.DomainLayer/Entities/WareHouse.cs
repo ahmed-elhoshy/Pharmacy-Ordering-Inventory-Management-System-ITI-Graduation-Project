@@ -5,6 +5,10 @@ namespace PharmacySystem.DomainLayer.Entities
 {
     public class WareHouse : BaseEntity
     {
+
+        [Required]
+        [StringLength(100)]
+
         public string Address { get; set; }
         public string Governate { get; set; }
         public bool IsTrusted { get; set; } = false;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -92,7 +94,23 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+
+        public async Task<List<WareHouse>> GetWarehousesByAreaAndMedicineAsync(int areaId, int medicineId)
+        {
+            return await _dbContext.WareHouses
+                      .Include(w => w.WareHouseAreas)
+                      .Include(w => w.WareHouseMedicines)
+                          .ThenInclude(wm => wm.Medicine)
+                      .Where(w => w.WareHouseAreas.Any(wa => wa.Area.Id == areaId) &&
+                                 w.WareHouseMedicines.Any(wm => wm.MedicineId == medicineId))
+                      .ToListAsync();
+
+        }
+     
+
        
+
     }
 }
 
