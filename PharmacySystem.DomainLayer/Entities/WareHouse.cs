@@ -6,6 +6,8 @@ namespace PharmacySystem.DomainLayer.Entities
     public class WareHouse : BaseEntity
     {
 
+        public string? Name { get; set; }
+
         [Required]
         [StringLength(100)]
 

@@ -1,5 +1,11 @@
-﻿using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AutoMapper;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
+using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
@@ -21,50 +27,75 @@ namespace PharmacySystem.ApplicationLayer.Services
 
         public async Task<PaginatedResult<WarehouseMedicineDto>> GetWarehouseMedicineDtosAsync(int warehouseId, int page, int pageSize)
         {
-            var result = await warehouseRepository.GetWarehouseMedicinesAsync( warehouseId,page, pageSize);
-
-            //var dtoItems = result.Items.Select(wm => new WarehouseMedicineDto
-            //{
-            //    MedicineId = wm.MedicineId,
-            //    MedicineName = wm.Medicine.Name,
-            //    Quantity = wm.Quantity,
-            //    Discount = wm.Discount
-            //}).ToList();
+            var result = await warehouseRepository.GetWarehouseMedicinesAsync(warehouseId, page, pageSize);
             var dtoItems = _mapper.Map<List<WarehouseMedicineDto>>(result.Items);
+
             return new PaginatedResult<WarehouseMedicineDto>
             {
                 TotalCount = result.TotalCount,
-                Page = result.Page,
+                PageNumber = result.PageNumber,
                 PageSize = result.PageSize,
                 Items = dtoItems
             };
         }
-        public async Task<IEnumerable<ReadWareHouseDTO>> GetWarehousesByUserAreaAsync(int areaId)
+
+        public async Task<PaginatedResult<SimpleReadWarehouseDTO>> GetWarehousesByUserAreaAsync(int page, int pageSize, int areaId, string? search)
         {
-            var warehouses = await warehouseRepository.GetWarehousesByAreaAsync(areaId);
-            return _mapper.Map<IEnumerable<ReadWareHouseDTO>>(warehouses);
-        }
-        public async Task<IEnumerable<ReadWarehouseDetailsDTO>> GetAllAsync()
-        {
-            var warehouses = await warehouseRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ReadWarehouseDetailsDTO>>(warehouses);
+            var result = await warehouseRepository.GetWarehousesByAreaAsync(page, pageSize, areaId, search);
+            var dtoItems = _mapper.Map<IEnumerable<SimpleReadWarehouseDTO>>(result.Items,
+                opt => opt.Items["areaId"] = areaId);
+
+            return new PaginatedResult<SimpleReadWarehouseDTO>
+            {
+                TotalCount = result.TotalCount,
+                PageNumber = result.PageNumber,
+                PageSize = result.PageSize,
+                Items = dtoItems
+            };
         }
 
-        public async Task<ReadWarehouseDetailsDTO?> GetByIdAsync(int id)
+        public async Task<PaginatedResult<ReadWareHouseDTO>> GetAllAsync(int page, int pageSize)
+        {
+            var result = await warehouseRepository.GetAllAsync(page, pageSize);
+            var dtoitems = _mapper.Map<IEnumerable<ReadWareHouseDTO>>(result.Items);
+
+            return new PaginatedResult<ReadWareHouseDTO>
+            {
+                TotalCount = result.TotalCount,
+                PageNumber = result.PageNumber,
+                PageSize = result.PageSize,
+                Items = dtoitems
+            };
+        }
+
+        public async Task<ReadWareHouseDTO?> GetByIdAsync(int id)
         {
             var warehouse = await warehouseRepository.GetByIdAsync(id);
+            return warehouse is null ? null : _mapper.Map<ReadWareHouseDTO>(warehouse);
+        }
+
+        public async Task<ReadWarehouseDetailsDTO?> GetWarehouseByIdDetailsAsync(int id)
+        {
+            var warehouse = await warehouseRepository.GetWarehouseByIdDetailsAsync(id);
             return warehouse is null ? null : _mapper.Map<ReadWarehouseDetailsDTO>(warehouse);
         }
-        public async Task AddAsync(CreateWarhouseDTO dto)
+
+        public async Task<bool> WarehouseExistsAsync(int id)
         {
-            var entity = _mapper.Map<WareHouse>(dto);
-            await warehouseRepository.AddAsync(entity);
+            return await warehouseRepository.ExistsAsync(id);
+        }
+
+        public async Task<ReadWareHouseDTO> AddAsync(CreateWarhouseDTO dto)
+        {
+            var warehouse = _mapper.Map<WareHouse>(dto);
+            await warehouseRepository.AddAsync(warehouse);
+            return _mapper.Map<ReadWareHouseDTO>(warehouse);
         }
 
         public async Task UpdateAsync(UpdateWareHouseDTO dto)
         {
-            var entity = _mapper.Map<WareHouse>(dto);
-            await warehouseRepository.UpdateAsync(entity);
+            var updatedWarehouse = _mapper.Map<WareHouse>(dto);
+            await warehouseRepository.UpdateAsync(updatedWarehouse);
         }
 
         public async Task DeleteAsync(int id)
@@ -88,8 +119,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                     Discount = medicine?.Discount ?? 0,
                     FinalPrice = (medicine?.Medicine.Price ?? 0) * (1 - (medicine?.Discount ?? 0) / 100)
                 };
-            })
-            .ToList();
+            }).ToList();
         }
     }
 }

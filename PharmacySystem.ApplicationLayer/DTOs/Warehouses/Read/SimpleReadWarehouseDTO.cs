@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read
 {
-    public class ReadWareHouseDTO
+    public class SimpleReadWarehouseDTO
     {
-
         public int Id { get; set; }
         public string? Name { get; set; }
         public string Address { get; set; }
@@ -19,8 +18,7 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read
 
         public string UserId { get; set; }
         public string? ApprovedByAdminId { get; set; }
-
-        public List<ReadWareHouseAreaDTO> WareHouseAreas { get; set; }
+        public decimal MinmumPrice { get; set; }
 
 
     }
