@@ -44,8 +44,7 @@ namespace E_Commerce.InfrastructureLayer.Data.GenericClass
             searchTerm = searchTerm.ToLower();
 
             return await context.Medicines
-                .Where(p =>
-                p.Name.ToLower().StartsWith(searchTerm) ||       
+                .Where(p => p.Name.ToLower().StartsWith(searchTerm) ||       
                 p.Description.ToLower().StartsWith(searchTerm)).OrderBy(p => p.Name).ToListAsync();
         }
 
