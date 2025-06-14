@@ -1,22 +1,20 @@
-# Build and cache folders
-bin/
-obj/
+# Ignore VS and build artifacts
 .vs/
+**/bin/
+**/obj/
 
-# User-specific files
-*.user
+# Ignore output files
+*.dll
+*.pdb
+*.exe
+*.cache
+*.log
+
+# Ignore user-specific and IDE config
 *.suo
+*.user
 *.userosscache
 *.sln.docstates
 
-# Rider
-.idea/
-
-# Logs
-*.log
-
-# Others
-*.db
-*.db-shm
-*.db-wal
-*.cache
+# Ignore secrets/config (optional)
+appsettings*.json
