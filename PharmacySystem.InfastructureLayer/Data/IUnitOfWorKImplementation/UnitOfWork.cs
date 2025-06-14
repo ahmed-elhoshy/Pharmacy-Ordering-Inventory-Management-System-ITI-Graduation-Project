@@ -3,6 +3,7 @@ using E_Commerce.InfrastructureLayer.Data.DBContext;
 using E_Commerce.InfrastructureLayer.Data.GenericClass;
 using PharmacySystem.DomainLayer.Interfaces;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
+using PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion;
 
 namespace E_Commerce.DomainLayer
 {
@@ -10,9 +11,10 @@ namespace E_Commerce.DomainLayer
     {
         #region DBContext
         private readonly PharmaDbContext context;
-        private IMedicinRepository _MedicinRepository;
         #endregion
 
+        private IMedicinRepository _MedicinRepository;
+        private IRepresentitiveRepository _representitiveRepository ;
         public IMedicinRepository medicinRepository
         {
             get
@@ -23,6 +25,17 @@ namespace E_Commerce.DomainLayer
             }
             set => _MedicinRepository = value;
         }
+        public IRepresentitiveRepository representitiveRepository 
+        {
+            get
+            {
+                if (_representitiveRepository == null)
+                    _representitiveRepository = new RepresentitiveRepository(context);
+                return _representitiveRepository;
+            }
+            set => representitiveRepository = value;
+        }
+
         public UnitOfWork(PharmaDbContext context)
         {
             this.context = context;

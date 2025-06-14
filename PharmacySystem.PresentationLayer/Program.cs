@@ -1,26 +1,31 @@
 using E_Commerce.DomainLayer;
 using E_Commerce.DomainLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using PharmacySystem.ApplicationLayer.IServiceInterfaces;
 using PharmacySystem.ApplicationLayer.MappingConfig;
 using PharmacySystem.ApplicationLayer.Services;
 using PharmacySystem.DomainLayer.Interfaces;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
 using PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 #region DbContext Configuration
 builder.Services.AddDbContext<PharmaDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 #endregion
 
+
 #region Services Registration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>();
 builder.Services.AddScoped<WarehouseService>();
-
+builder.Services.AddScoped<IRepresentativeService, RepresentativeService>();
 #endregion
+
 
 #region AutoMapper Configuration
 builder.Services.AddAutoMapper(typeof(MapperConfig)); 
@@ -34,6 +39,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
