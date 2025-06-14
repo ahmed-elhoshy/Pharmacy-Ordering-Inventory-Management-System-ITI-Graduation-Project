@@ -16,12 +16,12 @@ namespace PharmacySystem.InfastructureLayer.Data.Config
             builder.Property(e => e.IsTrusted).IsRequired().HasDefaultValue(false);
 
 
-            builder.HasOne(e => e.User).WithOne(g => g.WareHouse).HasForeignKey<WareHouse>(e => e.UserId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(e => e.User).WithOne(g => g.WareHouse).HasForeignKey<WareHouse>(e => e.UserId)
+            //       .OnDelete(DeleteBehavior.Restrict);
 
 
-            builder.HasOne(e => e.User).WithOne(g => g.WareHouse).HasForeignKey<WareHouse>(e => e.ApprovedByAdminId)
-                  .OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(e => e.User).WithOne(g => g.WareHouse).HasForeignKey<WareHouse>(e => e.ApprovedByAdminId)
+            //      .OnDelete(DeleteBehavior.Restrict);
         }
     }
 } 

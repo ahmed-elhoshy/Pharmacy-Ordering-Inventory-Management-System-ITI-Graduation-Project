@@ -92,9 +92,6 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                 await _dbContext.SaveChangesAsync();
             }
         }
-
-        
-
        
     }
 }

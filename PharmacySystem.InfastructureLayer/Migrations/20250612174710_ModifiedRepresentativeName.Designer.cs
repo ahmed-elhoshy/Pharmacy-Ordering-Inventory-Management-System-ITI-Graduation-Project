@@ -12,8 +12,8 @@ using PharmacySystem.InfastructureLayer.Data.DBContext;
 namespace PharmacySystem.InfastructureLayer.Migrations
 {
     [DbContext(typeof(PharmaDbContext))]
-    [Migration("20250609214606_initailCreate")]
-    partial class initailCreate
+    [Migration("20250612174710_ModifiedRepresentativeName")]
+    partial class ModifiedRepresentativeName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -200,8 +200,7 @@ namespace PharmacySystem.InfastructureLayer.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -311,12 +310,6 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("ApprovalCode")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ApprovedByRepresentativeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("AreaId")
                         .HasColumnType("int");
 
@@ -328,24 +321,25 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RepresentativeCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RepresentativeId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ApprovedByRepresentativeId");
 
                     b.HasIndex("AreaId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("RepresentativeId");
 
                     b.ToTable("Pharmacies");
                 });
@@ -363,9 +357,6 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("ApprovedByAdminId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Code")
                         .HasColumnType("int");
 
@@ -377,14 +368,14 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApprovedByAdminId")
-                        .IsUnique()
-                        .HasFilter("[ApprovedByAdminId] IS NOT NULL");
 
                     b.ToTable("Representatives");
                 });
@@ -433,11 +424,17 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PharmacyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("RepresentativeId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
@@ -452,6 +449,9 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<int?>("WareHouseId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -461,6 +461,12 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("PharmacyId");
+
+                    b.HasIndex("RepresentativeId");
+
+                    b.HasIndex("WareHouseId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -478,12 +484,6 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("ApprovedByAdminId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ApprovedByAdminId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -497,23 +497,10 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<bool>("IsWarehouseApproved")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ApprovedByAdminId")
-                        .IsUnique()
-                        .HasFilter("[ApprovedByAdminId] IS NOT NULL");
-
-                    b.HasIndex("ApprovedByAdminId1");
 
                     b.ToTable("WareHouses");
                 });
@@ -659,53 +646,42 @@ namespace PharmacySystem.InfastructureLayer.Migrations
 
             modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.Pharmacy", b =>
                 {
-                    b.HasOne("PharmacySystem.DomainLayer.Entities.Representative", "ApprovedByRepresentative")
-                        .WithMany("pharmacies")
-                        .HasForeignKey("ApprovedByRepresentativeId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("PharmacySystem.DomainLayer.Entities.Area", "Area")
                         .WithMany("Pharmacies")
                         .HasForeignKey("AreaId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("PharmacySystem.DomainLayer.Entities.User", "User")
-                        .WithOne("Pharmacy")
-                        .HasForeignKey("PharmacySystem.DomainLayer.Entities.Pharmacy", "UserId")
+                    b.HasOne("PharmacySystem.DomainLayer.Entities.Representative", "Representative")
+                        .WithMany("pharmacies")
+                        .HasForeignKey("RepresentativeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApprovedByRepresentative");
-
                     b.Navigation("Area");
 
-                    b.Navigation("User");
+                    b.Navigation("Representative");
                 });
 
-            modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.Representative", b =>
+            modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.User", b =>
                 {
-                    b.HasOne("PharmacySystem.DomainLayer.Entities.User", "ApprovedByAdmin")
-                        .WithOne("Representative")
-                        .HasForeignKey("PharmacySystem.DomainLayer.Entities.Representative", "ApprovedByAdminId");
-
-                    b.Navigation("ApprovedByAdmin");
-                });
-
-            modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.WareHouse", b =>
-                {
-                    b.HasOne("PharmacySystem.DomainLayer.Entities.User", "User")
-                        .WithOne("WareHouse")
-                        .HasForeignKey("PharmacySystem.DomainLayer.Entities.WareHouse", "ApprovedByAdminId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PharmacySystem.DomainLayer.Entities.User", "ApprovedByAdmin")
+                    b.HasOne("PharmacySystem.DomainLayer.Entities.Pharmacy", "Pharmacy")
                         .WithMany()
-                        .HasForeignKey("ApprovedByAdminId1");
+                        .HasForeignKey("PharmacyId");
 
-                    b.Navigation("ApprovedByAdmin");
+                    b.HasOne("PharmacySystem.DomainLayer.Entities.Representative", "Representative")
+                        .WithMany()
+                        .HasForeignKey("RepresentativeId");
 
-                    b.Navigation("User");
+                    b.HasOne("PharmacySystem.DomainLayer.Entities.WareHouse", "WareHouse")
+                        .WithMany()
+                        .HasForeignKey("WareHouseId");
+
+                    b.Navigation("Pharmacy");
+
+                    b.Navigation("Representative");
+
+                    b.Navigation("WareHouse");
                 });
 
             modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.WareHouseArea", b =>
@@ -778,15 +754,6 @@ namespace PharmacySystem.InfastructureLayer.Migrations
             modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.Representative", b =>
                 {
                     b.Navigation("pharmacies");
-                });
-
-            modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.User", b =>
-                {
-                    b.Navigation("Pharmacy");
-
-                    b.Navigation("Representative");
-
-                    b.Navigation("WareHouse");
                 });
 
             modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.WareHouse", b =>
