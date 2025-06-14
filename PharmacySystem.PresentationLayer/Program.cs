@@ -19,6 +19,7 @@ builder.Services.AddDbContext<PharmaDbContext>(options =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>();
 builder.Services.AddScoped<WarehouseService>();
+builder.Services.AddScoped<MedicineService, MedicineService>();
 
 #endregion
 
