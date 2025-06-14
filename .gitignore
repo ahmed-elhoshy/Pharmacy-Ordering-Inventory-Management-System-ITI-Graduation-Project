@@ -1,0 +1,22 @@
+# Build and cache folders
+bin/
+obj/
+.vs/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# Others
+*.db
+*.db-shm
+*.db-wal
+*.cache

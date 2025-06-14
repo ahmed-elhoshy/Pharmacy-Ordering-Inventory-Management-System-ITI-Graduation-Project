@@ -305,10 +305,10 @@ H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj
 H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PharmacySystem.PresentationLayer.props
 H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PharmacySystem.PresentationLayer.props
 H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\staticwebassets.pack.json
-H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\Pharmacy.DC02ACE9.Up2Date
 H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\PharmacySystem.PresentationLayer.dll
 H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\refint\PharmacySystem.PresentationLayer.dll
 H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\PharmacySystem.PresentationLayer.pdb
 H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\PharmacySystem.PresentationLayer.genruntimeconfig.cache
 H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\ref\PharmacySystem.PresentationLayer.dll
+H:\Pharmacy Warhouse Graduation Project ITI\PharmacySystem.PresentationLayer\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

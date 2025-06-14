@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36121.58 d17.14
+VisualStudioVersion = 17.14.36121.58
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacySystem.PresentationLayer", "PharmacySystem.PresentationLayer\PharmacySystem.PresentationLayer.csproj", "{3CF62681-1B5B-4CC5-A746-0AAF67C7508E}"
 EndProject
@@ -10,6 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacySystem.DomainLayer", "PharmacySystem.DomainLayer\PharmacySystem.DomainLayer.csproj", "{7F8FCD67-C281-4426-A7CA-0D389267113C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacySystem.InfastructureLayer", "PharmacySystem.InfastructureLayer\PharmacySystem.InfastructureLayer.csproj", "{B418194F-E56F-4F02-9A5E-4117F026983F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BB538A2C-8F7E-4265-88A7-0BCE2373693A}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

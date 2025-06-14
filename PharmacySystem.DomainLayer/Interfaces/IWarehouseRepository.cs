@@ -11,9 +11,10 @@ namespace PharmacySystem.DomainLayer.Interfaces
 {
     public interface IWarehouseRepository
     {
-        Task<IEnumerable<WareHouse>> GetWarehousesByAreaAsync(int areaId);
-        Task<IEnumerable<WareHouse>> GetAllAsync();
+        Task<PaginatedResult<WareHouse>> GetWarehousesByAreaAsync( int page, int pageSize ,int areaId, string? search);
+        Task<PaginatedResult<WareHouse>> GetAllAsync(int page, int pageSize);
         Task<WareHouse?> GetByIdAsync(int id);
+        Task<WareHouse?> GetWarehouseByIdDetailsAsync(int id);
         Task<PaginatedResult<WareHouseMedicien>> GetWarehouseMedicinesAsync(
         int warehouseId, int page, int pageSize);
         Task AddAsync(WareHouse warehouse);

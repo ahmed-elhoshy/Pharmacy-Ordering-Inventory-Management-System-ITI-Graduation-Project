@@ -1,1 +1,12 @@
-{"Version":1,"Hash":"D3Etjo0WnpnySjJA/GNM8yb+RdXaiusKLaJsYDvcvGo=","Source":"PharmacySystem.PresentationLayer","BasePath":"_content/PharmacySystem.PresentationLayer","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "D3Etjo0WnpnySjJA/GNM8yb+RdXaiusKLaJsYDvcvGo=",
+  "Source": "PharmacySystem.PresentationLayer",
+  "BasePath": "_content/PharmacySystem.PresentationLayer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
