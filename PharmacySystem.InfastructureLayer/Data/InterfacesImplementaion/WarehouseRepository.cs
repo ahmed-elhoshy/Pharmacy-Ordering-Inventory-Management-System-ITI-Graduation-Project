@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using E_Commerce.InfrastructureLayer.Data.DBContext.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Interfaces;
@@ -20,12 +21,61 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
         {
             _dbContext = dbContext;
         }
-
-        public async Task<IEnumerable<WareHouse>> GetAllAsync()
+        public async Task<PaginatedResult<WareHouse>> GetAllAsync(int page, int pageSize)
         {
-            return await _dbContext.WareHouses.Include(w => w.WareHouseAreas).ThenInclude(w => w.Area).ToListAsync();
+             var query= _dbContext.WareHouses.Include(w => w.WareHouseAreas)
+                .ThenInclude(w => w.Area)
+                .AsQueryable();
+
+            int totalCount = await query.CountAsync();
+            
+            var items = await query.Skip((page -1) * pageSize).Take(pageSize).ToListAsync();
+            return new PaginatedResult<WareHouse>
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                Items = items
+            };
+
         }
-        
+        public async Task<PaginatedResult<WareHouse>> GetWarehousesByAreaAsync(int page, int pageSize, int areaId, string? search)
+        {
+           
+            IOrderedQueryable<WareHouse> query = _dbContext.WareHouses
+                .Include(w => w.WareHouseAreas)
+                .ThenInclude(wa => wa.Area)
+                .Where(w => w.WareHouseAreas.Any(wa => wa.AreaId == areaId))
+                .OrderBy(w => w.WareHouseAreas
+                   .Where(wa => wa.AreaId == areaId)
+                   .Select(wa => wa.MinmumPrice)
+                   .FirstOrDefault());
+
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                query = query
+                    .Where(w => w.Name != null && w.Name.Contains(search))
+                    .OrderBy(w => w.WareHouseAreas
+                        .Where(wa => wa.AreaId == areaId)
+                        .Select(wa => wa.MinmumPrice)
+                        .FirstOrDefault());
+            }
+
+            int totalCount = await query.CountAsync();
+
+            var items = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            return new PaginatedResult<WareHouse>
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                Items = items
+            };
+        }
         public async Task<WareHouse?> GetByIdAsync(int id)
         {
             return await _dbContext.WareHouses
@@ -41,14 +91,7 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                 .FirstOrDefaultAsync(w => w.Id == id);
         }
 
-        public async Task<IEnumerable<WareHouse>> GetWarehousesByAreaAsync(int areaId)
-        {
-            return await _dbContext.WareHouses
-                .Include(w => w.WareHouseAreas)
-                .ThenInclude(wa => wa.Area)
-                .Where(w => w.WareHouseAreas.Any(wa => wa.AreaId == areaId))
-                 .ToListAsync();
-        }
+        
         public async Task<PaginatedResult<WareHouseMedicien>> GetWarehouseMedicinesAsync(int warehouseId, int page, int pageSize)
         {
             var query = _dbContext.WareHouseMediciens
@@ -67,10 +110,10 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
 
             return new PaginatedResult<WareHouseMedicien>
             {
-                TotalCount = totalCount,
-                Page = page,
+                Items = items,
+                PageNumber = page,
                 PageSize = pageSize,
-                Items = items
+                TotalCount = totalCount
             };
         }
 
@@ -105,6 +148,7 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
             existing.IsWarehouseApproved = updated.IsWarehouseApproved;
             existing.UserId = updated.UserId;
             existing.ApprovedByAdminId = updated.ApprovedByAdminId;
+            existing.Name = updated.Name;
 
             // Remove and replace areas
             _dbContext.WareHouseAreas.RemoveRange(existing.WareHouseAreas);
@@ -119,17 +163,25 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
 
         public async Task DeleteAsync(int id)
         {
-            var warehouse = await _dbContext.WareHouses.FindAsync(id);
-            if (warehouse != null)
-            {
-                _dbContext.WareHouses.Remove(warehouse);
-                await _dbContext.SaveChangesAsync();
-            }
+            var warehouse = await _dbContext.WareHouses
+                .Include(w => w.WareHouseMedicines)
+                .FirstOrDefaultAsync(w => w.Id == id);
+
+            if (warehouse == null)
+                throw new Exception("Warehouse not found");
+
+            
+            if (warehouse.WareHouseMedicines.Any())
+                _dbContext.WareHouseMediciens.RemoveRange(warehouse.WareHouseMedicines);
+
+            
+            _dbContext.WareHouses.Remove(warehouse);
+
+            await _dbContext.SaveChangesAsync();
         }
 
-        
 
-       
+
     }
 }
 

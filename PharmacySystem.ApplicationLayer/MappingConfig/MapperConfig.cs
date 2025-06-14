@@ -36,7 +36,7 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             // READ mappings
             CreateMap<WareHouseArea, ReadWareHouseAreaDTO>()
                 .ForMember(dest => dest.AreaName, opt => opt.MapFrom(src => src.Area.Name));
-
+            
             CreateMap<ReadWareHouseAreaDTO, WareHouseArea>()
                 .ForMember(dest => dest.Area, opt => opt.Ignore()); 
             
@@ -58,7 +58,12 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<WareHouseMedicien, WarehouseMedicineDto>()
                 .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
                 .ForMember(dest => dest.MedicineId, opt => opt.MapFrom(src => src.MedicineId));
-
+            CreateMap<WareHouse, SimpleReadWarehouseDTO>()
+                .ForMember(dest => dest.MinmumPrice, opt =>
+                 opt.MapFrom((src, dest, destMember, context) =>
+                 src.WareHouseAreas
+               .FirstOrDefault(a => a.AreaId == (int)context.Items["areaId"])?.MinmumPrice ?? 0
+        ));
         }
     }
 }

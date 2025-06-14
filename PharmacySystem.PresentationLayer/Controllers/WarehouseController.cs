@@ -18,29 +18,31 @@ namespace PharmacySystem.PresentationLayer.Controllers
         {
             _service = service;
         }
+        //GET /api/warehouse/GetWarehousesByArea/5?page=1&pageSize=10&search=central
 
-        //[Authorize(Roles = "Pharmacy")]
-        [HttpGet("GetWarhehousesByArea")]
-        public async Task<IActionResult> GetWarehousesByArea()
+        [HttpGet("GetWarehousesByArea/{areaId:int}")]
+        public async Task<IActionResult> GetWarehousesByArea(
+            int areaId,
+           [FromQuery] int page = 1,
+           [FromQuery] int pageSize = 10,
+           [FromQuery] string? search = null)
         {
-            var areaIdClaim = User.FindFirst("AreaId")?.Value;
-
-            if (string.IsNullOrEmpty(areaIdClaim))
-                return Unauthorized("Area ID not found in token");
-
-            if (!int.TryParse(areaIdClaim, out int areaId))
+            if (areaId <= 0)
                 return BadRequest("Invalid Area ID");
 
-            var warehouses = await _service.GetWarehousesByUserAreaAsync(areaId);
-
-            return Ok(warehouses); 
-        }
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var warehouses = await _service.GetAllAsync();
+            var warehouses = await _service.GetWarehousesByUserAreaAsync(page, pageSize, areaId, search);
             return Ok(warehouses);
         }
+        //GET /api/warehouse/GetAll?page=1&pageSize=10
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10)
+        {
+            var warehouses = await _service.GetAllAsync(page, pageSize);
+            return Ok(warehouses);
+        }
+
 
         // GET: api/warehouses/Getbyid/5
         [HttpGet("Getbyid/{id:int}")]

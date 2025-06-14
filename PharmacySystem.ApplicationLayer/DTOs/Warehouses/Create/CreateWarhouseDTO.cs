@@ -10,6 +10,7 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create
 {
     public class CreateWarhouseDTO
     {
+        
         [Required]
         [StringLength(100)]
         public string Address { get; set; }
@@ -17,6 +18,7 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create
         [StringLength(50)]
         public string? Governate { get; set; }
 
+        public string? Name { get; set; }
         public bool IsTrusted { get; set; } = false;
 
         [Required]

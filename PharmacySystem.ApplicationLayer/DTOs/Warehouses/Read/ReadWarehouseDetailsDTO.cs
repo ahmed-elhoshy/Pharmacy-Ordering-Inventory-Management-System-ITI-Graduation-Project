@@ -11,6 +11,7 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read
     public class ReadWarehouseDetailsDTO
     {
         public int Id { get; set; }
+        public string? Name { get; set; }
         public string Address { get; set; }
         public string Governate { get; set; }
         public bool IsTrusted { get; set; }

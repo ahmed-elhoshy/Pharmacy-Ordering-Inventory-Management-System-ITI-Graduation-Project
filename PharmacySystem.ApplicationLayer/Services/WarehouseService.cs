@@ -28,33 +28,44 @@ namespace PharmacySystem.ApplicationLayer.Services
         {
             var result = await warehouseRepository.GetWarehouseMedicinesAsync( warehouseId,page, pageSize);
 
-            //var dtoItems = result.Items.Select(wm => new WarehouseMedicineDto
-            //{
-            //    MedicineId = wm.MedicineId,
-            //    MedicineName = wm.Medicine.Name,
-            //    Quantity = wm.Quantity,
-            //    Discount = wm.Discount
-            //}).ToList();
             var dtoItems = _mapper.Map<List<WarehouseMedicineDto>>(result.Items);
 
 
             return new PaginatedResult<WarehouseMedicineDto>
             {
                 TotalCount = result.TotalCount,
-                Page = result.Page,
+                PageNumber = result.PageNumber,
                 PageSize = result.PageSize,
                 Items = dtoItems
             };
         }
-        public async Task<IEnumerable<ReadWareHouseDTO>> GetWarehousesByUserAreaAsync(int areaId)
+        public async Task<PaginatedResult<SimpleReadWarehouseDTO>> GetWarehousesByUserAreaAsync(int page, int pageSize, int areaId, string? search)
         {
-            var warehouses = await warehouseRepository.GetWarehousesByAreaAsync(areaId);
-            return _mapper.Map<IEnumerable<ReadWareHouseDTO>>(warehouses);
+            var result = await warehouseRepository.GetWarehousesByAreaAsync( page,  pageSize,  areaId, search);
+            var dtoItems = _mapper.Map<IEnumerable<SimpleReadWarehouseDTO>>(result.Items,
+             opt => opt.Items["areaId"] = areaId);
+
+            return new PaginatedResult<SimpleReadWarehouseDTO>
+            {
+                TotalCount = result.TotalCount,
+                PageNumber = result.PageNumber,
+                PageSize = result.PageSize,
+                Items = dtoItems
+            };
         }
-        public async Task<IEnumerable<ReadWareHouseDTO>> GetAllAsync()
+        public async Task<PaginatedResult<ReadWareHouseDTO>> GetAllAsync(int page, int pageSize)
         {
-            var warehouses = await warehouseRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ReadWareHouseDTO>>(warehouses);
+            var result = await warehouseRepository.GetAllAsync(page, pageSize);
+                
+            var dtoitems = _mapper.Map<IEnumerable<ReadWareHouseDTO>>(result.Items);
+
+            return new PaginatedResult<ReadWareHouseDTO>
+            {
+                TotalCount = result.TotalCount,
+                PageNumber = result.PageNumber,
+                PageSize = result.PageSize,
+                Items = dtoitems
+            };
         }
 
         public async Task<ReadWareHouseDTO?> GetByIdAsync(int id)
