@@ -95,6 +95,7 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
             }
         }
 
+
         public async Task<List<WareHouse>> GetWarehousesByAreaAndMedicineAsync(int areaId, int medicineId)
         {
             return await _dbContext.WareHouses
@@ -107,6 +108,9 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
 
         }
      
+
+       
+
     }
 }
 

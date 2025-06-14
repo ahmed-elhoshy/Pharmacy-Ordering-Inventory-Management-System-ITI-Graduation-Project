@@ -22,8 +22,8 @@ namespace PharmacySystem.InfastructureLayer.Data.Config
             builder.HasOne(e => e.Area).WithMany(a => a.Pharmacies).HasForeignKey(e => e.AreaId)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(e => e.ApprovedByRepresentative).WithMany(r => r.pharmacies).HasForeignKey(e => e.ApprovedByRepresentativeId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(e => e.ApprovedByRepresentative).WithMany(r => r.pharmacies).HasForeignKey(e => e.ApprovedByRepresentativeId)
+            //       .OnDelete(DeleteBehavior.Restrict);
 
         }
     }
