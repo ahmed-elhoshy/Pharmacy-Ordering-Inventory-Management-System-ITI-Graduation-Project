@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
@@ -26,10 +27,8 @@ namespace PharmacySystem.ApplicationLayer.Services
 
         public async Task<PaginatedResult<WarehouseMedicineDto>> GetWarehouseMedicineDtosAsync(int warehouseId, int page, int pageSize)
         {
-            var result = await warehouseRepository.GetWarehouseMedicinesAsync( warehouseId,page, pageSize);
-
+            var result = await warehouseRepository.GetWarehouseMedicinesAsync(warehouseId, page, pageSize);
             var dtoItems = _mapper.Map<List<WarehouseMedicineDto>>(result.Items);
-
 
             return new PaginatedResult<WarehouseMedicineDto>
             {
@@ -39,11 +38,12 @@ namespace PharmacySystem.ApplicationLayer.Services
                 Items = dtoItems
             };
         }
+
         public async Task<PaginatedResult<SimpleReadWarehouseDTO>> GetWarehousesByUserAreaAsync(int page, int pageSize, int areaId, string? search)
         {
-            var result = await warehouseRepository.GetWarehousesByAreaAsync( page,  pageSize,  areaId, search);
+            var result = await warehouseRepository.GetWarehousesByAreaAsync(page, pageSize, areaId, search);
             var dtoItems = _mapper.Map<IEnumerable<SimpleReadWarehouseDTO>>(result.Items,
-             opt => opt.Items["areaId"] = areaId);
+                opt => opt.Items["areaId"] = areaId);
 
             return new PaginatedResult<SimpleReadWarehouseDTO>
             {
@@ -53,10 +53,10 @@ namespace PharmacySystem.ApplicationLayer.Services
                 Items = dtoItems
             };
         }
+
         public async Task<PaginatedResult<ReadWareHouseDTO>> GetAllAsync(int page, int pageSize)
         {
             var result = await warehouseRepository.GetAllAsync(page, pageSize);
-                
             var dtoitems = _mapper.Map<IEnumerable<ReadWareHouseDTO>>(result.Items);
 
             return new PaginatedResult<ReadWareHouseDTO>
@@ -73,11 +73,13 @@ namespace PharmacySystem.ApplicationLayer.Services
             var warehouse = await warehouseRepository.GetByIdAsync(id);
             return warehouse is null ? null : _mapper.Map<ReadWareHouseDTO>(warehouse);
         }
+
         public async Task<ReadWarehouseDetailsDTO?> GetWarehouseByIdDetailsAsync(int id)
         {
             var warehouse = await warehouseRepository.GetWarehouseByIdDetailsAsync(id);
             return warehouse is null ? null : _mapper.Map<ReadWarehouseDetailsDTO>(warehouse);
         }
+
         public async Task<bool> WarehouseExistsAsync(int id)
         {
             return await warehouseRepository.ExistsAsync(id);
@@ -92,14 +94,32 @@ namespace PharmacySystem.ApplicationLayer.Services
 
         public async Task UpdateAsync(UpdateWareHouseDTO dto)
         {
-           // Map DTO to a WareHouse entity but don't attach to DB
             var updatedWarehouse = _mapper.Map<WareHouse>(dto);
-           await warehouseRepository.UpdateAsync(updatedWarehouse);
+            await warehouseRepository.UpdateAsync(updatedWarehouse);
         }
 
         public async Task DeleteAsync(int id)
         {
             await warehouseRepository.DeleteAsync(id);
+        }
+
+        public async Task<List<WareHouseMedicineAreaDto>> GetWarehousesByAreaAndMedicineAsync(int areaId, int medicineId)
+        {
+            var warehouses = await warehouseRepository.GetWarehousesByAreaAndMedicineAsync(areaId, medicineId);
+
+            return warehouses.Select(w =>
+            {
+                var medicine = w.WareHouseMedicines.FirstOrDefault(wm => wm.MedicineId == medicineId);
+                return new WareHouseMedicineAreaDto
+                {
+                    WarehouseId = w.Id,
+                    MedicineId = medicineId,
+                    MedicineName = medicine?.Medicine.Name,
+                    MedicinePrice = medicine?.Medicine.Price ?? 0,
+                    Discount = medicine?.Discount ?? 0,
+                    FinalPrice = (medicine?.Medicine.Price ?? 0) * (1 - (medicine?.Discount ?? 0) / 100)
+                };
+            }).ToList();
         }
     }
 }

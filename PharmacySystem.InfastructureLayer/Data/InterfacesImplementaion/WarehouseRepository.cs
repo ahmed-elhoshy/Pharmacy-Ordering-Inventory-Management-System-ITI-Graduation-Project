@@ -1,12 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using E_Commerce.InfrastructureLayer.Data.DBContext.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Interfaces;
@@ -16,7 +12,8 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
 {
     public class WarehouseRepository : IWarehouseRepository
     {
-        private PharmaDbContext _dbContext;
+        private readonly PharmaDbContext _dbContext;
+
         public WarehouseRepository(PharmaDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -24,13 +21,18 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
 
         public async Task<PaginatedResult<WareHouse>> GetAllAsync(int page, int pageSize)
         {
-            var query = _dbContext.WareHouses.Include(w => w.WareHouseAreas)
+            var query = _dbContext.WareHouses
+                .Include(w => w.WareHouseAreas)
                 .ThenInclude(w => w.Area)
                 .AsQueryable();
 
             int totalCount = await query.CountAsync();
 
-            var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var items = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
             return new PaginatedResult<WareHouse>
             {
                 PageNumber = page,
@@ -47,9 +49,9 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                 .ThenInclude(wa => wa.Area)
                 .Where(w => w.WareHouseAreas.Any(wa => wa.AreaId == areaId))
                 .OrderBy(w => w.WareHouseAreas
-                   .Where(wa => wa.AreaId == areaId)
-                   .Select(wa => wa.MinmumPrice)
-                   .FirstOrDefault());
+                    .Where(wa => wa.AreaId == areaId)
+                    .Select(wa => wa.MinmumPrice)
+                    .FirstOrDefault());
 
             if (!string.IsNullOrWhiteSpace(search))
             {
@@ -80,8 +82,9 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
         public async Task<WareHouse?> GetByIdAsync(int id)
         {
             return await _dbContext.WareHouses
-               .Include(w => w.WareHouseAreas).ThenInclude(wa => wa.Area)
-               .FirstOrDefaultAsync(w => w.Id == id);
+                .Include(w => w.WareHouseAreas)
+                .ThenInclude(wa => wa.Area)
+                .FirstOrDefaultAsync(w => w.Id == id);
         }
 
         public async Task<WareHouse?> GetWarehouseByIdDetailsAsync(int id)
@@ -97,9 +100,9 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
         public async Task<PaginatedResult<WareHouseMedicien>> GetWarehouseMedicinesAsync(int warehouseId, int page, int pageSize)
         {
             var query = _dbContext.WareHouseMediciens
-             .Where(wm => wm.WareHouseId == warehouseId)
-             .Include(wm => wm.Medicine)
-             .AsQueryable();
+                .Where(wm => wm.WareHouseId == warehouseId)
+                .Include(wm => wm.Medicine)
+                .AsQueryable();
 
             var totalCount = await query.CountAsync();
 
@@ -147,11 +150,11 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
             existing.ApprovedByAdminId = updated.ApprovedByAdminId;
             existing.Name = updated.Name;
 
-            // Remove and replace areas
+            // Replace areas
             _dbContext.WareHouseAreas.RemoveRange(existing.WareHouseAreas);
             existing.WareHouseAreas = updated.WareHouseAreas;
 
-            // Remove and replace medicines
+            // Replace medicines
             _dbContext.WareHouseMediciens.RemoveRange(existing.WareHouseMedicines);
             existing.WareHouseMedicines = updated.WareHouseMedicines;
 
@@ -172,6 +175,18 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
 
             _dbContext.WareHouses.Remove(warehouse);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<WareHouse>> GetWarehousesByAreaAndMedicineAsync(int areaId, int medicineId)
+        {
+            return await _dbContext.WareHouses
+                .Include(w => w.WareHouseAreas)
+                .Include(w => w.WareHouseMedicines)
+                    .ThenInclude(wm => wm.Medicine)
+                .Where(w =>
+                    w.WareHouseAreas.Any(wa => wa.Area.Id == areaId) &&
+                    w.WareHouseMedicines.Any(wm => wm.MedicineId == medicineId))
+                .ToListAsync();
         }
     }
 }

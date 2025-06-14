@@ -5,6 +5,6 @@ namespace PharmacySystem.DomainLayer.Entities.Constants
         Admin,
         WareHouseManager,
         Pharmacy,
-        Representative,
+        Representative
     }
 } 

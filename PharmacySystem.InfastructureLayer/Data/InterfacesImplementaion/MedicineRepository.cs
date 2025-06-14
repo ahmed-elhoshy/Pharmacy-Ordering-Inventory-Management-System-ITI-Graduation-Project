@@ -1,6 +1,7 @@
 ﻿#region MyRegion
 using E_Commerce.InfrastructureLayer.Data.DBContext.Repositories;
 using Microsoft.EntityFrameworkCore;
+using PharmacySystem.ApplicationLayer.DTOs.Medicines;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Interfaces;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
@@ -34,6 +35,17 @@ namespace E_Commerce.InfrastructureLayer.Data.GenericClass
             };
             return await query.ToListAsync();
         }
+
+        public async Task<List<Medicine>> GetMedicinesByAreaAsync(int areaId)
+        {
+            return await context.Medicines
+          .Include(m => m.WareHouseMedicines)
+              .ThenInclude(wm => wm.WareHouse)
+                  .ThenInclude(w => w.WareHouseAreas)
+          .Where(m => m.WareHouseMedicines
+              .Any(wm => wm.WareHouse.WareHouseAreas.Any(wa => wa.AreaId == areaId)))
+          .ToListAsync();   
+        }
         public async Task<IReadOnlyList<Medicine>> SearchMedicinesAsync(string? searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
@@ -42,10 +54,10 @@ namespace E_Commerce.InfrastructureLayer.Data.GenericClass
             searchTerm = searchTerm.ToLower();
 
             return await context.Medicines
-                .Where(p =>
-                p.Name.ToLower().StartsWith(searchTerm) ||       
+                .Where(p => p.Name.ToLower().StartsWith(searchTerm) ||       
                 p.Description.ToLower().StartsWith(searchTerm)).OrderBy(p => p.Name).ToListAsync();
         }
 
     }
+
 }

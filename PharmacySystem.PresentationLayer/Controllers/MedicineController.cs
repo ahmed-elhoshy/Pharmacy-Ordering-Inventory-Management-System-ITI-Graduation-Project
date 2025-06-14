@@ -1,6 +1,7 @@
 ﻿#region
 using E_Commerce.DomainLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using PharmacySystem.ApplicationLayer.Services;
 using PharmacySystem.DomainLayer.Entities;
 #endregion
 
@@ -12,9 +13,12 @@ namespace PharmacySystem.PresentationLayer.Controllers
     {
         #region DBContext
         private readonly IUnitOfWork _unitOfWork;
-        public MedicineController(IUnitOfWork unitOfWork)
+        private readonly MedicineService medicineService;
+
+        public MedicineController(IUnitOfWork unitOfWork,MedicineService _medicineService)
         {
             _unitOfWork = unitOfWork;
+            medicineService = _medicineService; 
         }
         #endregion
 
@@ -150,6 +154,18 @@ namespace PharmacySystem.PresentationLayer.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpGet("ByArea/{areaId}")]
+        [EndpointSummary("Get Medicines exist in Area")]
+        public async Task<IActionResult> GetMedicineStatsByArea(int areaId)
+        {
+            if (areaId <= 0 )
+            {
+                return BadRequest("Area ID  must be positive integer");
+            }
+            var stats = await medicineService.GetMedicineStatsByAreaAsync(areaId);
+            return Ok(stats);
         }
     }
 }

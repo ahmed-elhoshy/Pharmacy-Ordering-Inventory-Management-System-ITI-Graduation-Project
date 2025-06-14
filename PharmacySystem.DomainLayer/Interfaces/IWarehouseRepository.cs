@@ -21,5 +21,6 @@ namespace PharmacySystem.DomainLayer.Interfaces
         Task UpdateAsync(WareHouse warehouse);
         Task DeleteAsync(int id);
         Task<bool> ExistsAsync(int id);
+        Task<List<WareHouse>> GetWarehousesByAreaAndMedicineAsync(int areaId, int medicineId);
     }
 }
