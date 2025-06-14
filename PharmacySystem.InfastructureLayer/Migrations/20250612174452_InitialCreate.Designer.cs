@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
 
@@ -11,9 +12,11 @@ using PharmacySystem.InfastructureLayer.Data.DBContext;
 namespace PharmacySystem.InfastructureLayer.Migrations
 {
     [DbContext(typeof(PharmaDbContext))]
-    partial class PharmaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250612174452_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -354,9 +357,8 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -650,15 +652,15 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("PharmacySystem.DomainLayer.Entities.Representative", "Representative")
+                    b.HasOne("PharmacySystem.DomainLayer.Entities.Representative", "ApprovedByRepresentative")
                         .WithMany("pharmacies")
                         .HasForeignKey("RepresentativeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Area");
+                    b.Navigation("ApprovedByRepresentative");
 
-                    b.Navigation("Representative");
+                    b.Navigation("Area");
                 });
 
             modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.User", b =>

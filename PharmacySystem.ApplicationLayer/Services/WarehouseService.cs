@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
@@ -36,8 +31,6 @@ namespace PharmacySystem.ApplicationLayer.Services
             //    Discount = wm.Discount
             //}).ToList();
             var dtoItems = _mapper.Map<List<WarehouseMedicineDto>>(result.Items);
-
-
             return new PaginatedResult<WarehouseMedicineDto>
             {
                 TotalCount = result.TotalCount,
@@ -77,6 +70,26 @@ namespace PharmacySystem.ApplicationLayer.Services
         public async Task DeleteAsync(int id)
         {
             await warehouseRepository.DeleteAsync(id);
+        }
+
+        public async Task<List<WareHouseMedicineAreaDto>> GetWarehousesByAreaAndMedicineAsync(int areaId, int medicineId)
+        {
+            var warehouses = await warehouseRepository.GetWarehousesByAreaAndMedicineAsync(areaId, medicineId);
+
+            return warehouses.Select(w =>
+            {
+                var medicine = w.WareHouseMedicines.FirstOrDefault(wm => wm.MedicineId == medicineId);
+                return new WareHouseMedicineAreaDto
+                {
+                    WarehouseId = w.Id,
+                    MedicineId = medicineId,
+                    MedicineName = medicine?.Medicine.Name,
+                    MedicinePrice = medicine?.Medicine.Price ?? 0,
+                    Discount = medicine?.Discount ?? 0,
+                    FinalPrice = (medicine?.Medicine.Price ?? 0) * (1 - (medicine?.Discount ?? 0) / 100)
+                };
+            })
+            .ToList();
         }
     }
 }
