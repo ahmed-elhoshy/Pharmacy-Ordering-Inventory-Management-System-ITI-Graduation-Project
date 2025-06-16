@@ -1,4 +1,5 @@
 using AutoMapper;
+using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Register;
 using PharmacySystem.ApplicationLayer.DTOs.representatitve.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representatitve.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representatitve.Update;
@@ -47,8 +48,7 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
                 .ForMember(dest => dest.WareHouseAreas, opt => opt.MapFrom(src => src.WareHouseAreas));
 
             CreateMap<WareHouse, ReadWarehouseDetailsDTO>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
-                .ForMember(dest => dest.ApprovedByAdminName, opt => opt.MapFrom(src => src.ApprovedByAdmin != null ? src.ApprovedByAdmin.UserName : null))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.AreaNames, opt => opt.MapFrom(src =>
                     src.WareHouseAreas != null ?
                         src.WareHouseAreas
@@ -95,6 +95,10 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
                 .ForMember(dest => dest.OrdersCount, opt => opt.MapFrom(src =>
                     src.pharmacies.Sum(p => p.Orders.Count)));
             #endregion
+            CreateMap<PharmacyRegisterDto, Pharmacy>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
         }
     }
 }
