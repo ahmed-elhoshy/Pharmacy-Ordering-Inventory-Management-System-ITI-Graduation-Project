@@ -7,5 +7,5 @@ namespace PharmacySystem.ApplicationLayer.IServiceInterfaces;
 public interface IPharmacyService
 {
     Task<Result> RegisterAsync(PharmacyRegisterDto dto);
-    Task<Result> LoginAsync(PharmacyLoginDTO dto);
+    Task<PharmacyLoginResponseDTO> LoginAsync(PharmacyLoginDTO dto);
 }
