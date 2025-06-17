@@ -6,8 +6,8 @@ namespace E_Commerce.DomainLayer.Interfaces
 {
     public interface IUnitOfWork
     {
-        public IMedicinRepository medicinRepository { get; set; }
-        public IRepresentitiveRepository representitiveRepository { get; set; }
+        public IMedicinRepository medicineRepository { get; set; }
+        public IRepresentativeRepository representativeRepository { get; set; }
         public IPharmacyRepository PharmacyRepository { get; set; }
         IGenericRepository<Area> AreaRepository { get; }
         Task<bool> SaveAsync();

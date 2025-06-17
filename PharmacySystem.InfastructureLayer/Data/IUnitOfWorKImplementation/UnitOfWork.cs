@@ -15,29 +15,29 @@ namespace E_Commerce.DomainLayer
         private readonly PharmaDbContext context;
         #endregion
 
-        private IMedicinRepository _MedicinRepository;
-        private IRepresentitiveRepository _representitiveRepository ;
+        private IMedicinRepository _MedicineRepository;
+        private IRepresentativeRepository _representativeRepository ;
         private IPharmacyRepository _pharmacyRepository;
         private IGenericRepository<Area> _areaRepository;
-        public IMedicinRepository medicinRepository
+        public IMedicinRepository medicineRepository
         {
             get
             {
-                if (_MedicinRepository == null)
-                    _MedicinRepository = new MedicineRepository(context);
-                return _MedicinRepository;
+                if (_MedicineRepository == null)
+                    _MedicineRepository = new MedicineRepository(context);
+                return _MedicineRepository;
             }
-            set => _MedicinRepository = value;
+            set => _MedicineRepository = value;
         }
-        public IRepresentitiveRepository representitiveRepository 
+        public IRepresentativeRepository representativeRepository 
         {
             get
             {
-                if (_representitiveRepository == null)
-                    _representitiveRepository = new RepresentitiveRepository(context);
-                return _representitiveRepository;
+                if (_representativeRepository == null)
+                    _representativeRepository = new RepresentativeRepository(context);
+                return _representativeRepository;
             }
-            set => representitiveRepository = value;
+            set => representativeRepository = value;
         }
 
         public IPharmacyRepository PharmacyRepository

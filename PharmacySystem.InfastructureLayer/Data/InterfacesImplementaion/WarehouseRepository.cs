@@ -187,5 +187,10 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                     w.WareHouseMedicines.Any(wm => wm.MedicineId == medicineId))
                 .ToListAsync();
         }
+        public async Task<WareHouse?> FindByEmailAsync(string email)
+        {
+            return await _dbContext.Set<WareHouse>()
+                .FirstOrDefaultAsync(p => p.Email == email);
+        }
     }
 }

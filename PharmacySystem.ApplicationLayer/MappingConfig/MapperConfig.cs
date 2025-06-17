@@ -1,8 +1,8 @@
 using AutoMapper;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Register;
-using PharmacySystem.ApplicationLayer.DTOs.representatitve.Create;
-using PharmacySystem.ApplicationLayer.DTOs.representatitve.Read;
-using PharmacySystem.ApplicationLayer.DTOs.representatitve.Update;
+using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
+using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
+using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
 using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies;
 using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrderDetails;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
@@ -21,7 +21,7 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
         public MapperConfig()
         {
             // CREATE & UPDATE mappings
-            CreateMap<CreateWarhouseDTO, WareHouse>()
+            CreateMap<CreateWarehouseDTO, WareHouse>()
                 .ForMember(dest => dest.WareHouseAreas, opt => opt.MapFrom(src => src.WareHouseAreas))
                 .ForMember(dest => dest.WareHouseMedicines, opt => opt.MapFrom(src => src.WareHouseMedicines))
                 .ReverseMap();
@@ -73,11 +73,11 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             // Representative Mappings
             #region Representative
             CreateMap<Representative, GetAllRepresentatitveDto>();
-            CreateMap<CreateRepresentatitveDto, Representative>();
+            CreateMap<CreateRepresentativeDto, Representative>();
             CreateMap<UpdateRepresentativeDto, Representative>();
 
-            CreateMap<Representative, GetRepresentatitveByIdDto>()
-                .ForMember(dest => dest.Representatitve_Id, opt => opt.MapFrom(src => src.Id))
+            CreateMap<Representative, GetRepresentativeByIdDto>()
+                .ForMember(dest => dest.Representative_Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Representatitve_Name, opt => opt.MapFrom(src => src.Name));
 
             CreateMap<Representative, GetRepresentatitvePharmaciesCountDto>()

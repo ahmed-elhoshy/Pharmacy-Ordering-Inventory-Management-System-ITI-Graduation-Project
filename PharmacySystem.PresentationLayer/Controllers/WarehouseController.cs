@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
+using PharmacySystem.ApplicationLayer.DTOs.Warehouse.Login;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
@@ -78,8 +80,9 @@ namespace PharmacySystem.PresentationLayer.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateWarhouseDTO dto)
+        [HttpPost("CreateWareHouse")]
+        [EndpointSummary("Create a new warehouse with the provided details.")]
+        public async Task<IActionResult> Create([FromBody] CreateWarehouseDTO dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -145,6 +148,16 @@ namespace PharmacySystem.PresentationLayer.Controllers
                 }
 
                 return Ok(result);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] WarehouseLoginDTO dto)
+        {
+            var result = await _service.LoginAsync(dto);
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result);
         }
     }
 }

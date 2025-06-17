@@ -21,7 +21,7 @@ namespace PharmacySystem.ApplicationLayer.Services
 
         public async Task<List<MedicinesbyAreaIdDto>> GetMedicineStatsByAreaAsync(int areaId)
         {
-            var medicines = await unitOfWork.medicinRepository.GetMedicinesByAreaAsync(areaId);
+            var medicines = await unitOfWork.medicineRepository.GetMedicinesByAreaAsync(areaId);
 
             var result = medicines
                 .Select(m =>

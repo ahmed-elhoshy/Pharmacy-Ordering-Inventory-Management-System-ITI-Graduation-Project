@@ -39,7 +39,7 @@ public class PharmacyService : IPharmacyService
             return Result.Fail("Invalid AreaId: Area does not exist.");
 
         // Find Representative by Code
-        var representative = _unitOfWork.representitiveRepository
+        var representative = _unitOfWork.representativeRepository
             .FindAsync(r => r.Code == dto.RepresentativeCode).FirstOrDefault();
 
         if (representative == null)
