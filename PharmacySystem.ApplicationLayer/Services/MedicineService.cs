@@ -37,6 +37,8 @@ namespace PharmacySystem.ApplicationLayer.Services
                         .OrderByDescending(wm => wm.Discount)
                         .FirstOrDefault();
 
+                    decimal minimumPricePerOrder = maxDiscountEntry.WareHouse.WareHouseAreas.Min(wa => wa.MinmumPrice);
+
                     return new MedicinesbyAreaIdDto
                     {
                         MedicineId = m.Id,
@@ -44,17 +46,21 @@ namespace PharmacySystem.ApplicationLayer.Services
                         Price = m.Price,
                         TotalQuantity = totalQuantity,
                         DistributorsCount = distributorsCount,
-                        WarehouseIdOfMaxDiscount = maxDiscountEntry?.WareHouseId ?? 0,  
-                        //WarehouseNameOfMaxDiscount = maxDiscountEntry?.WareHouse?.Name,
+                        MaximumwareHouseAreaName = maxDiscountEntry.WareHouse.Address,
+                        WarehouseIdOfMaxDiscount = maxDiscountEntry?.WareHouseId ?? 0,
+                        WarehouseNameOfMaxDiscount = maxDiscountEntry?.WareHouse?.Name,
                         QuantityInWarehouseWithMaxDiscount = maxDiscountEntry?.Quantity ?? 0,
-                        MaximumDiscount = maxDiscountEntry?.Discount ?? 0
+                        MaximumDiscount = maxDiscountEntry?.Discount ?? 0,
+                        MinmumPrice = minimumPricePerOrder
+
                     };
                 })
-
+                .OrderBy(dto => dto.MedicineName).ThenBy(dto => dto.Price)
                 .ToList();
 
             return result;
         }
+
 
 
     }

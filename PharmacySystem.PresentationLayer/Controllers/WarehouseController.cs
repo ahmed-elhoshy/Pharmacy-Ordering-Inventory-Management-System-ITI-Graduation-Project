@@ -131,23 +131,23 @@ namespace PharmacySystem.PresentationLayer.Controllers
             return NoContent();
         }
 
-        [EndpointSummary("Get Medicines that distribute medicine exists in area")]
+        [EndpointSummary("Get WareHouses that distribute medicine exists in area")]
         [HttpGet("area/{areaId}/medicine/{medicineId}")]
-        public async Task<IActionResult> GetWarehousesByAreaAndMedicine(int areaId,int medicineId)
+        public async Task<IActionResult> GetWarehousesByAreaAndMedicine(int areaId, int medicineId)
         {
-                if (areaId <= 0 || medicineId <= 0)
-                {
-                    return BadRequest("Area ID and Medicine ID must be positive integers");
-                }
+            if (areaId <= 0 || medicineId <= 0)
+            {
+                return BadRequest("Area ID and Medicine ID must be positive integers");
+            }
 
-                var result = await _service.GetWarehousesByAreaAndMedicineAsync(areaId, medicineId);
+            var result = await _service.GetWarehousesByAreaAndMedicineAsync(areaId, medicineId);
 
-                if (result == null || !result.Any())
-                {
-                    return NotFound("No warehouses found with the specified criteria");
-                }
+            if (result == null || !result.Any())
+            {
+                return NotFound("No warehouses found with the specified criteria");
+            }
 
-                return Ok(result);
+            return Ok(result);
         }
 
         [HttpPost("login")]

@@ -122,19 +122,21 @@ namespace PharmacySystem.ApplicationLayer.Services
             return warehouses.Select(w =>
             {
                 var medicine = w.WareHouseMedicines.FirstOrDefault(wm => wm.MedicineId == medicineId);
+
                 return new WareHouseMedicineAreaDto
                 {
                     WarehouseId = w.Id,
+                    WareHouseAreaName = w.Address,
                     MedicineId = medicineId,
+                    WarehHouseName = w.Name,
                     MedicineName = medicine?.Medicine.Name,
+                    Quantity = medicine?.Quantity ?? 0,
                     MedicinePrice = medicine?.Medicine.Price ?? 0,
                     Discount = medicine?.Discount ?? 0,
                     FinalPrice = (medicine?.Medicine.Price ?? 0) * (1 - (medicine?.Discount ?? 0) / 100)
                 };
             }).ToList();
         }
-
-
         public async Task<WarehouseLoginResponseDTO> LoginAsync(WarehouseLoginDTO dto)
         {
             var warehouse = await warehouseRepository.FindByEmailAsync(dto.Email);

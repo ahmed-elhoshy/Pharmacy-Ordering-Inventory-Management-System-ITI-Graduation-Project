@@ -36,15 +36,17 @@ namespace E_Commerce.InfrastructureLayer.Data.GenericClass
             return await query.ToListAsync();
         }
 
+
         public async Task<List<Medicine>> GetMedicinesByAreaAsync(int areaId)
         {
-            return await context.Medicines
+            var medicines = await context.Medicines
           .Include(m => m.WareHouseMedicines)
               .ThenInclude(wm => wm.WareHouse)
                   .ThenInclude(w => w.WareHouseAreas)
           .Where(m => m.WareHouseMedicines
               .Any(wm => wm.WareHouse.WareHouseAreas.Any(wa => wa.AreaId == areaId)))
-          .ToListAsync();   
+          .ToListAsync();
+            return medicines.DistinctBy(m => m.Id).ToList();
         }
         public async Task<IReadOnlyList<Medicine>> SearchMedicinesAsync(string? searchTerm)
         {
