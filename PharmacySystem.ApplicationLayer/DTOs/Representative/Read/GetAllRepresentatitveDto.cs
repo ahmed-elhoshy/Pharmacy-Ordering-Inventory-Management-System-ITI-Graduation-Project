@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PharmacySystem.ApplicationLayer.DTOs.representatitve.Read
+namespace PharmacySystem.ApplicationLayer.DTOs.representative.Read
 {
     public class GetAllRepresentatitveDto
     {

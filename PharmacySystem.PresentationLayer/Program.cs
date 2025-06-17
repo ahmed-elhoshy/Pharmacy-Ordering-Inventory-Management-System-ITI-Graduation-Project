@@ -23,12 +23,10 @@ builder.Services.AddDbContext<PharmaDbContext>(options =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>();
 builder.Services.AddScoped<WarehouseService>();
-
 builder.Services.AddScoped<MedicineService, MedicineService>();
-
-
 builder.Services.AddScoped<IRepresentativeService, RepresentativeService>();
-
+builder.Services.AddScoped<IPharmacyRepository, PharmacyRepository>();
+builder.Services.AddScoped<IPharmacyService, PharmacyService>();
 #endregion
 
 
@@ -68,9 +66,15 @@ app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
+
 app.UseCors();
 
 app.MapControllers();
+
+// Add a default route for the root URL
+app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.Run();

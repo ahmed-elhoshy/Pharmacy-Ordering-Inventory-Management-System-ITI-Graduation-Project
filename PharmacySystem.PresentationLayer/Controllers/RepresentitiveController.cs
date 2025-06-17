@@ -2,23 +2,26 @@
 using E_Commerce.DomainLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PharmacySystem.ApplicationLayer.DTOs.representatitve.Create;
-using PharmacySystem.ApplicationLayer.DTOs.representatitve.Read;
-using PharmacySystem.ApplicationLayer.DTOs.representatitve.Update;
+using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
+using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Register;
+using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
+using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
+using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
 using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies;
 using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrderDetails;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
+using PharmacySystem.ApplicationLayer.Services;
 using PharmacySystem.DomainLayer.Entities;
 
 namespace PharmacySystem.PresentationLayer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RepresentitiveController : ControllerBase
+    public class RepresentativeController : ControllerBase
     {
         #region service
         private readonly IRepresentativeService _service;
-        public RepresentitiveController(IRepresentativeService service)
+        public RepresentativeController(IRepresentativeService service)
         {
             _service = service;
         }
@@ -47,9 +50,9 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Create Representatitve
-        [HttpPost("CreateRepresentatitve")]
+        [HttpPost("CreateRepresentative")]
         [EndpointSummary("Create a new representative with a unique code")]
-        public async Task<IActionResult> Create(CreateRepresentatitveDto dto)
+        public async Task<IActionResult> Create(CreateRepresentativeDto dto)
         {
             if (!ModelState.IsValid) 
                 return BadRequest(ModelState);
@@ -57,7 +60,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
             try
             {
                 var created = await _service.CreateAsync(dto);
-                return CreatedAtAction(nameof(GetById), new { id = created.Representatitve_Id }, created);
+                return CreatedAtAction(nameof(GetById), new { id = created.Representative_Id }, created);
             }
             catch (Exception ex)
             {
@@ -121,6 +124,18 @@ namespace PharmacySystem.PresentationLayer.Controllers
         {
             var OrderCount = await _service.GetOrdersCountById(id);
             return Ok(OrderCount);
+        }
+        #endregion
+
+        #region Representative Login
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] RepresentativeLoginDTO dto)
+        {
+            var result = await _service.LoginAsync(dto);
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result);
         }
         #endregion
     }

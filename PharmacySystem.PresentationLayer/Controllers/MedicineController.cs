@@ -28,7 +28,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         [ProducesResponseType(400)]
         public async Task<ActionResult<IEnumerable<Medicine>>> GetAllMedicines()
         {
-            var medicines = await _unitOfWork.medicinRepository.GetAllAsync();
+            var medicines = await _unitOfWork.medicineRepository.GetAllAsync();
             return Ok(medicines);
         }
 
@@ -39,7 +39,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         [ProducesResponseType(400)]
         public async Task<ActionResult<IEnumerable<Medicine>>> SearchMedicines([FromQuery] string? searchTerm = null)
         {
-            var medicines = await _unitOfWork.medicinRepository.SearchMedicinesAsync(searchTerm);
+            var medicines = await _unitOfWork.medicineRepository.SearchMedicinesAsync(searchTerm);
             return Ok(medicines);
         }
 
@@ -50,7 +50,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         [ProducesResponseType(400)]
         public async Task<ActionResult<IEnumerable<Medicine>>> FilterMedicines(string? desc,string? name,string? sort)
         {
-            var medicines = await _unitOfWork.medicinRepository.FilterMedicine(desc, name, sort);
+            var medicines = await _unitOfWork.medicineRepository.FilterMedicine(desc, name, sort);
             return Ok(medicines);
         }
 
@@ -61,7 +61,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         [ProducesResponseType(400)]
         public async Task<ActionResult<Medicine>> GetMedicine(int id)
         {
-            var medicine = await _unitOfWork.medicinRepository.GetByIdAsync(id);
+            var medicine = await _unitOfWork.medicineRepository.GetByIdAsync(id);
             if (medicine == null)
             {
                 return NotFound();
@@ -81,7 +81,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _unitOfWork.medicinRepository.AddAsync(medicine);
+            await _unitOfWork.medicineRepository.AddAsync(medicine);
             var result = await _unitOfWork.SaveAsync();
 
             if (!result)
@@ -111,7 +111,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
 
             try
             {
-                await _unitOfWork.medicinRepository.UpdateAsync(medicine);
+                await _unitOfWork.medicineRepository.UpdateAsync(medicine);
                 var result = await _unitOfWork.SaveAsync();
 
                 if (!result)
@@ -121,7 +121,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
             }
             catch (Exception)
             {
-                var exists = await _unitOfWork.medicinRepository.GetByIdAsync(id) != null;
+                var exists = await _unitOfWork.medicineRepository.GetByIdAsync(id) != null;
                 if (!exists)
                 {
                     return NotFound();
@@ -139,13 +139,13 @@ namespace PharmacySystem.PresentationLayer.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> DeleteMedicine(int id)
         {
-            var medicine = await _unitOfWork.medicinRepository.GetByIdAsync(id);
+            var medicine = await _unitOfWork.medicineRepository.GetByIdAsync(id);
             if (medicine == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.medicinRepository.DeleteAsync(medicine);
+            await _unitOfWork.medicineRepository.DeleteAsync(medicine);
             var result = await _unitOfWork.SaveAsync();
 
             if (!result)

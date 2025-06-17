@@ -22,5 +22,7 @@ namespace PharmacySystem.DomainLayer.Interfaces
         Task DeleteAsync(int id);
         Task<bool> ExistsAsync(int id);
         Task<List<WareHouse>> GetWarehousesByAreaAndMedicineAsync(int areaId, int medicineId);
+        Task<WareHouse?> FindByEmailAsync(string email);
+
     }
 }

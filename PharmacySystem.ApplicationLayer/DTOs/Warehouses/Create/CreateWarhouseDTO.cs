@@ -8,9 +8,13 @@ using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Create;
 
 namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create
 {
-    public class CreateWarhouseDTO
+    public class CreateWarehouseDTO
     {
-        
+        [Required]
+        [StringLength(100)]
+        public string? Name { get; set; }
+
+
         [Required]
         [StringLength(100)]
         public string Address { get; set; }
@@ -18,12 +22,24 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create
         [StringLength(50)]
         public string? Governate { get; set; }
 
-        public string? Name { get; set; }
         public bool IsTrusted { get; set; } = false;
 
-        [Required]
-        public string UserId { get; set; }
 
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        [Phone]
+        public string Phone { get; set; }
+
+        [Required]
+        public string? ImageUrl { get; set; }
+        public bool IsWarehouseApproved { get; set; } = false;
+        public string? ApprovedByAdminId { get; set; }
         public List<CreateWareHouseAreaDTO> WareHouseAreas { get; set; } = new();
 
         public List<CreateWarehouseMedicineDTO> WareHouseMedicines { get; set; } = new();

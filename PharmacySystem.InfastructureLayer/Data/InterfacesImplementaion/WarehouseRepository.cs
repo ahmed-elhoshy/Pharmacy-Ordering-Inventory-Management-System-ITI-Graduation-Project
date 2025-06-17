@@ -90,8 +90,7 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
         public async Task<WareHouse?> GetWarehouseByIdDetailsAsync(int id)
         {
             return await _dbContext.WareHouses
-                .Include(w => w.User)
-                .Include(w => w.ApprovedByAdmin)
+                .Include(w => w.ApprovedByAdminId)
                 .Include(w => w.WareHouseAreas).ThenInclude(wa => wa.Area)
                 .Include(w => w.WareHouseMedicines).ThenInclude(wm => wm.Medicine)
                 .FirstOrDefaultAsync(w => w.Id == id);
@@ -146,7 +145,7 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
             existing.Governate = updated.Governate;
             existing.IsTrusted = updated.IsTrusted;
             existing.IsWarehouseApproved = updated.IsWarehouseApproved;
-            existing.UserId = updated.UserId;
+            existing.Id = updated.Id;
             existing.ApprovedByAdminId = updated.ApprovedByAdminId;
             existing.Name = updated.Name;
 
@@ -187,6 +186,11 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                     w.WareHouseAreas.Any(wa => wa.Area.Id == areaId) &&
                     w.WareHouseMedicines.Any(wm => wm.MedicineId == medicineId))
                 .ToListAsync();
+        }
+        public async Task<WareHouse?> FindByEmailAsync(string email)
+        {
+            return await _dbContext.Set<WareHouse>()
+                .FirstOrDefaultAsync(p => p.Email == email);
         }
     }
 }

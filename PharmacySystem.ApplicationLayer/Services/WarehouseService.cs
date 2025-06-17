@@ -1,9 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using E_Commerce.DomainLayer.Interfaces;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
+using PharmacySystem.ApplicationLayer.DTOs.Warehouse.Login;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
@@ -19,10 +26,13 @@ namespace PharmacySystem.ApplicationLayer.Services
     {
         private readonly IWarehouseRepository warehouseRepository;
         private readonly IMapper _mapper;
-        public WarehouseService(IWarehouseRepository warehouseRepository , IMapper mapper)
+        private readonly IConfiguration _configuration;
+
+        public WarehouseService(IWarehouseRepository warehouseRepository , IMapper mapper, IConfiguration configuration)
         {
             this.warehouseRepository = warehouseRepository;
             this._mapper = mapper;
+            this._configuration = configuration;
         }
 
         public async Task<PaginatedResult<WarehouseMedicineDto>> GetWarehouseMedicineDtosAsync(int warehouseId, int page, int pageSize)
@@ -85,9 +95,11 @@ namespace PharmacySystem.ApplicationLayer.Services
             return await warehouseRepository.ExistsAsync(id);
         }
 
-        public async Task<ReadWareHouseDTO> AddAsync(CreateWarhouseDTO dto)
+        public async Task<ReadWareHouseDTO> AddAsync(CreateWarehouseDTO dto)
         {
             var warehouse = _mapper.Map<WareHouse>(dto);
+            // Hash the password before saving
+            warehouse.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
             await warehouseRepository.AddAsync(warehouse);
             return _mapper.Map<ReadWareHouseDTO>(warehouse);
         }
@@ -120,6 +132,61 @@ namespace PharmacySystem.ApplicationLayer.Services
                     FinalPrice = (medicine?.Medicine.Price ?? 0) * (1 - (medicine?.Discount ?? 0) / 100)
                 };
             }).ToList();
+        }
+
+
+        public async Task<WarehouseLoginResponseDTO> LoginAsync(WarehouseLoginDTO dto)
+        {
+            var warehouse = await warehouseRepository.FindByEmailAsync(dto.Email);
+
+            if (warehouse == null)
+                return new WarehouseLoginResponseDTO
+                {
+                    Success = false,
+                    Message = "Invalid email or password."
+                };
+
+            // Verify the password against the stored hash
+            if (!BCrypt.Net.BCrypt.Verify(dto.Password, warehouse.Password))
+                return new WarehouseLoginResponseDTO
+                {
+                    Success = false,
+                    Message = "Invalid email or password."
+                };
+
+            // Generate JWT token
+
+            var token = GenerateJwtToken(warehouse);
+
+            return new WarehouseLoginResponseDTO
+            {
+                Success = true,
+                Message = "Login successful.",
+                Token = token
+            };
+        }
+
+        private string GenerateJwtToken(WareHouse warehouse)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+            new Claim(ClaimTypes.NameIdentifier, warehouse.Id.ToString()),
+            new Claim(ClaimTypes.Email, warehouse.Email),
+            new Claim(ClaimTypes.Role, "WareHouse")
+        };
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JWT:ValidIssuer"],
+                audience: _configuration["JWT:ValidAudience"],
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

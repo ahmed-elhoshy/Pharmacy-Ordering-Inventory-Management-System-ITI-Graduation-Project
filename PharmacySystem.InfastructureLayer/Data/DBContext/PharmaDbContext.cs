@@ -6,7 +6,7 @@ using PharmacySystem.InfastructureLayer.Data.Config;
 
 namespace PharmacySystem.InfastructureLayer.Data.DBContext
 {
-    public class PharmaDbContext : IdentityDbContext<User>
+    public class PharmaDbContext : DbContext
     {
         public PharmaDbContext(DbContextOptions<PharmaDbContext> options) :base(options)
         {

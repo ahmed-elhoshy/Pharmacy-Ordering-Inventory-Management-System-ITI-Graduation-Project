@@ -1,21 +1,18 @@
 ﻿
+
 using System.ComponentModel.DataAnnotations;
 
-namespace PharmacySystem.ApplicationLayer.DTOs.representatitve.Create
+namespace PharmacySystem.ApplicationLayer.DTOs.representative.Update
 {
-    public class CreateRepresentatitveDto
+    public class UpdateRepresentativeDto
     {
 
         [Required(ErrorMessage = "Name is required")]
         [StringLength(100, MinimumLength = 2)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Code is required")]
-        [StringLength(20)]
-        public string Code { get; set; }
-
         [Required(ErrorMessage = "Address is required")]
-        [StringLength(200)]
+        [StringLength(200 , MinimumLength = 2)]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Governate is required")]
