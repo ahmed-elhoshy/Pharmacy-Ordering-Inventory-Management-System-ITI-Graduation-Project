@@ -39,11 +39,10 @@ namespace PharmacySystem.PresentationLayer.Controllers
         }
         //GET /api/warehouse/GetAll?page=1&pageSize=10
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll(
-            [FromQuery] int page = 1,
-            [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetAll()
+           
         {
-            var warehouses = await _service.GetAllAsync(page, pageSize);
+            var warehouses = await _service.GetAllAsync();
             return Ok(warehouses);
         }
 

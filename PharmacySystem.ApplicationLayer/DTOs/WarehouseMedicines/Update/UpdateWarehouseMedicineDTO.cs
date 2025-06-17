@@ -12,7 +12,10 @@ namespace PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Update
     {
         [Required]
         public int MedicineId { get; set; }
+        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Please Put a valid Quantity ")]
         public int Quantity { get; set; }
+        [Required]
         public decimal Price { get; set; }
         [Required]
         [Column(TypeName = "decimal(5,2)")]

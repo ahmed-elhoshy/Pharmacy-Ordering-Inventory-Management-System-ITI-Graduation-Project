@@ -14,6 +14,8 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update
         [Required]
         [StringLength(100)]
         public string? Name { get; set; }
+        [Required]
+        [StringLength(100)]
         public string Address { get; set; }
 
         [StringLength(50)]
@@ -21,13 +23,15 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update
 
         public bool IsTrusted { get; set; }
 
-        [Required]
-        public string UserId { get; set; }
-
         public bool IsWarehouseApproved { get; set; }
         public string? ApprovedByAdminId { get; set; }
 
-        public List<UpdateWareHouseAreaDTO> WareHouseAreas { get; set; }
-        public List<UpdateWarehouseMedicineDTO> WareHouseMedicines { get; set; }
+        public List<UpdateWareHouseAreaDTO>? WareHouseAreas { get; set; }
+        public List<UpdateWarehouseMedicineDTO>? WareHouseMedicines { get; set; }
+
+        [Phone]
+        public string Phone { get; set; }
+
+        public string? ImageUrl { get; set; }
     }
 }

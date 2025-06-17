@@ -12,12 +12,6 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read
         public string? Name { get; set; }
         public string Address { get; set; }
         public string? Governate { get; set; }
-
-        public bool IsTrusted { get; set; }
-        public bool IsWarehouseApproved { get; set; }
-
-        public string UserId { get; set; }
-        public string? ApprovedByAdminId { get; set; }
         public decimal MinmumPrice { get; set; }
 
 

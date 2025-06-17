@@ -14,11 +14,6 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read
         public string? Name { get; set; }
         public string Address { get; set; }
         public string Governate { get; set; }
-        public bool IsTrusted { get; set; }
-        public string UserName { get; set; }
-        public bool IsWarehouseApproved { get; set; }
-        public string? ApprovedByAdminName { get; set; }
-
         public List<string> AreaNames { get; set; } = new();
         public List<WarehouseMedicineDto> Medicines { get; set; } = new();
     }

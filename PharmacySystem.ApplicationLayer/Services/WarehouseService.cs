@@ -64,16 +64,14 @@ namespace PharmacySystem.ApplicationLayer.Services
             };
         }
 
-        public async Task<PaginatedResult<ReadWareHouseDTO>> GetAllAsync(int page, int pageSize)
+        public async Task<PaginatedResult<ReadWareHouseDTO>> GetAllAsync()
         {
-            var result = await warehouseRepository.GetAllAsync(page, pageSize);
+            var result = await warehouseRepository.GetAllAsync();
             var dtoitems = _mapper.Map<IEnumerable<ReadWareHouseDTO>>(result.Items);
 
             return new PaginatedResult<ReadWareHouseDTO>
             {
                 TotalCount = result.TotalCount,
-                PageNumber = result.PageNumber,
-                PageSize = result.PageSize,
                 Items = dtoitems
             };
         }

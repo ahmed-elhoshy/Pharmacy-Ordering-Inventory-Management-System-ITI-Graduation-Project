@@ -38,8 +38,7 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create
 
         [Required]
         public string? ImageUrl { get; set; }
-        public bool IsWarehouseApproved { get; set; } = false;
-        public string? ApprovedByAdminId { get; set; }
+      
         public List<CreateWareHouseAreaDTO> WareHouseAreas { get; set; } = new();
 
         public List<CreateWarehouseMedicineDTO> WareHouseMedicines { get; set; } = new();
