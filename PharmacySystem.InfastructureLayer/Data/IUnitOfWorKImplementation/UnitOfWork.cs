@@ -38,7 +38,7 @@ namespace E_Commerce.DomainLayer
                     _representativeRepository = new RepresentativeRepository(context);
                 return _representativeRepository;
             }
-            set => representativeRepository = value;
+            set => _representativeRepository = value;
         }
 
         public IPharmacyRepository PharmacyRepository

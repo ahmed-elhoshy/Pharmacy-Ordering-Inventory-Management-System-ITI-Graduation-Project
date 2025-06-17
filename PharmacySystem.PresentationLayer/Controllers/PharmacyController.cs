@@ -22,11 +22,11 @@ public class PharmacyController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] PharmacyRegisterDto dto)
     {
-        var result = await _pharmacyService.RegisterAsync(dto);
-        if (!result.Success)
-            return BadRequest(result.Message);
+        var validation = await _pharmacyService.RegisterPharmacyAsync(dto);
+        if (validation is not null)
+            return new ObjectResult(validation) { StatusCode = 400 };
 
-        return Ok(result.Message);
+        return Ok(new { message = "Pharmacy registered successfully." });
     }
 
     [HttpGet("register")]
