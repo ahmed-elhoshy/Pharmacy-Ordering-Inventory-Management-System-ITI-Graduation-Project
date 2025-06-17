@@ -67,3 +67,12 @@ Content-Type: application/json
   "email": "warehouse@example.com",
   "password": "securepassword123"
 }
+
+###
+GET http://localhost:5252/api/pharmacy/register
+Content-Type: application/json 
+
+###
+GET http://localhost:5252/api/pharmacy/register/?governateid=3
+Content-Type: application/json 
+

@@ -13,6 +13,8 @@ using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
 using PharmacySystem.DomainLayer.Entities;
+using PharmacySystem.ApplicationLayer.DTOs.Governate;
+using PharmacySystem.ApplicationLayer.DTOs.Area;
 
 namespace PharmacySystem.ApplicationLayer.MappingConfig
 {
@@ -95,10 +97,24 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
                 .ForMember(dest => dest.OrdersCount, opt => opt.MapFrom(src =>
                     src.pharmacies.Sum(p => p.Orders.Count)));
             #endregion
+
+            #region Pharmacy
             CreateMap<PharmacyRegisterDto, Pharmacy>()
                 .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
                 .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+            #endregion
+
+            #region Governate
+            CreateMap<Governate, GovernateLookupDto>();
+            #endregion
+
+            #region Area
+            CreateMap<Area, AreaLookupDto>();
+            #endregion
+
+
+
         }
     }
 }

@@ -9,7 +9,8 @@ namespace E_Commerce.DomainLayer.Interfaces
         public IMedicinRepository medicineRepository { get; set; }
         public IRepresentativeRepository representativeRepository { get; set; }
         public IPharmacyRepository PharmacyRepository { get; set; }
-        IGenericRepository<Area> AreaRepository { get; }
+        IAreaRepository AreaRepository { get; }
+        IGenericRepository<Governate> GovernateRepository { get; }
         Task<bool> SaveAsync();
 
     }

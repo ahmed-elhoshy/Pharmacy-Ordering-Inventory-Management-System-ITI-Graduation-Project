@@ -16,9 +16,10 @@ namespace E_Commerce.DomainLayer
         #endregion
 
         private IMedicinRepository _MedicineRepository;
-        private IRepresentativeRepository _representativeRepository ;
+        private IRepresentativeRepository _representativeRepository;
         private IPharmacyRepository _pharmacyRepository;
-        private IGenericRepository<Area> _areaRepository;
+        private IGenericRepository<Governate> _governateRepository;
+        private IAreaRepository _areaRepository;
         public IMedicinRepository medicineRepository
         {
             get
@@ -29,7 +30,7 @@ namespace E_Commerce.DomainLayer
             }
             set => _MedicineRepository = value;
         }
-        public IRepresentativeRepository representativeRepository 
+        public IRepresentativeRepository representativeRepository
         {
             get
             {
@@ -50,16 +51,31 @@ namespace E_Commerce.DomainLayer
             }
             set => _pharmacyRepository = value;
         }
-        public IGenericRepository<Area> AreaRepository
+
+        public IAreaRepository AreaRepository
         {
             get
             {
                 if (_areaRepository == null)
-                    _areaRepository = new GenericRepository<Area>(context);
+                    _areaRepository = new AreaRepository(context);
                 return _areaRepository;
             }
             set => _areaRepository = value;
         }
+
+
+
+        public IGenericRepository<Governate> GovernateRepository
+        {
+            get
+            {
+                if (_governateRepository == null)
+                    _governateRepository = new GenericRepository<Governate>(context);
+                return _governateRepository;
+            }
+            set => _governateRepository = value;
+        }
+
         public UnitOfWork(PharmaDbContext context)
         {
             this.context = context;
