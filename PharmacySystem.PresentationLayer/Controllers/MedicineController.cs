@@ -160,12 +160,17 @@ namespace PharmacySystem.PresentationLayer.Controllers
         [EndpointSummary("Get Medicines exist in Area")]
         public async Task<IActionResult> GetMedicineStatsByArea(int areaId)
         {
-            if (areaId <= 0 )
+            if (areaId <= 0)
             {
                 return BadRequest("Area ID  must be positive integer");
             }
-            var stats = await medicineService.GetMedicineStatsByAreaAsync(areaId);
-            return Ok(stats);
+            var result = await medicineService.GetMedicineStatsByAreaAsync(areaId);
+
+            if (result == null || !result.Any())
+            {
+                return NotFound("No Medicines found ");
+            }
+            return Ok(result);
         }
     }
 }

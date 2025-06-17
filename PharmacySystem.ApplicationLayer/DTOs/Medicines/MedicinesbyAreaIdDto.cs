@@ -12,7 +12,7 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Medicines
         public int MedicineId { get; set; }
         public string MedicineName { get; set; }
         public decimal Price { get; set; }
-
+        public string MaximumwareHouseAreaName { get; set; }
         public int TotalQuantity { get; set; }
         public int DistributorsCount { get; set; }
         public int WarehouseIdOfMaxDiscount { get; set; }      
