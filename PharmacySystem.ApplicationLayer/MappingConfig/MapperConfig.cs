@@ -91,7 +91,7 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             //    string.Join(", ", src.pharmacies.Select(p => p.Address))))
             //.ForMember(dest => dest.OrdersCount, opt => opt.MapFrom(src =>
             //    src.pharmacies.Sum(p => p.Orders.Count)));
-#endregion
+//#endregion
 
             #region Pharmacy
             CreateMap<PharmacyRegisterDto, Pharmacy>()

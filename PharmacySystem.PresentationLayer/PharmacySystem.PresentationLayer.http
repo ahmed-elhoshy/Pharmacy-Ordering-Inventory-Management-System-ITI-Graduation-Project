@@ -8,14 +8,14 @@ Accept: application/json
 POST http://localhost:5252/api/pharmacy/register
 Content-Type: application/json
 {
-  "name": "Pharmacy three",
-  "email": "pharmacy3@example.com",
+  "name": "Pharmacy four",
+  "email": "pharmacy4@example.com",
   "password": "Pharma123",
   "confirmPassword": "Pharma123",
   "address": "456 Med Street",
   "governate": "cairo",
   "areaId": 5,
-  "representativeCode": "REZNP9",
+  "representativeCode": "BR001",
   "phoneNumber": "01012345678"
 }
 ###
