@@ -26,39 +26,54 @@ public class PharmacyService : IPharmacyService
         _configuration = configuration;
     }
 
-    public async Task<Result> RegisterAsync(PharmacyRegisterDto dto)
+    public async Task<ValidationResult?> RegisterPharmacyAsync(PharmacyRegisterDto dto)
     {
-        // Check if Pharmacy with the same email already exists
-        var emailExists = await _unitOfWork.PharmacyRepository.EmailExistsAsync(dto.Email);
-        if (emailExists)
-            return Result.Fail("Pharmacy with this email already exists.");
+        var validation = new ValidationResult();
 
-        // Check if AreaId exists
+        // Check for duplicate email
+        if (await _unitOfWork.PharmacyRepository.EmailExistsAsync(dto.Email))
+        {
+            validation.Errors.Add("Email", ["Pharmacy with this email already exists."]);
+        }
+
+        // Check if Area exists
         var area = await _unitOfWork.AreaRepository.GetByIdAsync(dto.AreaId);
         if (area == null)
-            return Result.Fail("Invalid AreaId: Area does not exist.");
+        {
+            validation.Errors.Add("Area", ["Invalid Area."]);
+        }
 
-        // Find Representative by Code
+        // Check if Governate exists
+        var governate = _unitOfWork.GovernateRepository
+            .FindAsync(g => g.Name.ToLower() == dto.Governate.Trim().ToLower()).FirstOrDefault();
+        if (governate == null)
+        {
+            validation.Errors.Add("Governate", ["Invalid Governate."]);
+        }
+
+        // Check if Representative exists
         var representative = _unitOfWork.representativeRepository
             .FindAsync(r => r.Code == dto.RepresentativeCode).FirstOrDefault();
-
         if (representative == null)
-            return Result.Fail("Invalid Representative Code: Representative does not exist.");
+        {
+            validation.Errors.Add("RepresentativeId", ["Invalid Representative Code."]);
+        }
 
-        // Map from DTO to Entity
-        var pharmacy = _mapper.Map<Pharmacy>(dto);
+        // If there are validation errors, return them
+        if (validation.HasErrors)
+            return validation;
 
-        // Set the RepresentativeId foreign key
-        pharmacy.RepresentativeId = representative.Id;
+        // Map DTO to entity
+        var pharmacy = _mapper.Map<DomainLayer.Entities.Pharmacy>(dto);
 
-        // Hash the password before saving
+        // Set foreign key and hash password
+        pharmacy.RepresentativeId = representative!.Id;
         pharmacy.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
-        // Add to repository
         await _unitOfWork.PharmacyRepository.AddAsync(pharmacy);
         await _unitOfWork.SaveAsync();
 
-        return Result.Ok("Pharmacy registered successfully.");
+        return null; // Success — no errors
     }
 
     public async Task<PharmacyLoginResponseDTO> LoginAsync(PharmacyLoginDTO dto)

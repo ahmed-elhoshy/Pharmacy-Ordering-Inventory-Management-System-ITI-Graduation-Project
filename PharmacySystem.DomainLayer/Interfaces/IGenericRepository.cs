@@ -7,6 +7,7 @@ namespace E_Commerce.InfrastructureLayer.Data.DBContext.Repositories
     {
         Task<IEnumerable<T>> GetAllAsync();
         IReadOnlySet<T> FindAsync(Expression<Func<T, bool>> query);
+
         Task<T?> GetByIdAsync(int id);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);

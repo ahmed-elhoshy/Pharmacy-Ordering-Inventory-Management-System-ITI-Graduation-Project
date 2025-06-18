@@ -8,12 +8,12 @@ Accept: application/json
 POST http://localhost:5252/api/pharmacy/register
 Content-Type: application/json
 {
-  "name": "Pharmacy One",
-  "email": "pharmacy1@example.com",
+  "name": "Pharmacy three",
+  "email": "pharmacy3@example.com",
   "password": "Pharma123",
   "confirmPassword": "Pharma123",
   "address": "456 Med Street",
-  "governate": "Giza",
+  "governate": "cairo",
   "areaId": 5,
   "representativeCode": "REZNP9",
   "phoneNumber": "01012345678"
@@ -65,21 +65,4 @@ Content-Type: application/json
 {
   "email": "warehouse@example.com",
   "password": "securepassword123"
-}
-
-###
-POST http://localhost:5252/api/admin/createadmin
-Content-Type: application/json 
-{
-  "name": "Ahmed Hossam",
-  "email": "ahmed@example.com",
-  "password": "Admin123",
-  "phone": "01001234567"
-}
-###
-POST http://localhost:5252/api/admin/login
-Content-Type: application/json 
-{
-  "email": "ahmed@example.com",
-  "password": "Admin123"
 }
