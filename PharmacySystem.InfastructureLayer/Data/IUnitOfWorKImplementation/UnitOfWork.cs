@@ -16,9 +16,11 @@ namespace E_Commerce.DomainLayer
         #endregion
 
         private IMedicinRepository _MedicineRepository;
-        private IRepresentativeRepository _representativeRepository ;
+        private IRepresentativeRepository _representativeRepository;
         private IPharmacyRepository _pharmacyRepository;
         private IGenericRepository<Area> _areaRepository;
+        private IAdminRepository _adminRepository;
+
         public IMedicinRepository medicineRepository
         {
             get
@@ -29,6 +31,7 @@ namespace E_Commerce.DomainLayer
             }
             set => _MedicineRepository = value;
         }
+
         public IRepresentativeRepository representativeRepository 
         {
             get
@@ -37,7 +40,7 @@ namespace E_Commerce.DomainLayer
                     _representativeRepository = new RepresentativeRepository(context);
                 return _representativeRepository;
             }
-            set => representativeRepository = value;
+            set => _representativeRepository = value;
         }
 
         public IPharmacyRepository PharmacyRepository
@@ -50,6 +53,7 @@ namespace E_Commerce.DomainLayer
             }
             set => _pharmacyRepository = value;
         }
+
         public IGenericRepository<Area> AreaRepository
         {
             get
@@ -60,10 +64,23 @@ namespace E_Commerce.DomainLayer
             }
             set => _areaRepository = value;
         }
+
+        public IAdminRepository AdminRepository
+        {
+            get
+            {
+                if (_adminRepository == null)
+                    _adminRepository = new AdminRepository(context);
+                return _adminRepository;
+            }
+            set => _adminRepository = value;
+        }
+
         public UnitOfWork(PharmaDbContext context)
         {
             this.context = context;
         }
+
         public async Task<bool> SaveAsync()
         {
             return await context.SaveChangesAsync() > 0; // return true -> if at least one row was modified on Database  

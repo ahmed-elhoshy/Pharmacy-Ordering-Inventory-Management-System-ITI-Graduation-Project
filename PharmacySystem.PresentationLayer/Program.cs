@@ -8,7 +8,6 @@ using PharmacySystem.DomainLayer.Interfaces;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
 using PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -28,6 +27,7 @@ builder.Services.AddScoped<IRepresentativeService, RepresentativeService>();
 builder.Services.AddScoped<IPharmacyRepository, PharmacyRepository>();
 builder.Services.AddScoped<IPharmacyService, PharmacyService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 #endregion
 
 

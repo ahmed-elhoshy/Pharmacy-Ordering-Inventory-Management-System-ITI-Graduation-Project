@@ -1,4 +1,5 @@
 using PharmacySystem.ApplicationLayer.DTOs.Admin;
+using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
@@ -12,6 +13,14 @@ namespace PharmacySystem.ApplicationLayer.IServiceInterfaces
 {
     public interface IAdminService
     {
+        #region Admin Operations
+        Task<AdminResponseDto> CreateAdminAsync(CreateAdminDto dto);
+        Task<AdminResponseDto> UpdateAdminAsync(int id, UpdateAdminDto dto);
+        Task<bool> DeleteAdminAsync(int id);
+        Task<IEnumerable<AdminResponseDto>> GetAllAdminsAsync();
+        Task<AdminResponseDto> GetAdminByIdAsync(int id);
+        #endregion
+
         #region Representative Operations
         Task<GetRepresentativeByIdDto> CreateRepresentativeAsync(CreateRepresentativeDto dto);
         Task<GetRepresentativeByIdDto> UpdateRepresentativeAsync(int id, UpdateRepresentativeDto dto);
@@ -27,5 +36,10 @@ namespace PharmacySystem.ApplicationLayer.IServiceInterfaces
         Task<IEnumerable<ReadWareHouseDTO>> GetAllWarehousesAsync();
         Task<ReadWareHouseDTO> GetWarehouseByIdAsync(int id);
         #endregion
+
+        #region Login Operations
+        Task<AdminLoginResponseDTO> LoginAsync(AdminLoginDTO dto);
+        #endregion
+
     }
 } 

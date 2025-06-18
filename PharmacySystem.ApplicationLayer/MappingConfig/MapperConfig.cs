@@ -1,10 +1,13 @@
 using AutoMapper;
+using PharmacySystem.ApplicationLayer.DTOs.Admin;
+using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Register;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
 using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies;
 using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrderDetails;
+using PharmacySystem.ApplicationLayer.DTOs.Warehouse.Login;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Create;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Read;
@@ -20,85 +23,64 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
     {
         public MapperConfig()
         {
+            #region Admin Mappings
+            CreateMap<Admin, AdminResponseDto>();
+            CreateMap<CreateAdminDto, Admin>();
+            CreateMap<UpdateAdminDto, Admin>();
+            #endregion
+
+            #region Representative Mappings
+            CreateMap<Representative, GetAllRepresentatitveDto>();
+            CreateMap<Representative, GetRepresentativeByIdDto>();
+            CreateMap<CreateRepresentativeDto, Representative>();
+            CreateMap<UpdateRepresentativeDto, Representative>();
+            #endregion
+
+            #region Warehouse Mappings
+            CreateMap<WareHouse, ReadWareHouseDTO>();
+            CreateMap<CreateWarehouseDTO, WareHouse>();
+            CreateMap<UpdateWareHouseDTO, WareHouse>();
+            #endregion
+
+            #region Pharmacy Mappings
+            CreateMap<Pharmacy, PharmacyLoginResponseDTO>();
+            CreateMap<PharmacyRegisterDto, Pharmacy>();
+            #endregion
+
             // CREATE & UPDATE mappings
             CreateMap<CreateWarehouseDTO, WareHouse>()
-                .ForMember(dest => dest.WareHouseAreas, opt => opt.MapFrom(src => src.WareHouseAreas))
-                .ForMember(dest => dest.WareHouseMedicines, opt => opt.MapFrom(src => src.WareHouseMedicines))
-                .ReverseMap();
-
-            CreateMap<CreateWareHouseAreaDTO, WareHouseArea>();
-            CreateMap<UpdateWareHouseAreaDTO, WareHouseArea>();
-
-            CreateMap<UpdateWarehouseMedicineDTO, WareHouseMedicien>().ReverseMap();
-            CreateMap<CreateWarehouseMedicineDTO, WareHouseMedicien>().ReverseMap();
-
-            CreateMap<UpdateWareHouseDTO, WareHouse>()
-                .ForMember(dest => dest.WareHouseAreas, opt => opt.MapFrom(src => src.WareHouseAreas))
-                .ForMember(dest => dest.WareHouseMedicines, opt => opt.MapFrom(src => src.WareHouseMedicines))
-                .ReverseMap();
-
-            // READ mappings
-            CreateMap<WareHouseArea, ReadWareHouseAreaDTO>()
-                .ForMember(dest => dest.AreaName, opt => opt.MapFrom(src => src.Area.Name));
-
-            CreateMap<ReadWareHouseAreaDTO, WareHouseArea>()
-                .ForMember(dest => dest.Area, opt => opt.Ignore());
-
-            CreateMap<WareHouse, ReadWareHouseDTO>()
-                .ForMember(dest => dest.WareHouseAreas, opt => opt.MapFrom(src => src.WareHouseAreas));
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.WareHouseAreas, opt => opt.Ignore());
 
             CreateMap<WareHouse, ReadWarehouseDetailsDTO>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.AreaNames, opt => opt.MapFrom(src =>
-                    src.WareHouseAreas != null ?
-                        src.WareHouseAreas
-                            .Where(wa => wa.Area != null)
-                            .Select(wa => wa.Area.Name)
-                            .ToList()
-                        : new List<string>()))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
+                .ForMember(dest => dest.Governate, opt => opt.MapFrom(src => src.Governate))
+                .ForMember(dest => dest.AreaNames, opt => opt.MapFrom(src => src.WareHouseAreas.Select(wa => wa.Area.Name)))
                 .ForMember(dest => dest.Medicines, opt => opt.MapFrom(src => src.WareHouseMedicines));
 
+            // Warehouse Medicine Mappings
             CreateMap<WareHouseMedicien, WarehouseMedicineDto>()
-                .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
                 .ForMember(dest => dest.MedicineId, opt => opt.MapFrom(src => src.MedicineId))
-                .ReverseMap();
+                .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
+                .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity))
+                .ForMember(dest => dest.Discount, opt => opt.MapFrom(src => src.Discount));
 
-            CreateMap<WareHouse, SimpleReadWarehouseDTO>()
-                .ForMember(dest => dest.MinmumPrice, opt =>
-                    opt.MapFrom((src, dest, destMember, context) =>
-                        src.WareHouseAreas
-                            .FirstOrDefault(a => a.AreaId == (int)context.Items["areaId"])?.MinmumPrice ?? 0
-                    ));
+            CreateMap<CreateWarehouseMedicineDTO, WareHouseMedicien>();
+            CreateMap<UpdateWarehouseMedicineDTO, WareHouseMedicien>();
 
             // Representative Mappings
-            #region Representative
-            CreateMap<Representative, GetAllRepresentatitveDto>();
-            CreateMap<CreateRepresentativeDto, Representative>();
-            CreateMap<UpdateRepresentativeDto, Representative>();
-
-            CreateMap<Representative, GetRepresentativeByIdDto>()
-                .ForMember(dest => dest.Representative_Id, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Representatitve_Name, opt => opt.MapFrom(src => src.Name));
-
             CreateMap<Representative, GetRepresentatitvePharmaciesCountDto>()
                 .ForMember(dest => dest.RepresentatitveId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.RepresentatitveName, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.PharmaciesCount, opt => opt.MapFrom(src => src.pharmacies.Count));
 
             CreateMap<Representative, GetOrdersPharmaciesCountDto>()
-                .ForMember(dest => dest.PharmaciesName, opt => opt.MapFrom(src =>
-                    string.Join(", ", src.pharmacies.Select(p => p.Name))))
-                .ForMember(dest => dest.PharmaciesGovernate, opt => opt.MapFrom(src =>
-                    string.Join(", ", src.pharmacies.Select(p => p.Governate))))
-                .ForMember(dest => dest.PharmaciesAddress, opt => opt.MapFrom(src =>
-                    string.Join(", ", src.pharmacies.Select(p => p.Address))))
-                .ForMember(dest => dest.OrdersCount, opt => opt.MapFrom(src =>
-                    src.pharmacies.Sum(p => p.Orders.Count)));
-            #endregion
-            CreateMap<PharmacyRegisterDto, Pharmacy>()
-                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
-                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+                .ForMember(dest => dest.PharmaciesName, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().Name))
+                .ForMember(dest => dest.PharmaciesAddress, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().Address))
+                .ForMember(dest => dest.PharmaciesGovernate, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().Governate))
+                .ForMember(dest => dest.OrdersCount, opt => opt.MapFrom(src => src.pharmacies.Sum(p => p.Orders.Count)));
         }
     }
 }
