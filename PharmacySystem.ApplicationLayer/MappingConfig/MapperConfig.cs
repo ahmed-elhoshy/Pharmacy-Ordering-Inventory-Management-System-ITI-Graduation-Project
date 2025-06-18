@@ -39,9 +39,63 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             #endregion
 
             #region Warehouse Mappings
-            CreateMap<WareHouse, ReadWareHouseDTO>();
-            CreateMap<CreateWarehouseDTO, WareHouse>();
-            CreateMap<UpdateWareHouseDTO, WareHouse>();
+            // CREATE & UPDATE mappings
+            CreateMap<CreateWarehouseDTO, WareHouse>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.WareHouseAreas, opt => opt.MapFrom(src => src.WareHouseAreas))
+                .ForMember(dest => dest.WareHouseMedicines, opt => opt.MapFrom(src => src.WareHouseMedicines))
+                .ReverseMap();
+
+            CreateMap<UpdateWareHouseDTO, WareHouse>()
+                .ForMember(dest => dest.WareHouseAreas, opt => opt.MapFrom(src => src.WareHouseAreas))
+                .ForMember(dest => dest.WareHouseMedicines, opt => opt.MapFrom(src => src.WareHouseMedicines))
+                .ReverseMap();
+
+            CreateMap<CreateWarehouseMedicineDTO, WareHouseMedicien>().ReverseMap();
+            CreateMap<UpdateWarehouseMedicineDTO, WareHouseMedicien>().ReverseMap();
+
+            CreateMap<CreateWareHouseAreaDTO, WareHouseArea>();
+            CreateMap<UpdateWareHouseAreaDTO, WareHouseArea>();
+
+            // READ mappings
+            CreateMap<WareHouse, ReadWareHouseDTO>()
+                .ForMember(dest => dest.WareHouseAreas, opt => opt.MapFrom(src => src.WareHouseAreas));
+
+            CreateMap<WareHouse, ReadWarehouseDetailsDTO>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
+                .ForMember(dest => dest.Governate, opt => opt.MapFrom(src => src.Governate))
+                .ForMember(dest => dest.AreaNames, opt => opt.MapFrom(src =>
+                    src.WareHouseAreas != null
+                        ? src.WareHouseAreas
+                            .Where(wa => wa.Area != null)
+                            .Select(wa => wa.Area.Name)
+                            .ToList()
+                        : new List<string>()
+                ))
+                .ForMember(dest => dest.Medicines, opt => opt.MapFrom(src => src.WareHouseMedicines));
+
+            CreateMap<WareHouseArea, ReadWareHouseAreaDTO>()
+                .ForMember(dest => dest.AreaName, opt => opt.MapFrom(src => src.Area.Name));
+
+            CreateMap<ReadWareHouseAreaDTO, WareHouseArea>()
+                .ForMember(dest => dest.Area, opt => opt.Ignore());
+
+            CreateMap<WareHouseMedicien, WarehouseMedicineDto>()
+                .ForMember(dest => dest.MedicineId, opt => opt.MapFrom(src => src.MedicineId))
+                .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
+                .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity))
+                .ForMember(dest => dest.Discount, opt => opt.MapFrom(src => src.Discount))
+                .ReverseMap();
+
+            CreateMap<WareHouse, SimpleReadWarehouseDTO>()
+                .ForMember(dest => dest.MinmumPrice, opt =>
+                    opt.MapFrom((src, dest, destMember, context) =>
+                        src.WareHouseAreas
+                            .FirstOrDefault(a => a.AreaId == (int)context.Items["areaId"])?.MinmumPrice ?? 0
+                    ));
+
             #endregion
 
             #region Pharmacy Mappings
@@ -49,28 +103,7 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<PharmacyRegisterDto, Pharmacy>();
             #endregion
 
-            // CREATE & UPDATE mappings
-            CreateMap<CreateWarehouseDTO, WareHouse>()
-                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
-                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
-                .ForMember(dest => dest.WareHouseAreas, opt => opt.Ignore());
-
-            CreateMap<WareHouse, ReadWarehouseDetailsDTO>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
-                .ForMember(dest => dest.Governate, opt => opt.MapFrom(src => src.Governate))
-                .ForMember(dest => dest.AreaNames, opt => opt.MapFrom(src => src.WareHouseAreas.Select(wa => wa.Area.Name)))
-                .ForMember(dest => dest.Medicines, opt => opt.MapFrom(src => src.WareHouseMedicines));
-
-            // Warehouse Medicine Mappings
-            CreateMap<WareHouseMedicien, WarehouseMedicineDto>()
-                .ForMember(dest => dest.MedicineId, opt => opt.MapFrom(src => src.MedicineId))
-                .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
-                .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity))
-                .ForMember(dest => dest.Discount, opt => opt.MapFrom(src => src.Discount));
-
-            CreateMap<CreateWarehouseMedicineDTO, WareHouseMedicien>();
-            CreateMap<UpdateWarehouseMedicineDTO, WareHouseMedicien>();
+            
 
             // Representative Mappings
             CreateMap<Representative, GetRepresentatitvePharmaciesCountDto>()

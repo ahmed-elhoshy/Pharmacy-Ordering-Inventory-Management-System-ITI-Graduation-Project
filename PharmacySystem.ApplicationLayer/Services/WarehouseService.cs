@@ -72,8 +72,8 @@ namespace PharmacySystem.ApplicationLayer.Services
             {
                 Items = dtos.ToList(),
                 TotalCount = warehouses.TotalCount,
-                PageNumber = warehouses.PageNumber,
-                PageSize = warehouses.PageSize
+                PageNumber = 1,
+                PageSize = warehouses.TotalCount
             };
         }
 

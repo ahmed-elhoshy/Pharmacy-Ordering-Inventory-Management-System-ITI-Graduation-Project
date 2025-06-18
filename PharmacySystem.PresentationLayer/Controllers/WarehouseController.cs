@@ -33,11 +33,13 @@ namespace PharmacySystem.PresentationLayer.Controllers
         {
             if (areaId <= 0)
                 return BadRequest("Invalid Area ID");
+            page = page <= 0 ? 1 : page;
+            pageSize = pageSize <= 0 ? 10 : pageSize;
 
             var warehouses = await _service.GetWarehousesByUserAreaAsync(page, pageSize, areaId, search);
             return Ok(warehouses);
         }
-        //GET /api/warehouse/GetAll?page=1&pageSize=10
+        //GET /api/warehouse/GetAll
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
            
