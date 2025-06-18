@@ -50,50 +50,50 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Create Representatitve
-        [HttpPost("CreateRepresentative")]
-        [EndpointSummary("Create a new representative with a unique code")]
-        public async Task<IActionResult> Create(CreateRepresentativeDto dto)
-        {
-            if (!ModelState.IsValid) 
-                return BadRequest(ModelState);
+        //[HttpPost("CreateRepresentative")]
+        //[EndpointSummary("Create a new representative with a unique code")]
+        //public async Task<IActionResult> Create(CreateRepresentativeDto dto)
+        //{
+        //    if (!ModelState.IsValid) 
+        //        return BadRequest(ModelState);
 
-            try
-            {
-                var created = await _service.CreateAsync(dto);
-                return CreatedAtAction(nameof(GetById), new { id = created.Representative_Id }, created);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { ex.Message });
-            }
-        }
+        //    try
+        //    {
+        //        var created = await _service.CreateAsync(dto);
+        //        return CreatedAtAction(nameof(GetById), new { id = created.Representative_Id }, created);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new { ex.Message });
+        //    }
+        //}
 
         #endregion
 
         #region Update Representatitve
-        [HttpPut("UpdateRepresentatitve/{id}")]
-        [EndpointSummary("Update Representatitve")]
-        public async Task<IActionResult> Update(int id, UpdateRepresentativeDto dto)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+        //[HttpPut("UpdateRepresentatitve/{id}")]
+        //[EndpointSummary("Update Representatitve")]
+        //public async Task<IActionResult> Update(int id, UpdateRepresentativeDto dto)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var result = await _service.UpdateAsync(id, dto);
-            if (result == null)
-                return NotFound();
-            return Ok(result);
-        }
+        //    var result = await _service.UpdateAsync(id, dto);
+        //    if (result == null)
+        //        return NotFound();
+        //    return Ok(result);
+        //}
 
         #endregion
 
         #region Delete Representatitve
-        [HttpDelete("DeleteRepresentatitve/{id}")]
-        [EndpointSummary("Delete Representatitve")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            return await _service.DeleteAsync(id)
-                ? Ok(new { Message = "Deleted" })
-                : NotFound();
-        }
+        //[HttpDelete("DeleteRepresentatitve/{id}")]
+        //[EndpointSummary("Delete Representatitve")]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    return await _service.DeleteAsync(id)
+        //        ? Ok(new { Message = "Deleted" })
+        //        : NotFound();
+        //}
 
         #endregion
 
@@ -128,7 +128,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Representative Login
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] RepresentativeLoginDTO dto)
         {
             var result = await _service.LoginAsync(dto);

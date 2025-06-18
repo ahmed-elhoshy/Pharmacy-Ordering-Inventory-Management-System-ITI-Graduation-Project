@@ -15,7 +15,7 @@ Content-Type: application/json
   "address": "456 Med Street",
   "governate": "Giza",
   "areaId": 5,
-  "representativeCode": "RA9NQL",
+  "representativeCode": "REZNP9",
   "phoneNumber": "01012345678"
 }
 ###
@@ -65,4 +65,21 @@ Content-Type: application/json
 {
   "email": "warehouse@example.com",
   "password": "securepassword123"
+}
+
+###
+POST http://localhost:5252/api/admin/createadmin
+Content-Type: application/json 
+{
+  "name": "Ahmed Hossam",
+  "email": "ahmed@example.com",
+  "password": "Admin123",
+  "phone": "01001234567"
+}
+###
+POST http://localhost:5252/api/admin/login
+Content-Type: application/json 
+{
+  "email": "ahmed@example.com",
+  "password": "Admin123"
 }
