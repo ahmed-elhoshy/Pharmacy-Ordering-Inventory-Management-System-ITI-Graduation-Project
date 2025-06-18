@@ -22,6 +22,7 @@ namespace PharmacySystem.InfastructureLayer.Data.DBContext
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<WareHouseMedicien> WareHouseMediciens { get; set; }
         public DbSet<WareHouseArea> WareHouseAreas { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

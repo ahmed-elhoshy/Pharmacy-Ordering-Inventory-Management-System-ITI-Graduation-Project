@@ -67,18 +67,18 @@ public class PharmacyService : IPharmacyService
         var pharmacy = await _unitOfWork.PharmacyRepository.FindByEmailAsync(dto.Email);
 
         if (pharmacy == null)
-            return new PharmacyLoginResponseDTO 
-            { 
-                Success = false, 
-                Message = "Invalid email or password." 
+            return new PharmacyLoginResponseDTO
+            {
+                Success = false,
+                Message = "Invalid email or password."
             };
 
         // Verify the password against the stored hash
         if (!BCrypt.Net.BCrypt.Verify(dto.Password, pharmacy.Password))
-            return new PharmacyLoginResponseDTO 
-            { 
-                Success = false, 
-                Message = "Invalid email or password." 
+            return new PharmacyLoginResponseDTO
+            {
+                Success = false,
+                Message = "Invalid email or password."
             };
 
         // Generate JWT token

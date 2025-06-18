@@ -33,6 +33,15 @@ namespace PharmacySystem.ApplicationLayer.Services
             _configuration = configuration;
         }
 
+        private string GenerateRepresentativeCode()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            // Generate 5 random characters and prepend 'R'
+            return "R" + new string(Enumerable.Repeat(chars, 5)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public async Task<IEnumerable<GetAllRepresentatitveDto>> GetAllAsync()
         {
             var reps = await _unitOfWork.representativeRepository.GetAllAsync();
@@ -50,11 +59,15 @@ namespace PharmacySystem.ApplicationLayer.Services
 
         public async Task<GetRepresentativeByIdDto> CreateAsync(CreateRepresentativeDto dto)
         {
-            var codeExists = await _unitOfWork.representativeRepository.IsCodeExistsAsync(dto.Code);
-            if (codeExists)
-                throw new Exception("This code already exists");
+            // Generate a unique code
+            string generatedCode;
+            do
+            {
+                generatedCode = GenerateRepresentativeCode();
+            } while (await _unitOfWork.representativeRepository.IsCodeExistsAsync(generatedCode));
 
             var entity = _mapper.Map<Representative>(dto);
+            entity.Code = generatedCode;
             
             // Hash the password before saving
             entity.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
