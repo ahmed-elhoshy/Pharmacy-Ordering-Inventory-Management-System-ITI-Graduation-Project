@@ -16,19 +16,20 @@ using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
+using PharmacySystem.ApplicationLayer.IServiceInterfaces;
 using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Interfaces;
 
 namespace PharmacySystem.ApplicationLayer.Services
 {
-    public class WarehouseService
+    public class WarehouseService : IWarehouseService
     {
         private readonly IWarehouseRepository warehouseRepository;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
 
-        public WarehouseService(IWarehouseRepository warehouseRepository , IMapper mapper, IConfiguration configuration)
+        public WarehouseService(IWarehouseRepository warehouseRepository, IMapper mapper, IConfiguration configuration)
         {
             this.warehouseRepository = warehouseRepository;
             this._mapper = mapper;
@@ -39,13 +40,12 @@ namespace PharmacySystem.ApplicationLayer.Services
         {
             var result = await warehouseRepository.GetWarehouseMedicinesAsync(warehouseId, page, pageSize);
             var dtoItems = _mapper.Map<List<WarehouseMedicineDto>>(result.Items);
-
             return new PaginatedResult<WarehouseMedicineDto>
             {
+                Items = dtoItems,
                 TotalCount = result.TotalCount,
                 PageNumber = result.PageNumber,
-                PageSize = result.PageSize,
-                Items = dtoItems
+                PageSize = result.PageSize
             };
         }
 
@@ -66,20 +66,21 @@ namespace PharmacySystem.ApplicationLayer.Services
 
         public async Task<PaginatedResult<ReadWareHouseDTO>> GetAllAsync()
         {
-            var result = await warehouseRepository.GetAllAsync();
-            var dtoitems = _mapper.Map<IEnumerable<ReadWareHouseDTO>>(result.Items);
-
+            var warehouses = await warehouseRepository.GetAllAsync();
+            var dtos = _mapper.Map<IEnumerable<ReadWareHouseDTO>>(warehouses.Items);
             return new PaginatedResult<ReadWareHouseDTO>
             {
-                TotalCount = result.TotalCount,
-                Items = dtoitems
+                Items = dtos.ToList(),
+                TotalCount = warehouses.TotalCount,
+                PageNumber = warehouses.PageNumber,
+                PageSize = warehouses.PageSize
             };
         }
 
-        public async Task<ReadWareHouseDTO?> GetByIdAsync(int id)
+        public async Task<ReadWareHouseDTO> GetByIdAsync(int id)
         {
             var warehouse = await warehouseRepository.GetByIdAsync(id);
-            return warehouse is null ? null : _mapper.Map<ReadWareHouseDTO>(warehouse);
+            return _mapper.Map<ReadWareHouseDTO>(warehouse);
         }
 
         public async Task<ReadWarehouseDetailsDTO?> GetWarehouseByIdDetailsAsync(int id)
@@ -135,6 +136,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                 };
             }).ToList();
         }
+
         public async Task<WarehouseLoginResponseDTO> LoginAsync(WarehouseLoginDTO dto)
         {
             var warehouse = await warehouseRepository.FindByEmailAsync(dto.Email);
@@ -155,7 +157,6 @@ namespace PharmacySystem.ApplicationLayer.Services
                 };
 
             // Generate JWT token
-
             var token = GenerateJwtToken(warehouse);
 
             return new WarehouseLoginResponseDTO
@@ -173,10 +174,10 @@ namespace PharmacySystem.ApplicationLayer.Services
 
             var claims = new[]
             {
-            new Claim(ClaimTypes.NameIdentifier, warehouse.Id.ToString()),
-            new Claim(ClaimTypes.Email, warehouse.Email),
-            new Claim(ClaimTypes.Role, "WareHouse")
-        };
+                new Claim(ClaimTypes.NameIdentifier, warehouse.Id.ToString()),
+                new Claim(ClaimTypes.Email, warehouse.Email),
+                new Claim(ClaimTypes.Role, "WareHouse")
+            };
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:ValidIssuer"],

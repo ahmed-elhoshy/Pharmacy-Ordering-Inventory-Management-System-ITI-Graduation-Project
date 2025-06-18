@@ -15,7 +15,7 @@ Content-Type: application/json
   "address": "456 Med Street",
   "governate": "Giza",
   "areaId": 5,
-  "representativeCode": "BR001",
+  "representativeCode": "RA9NQL",
   "phoneNumber": "01012345678"
 }
 ###
@@ -30,7 +30,6 @@ POST http://localhost:5252/api/representative/CreateRepresentative
 Content-Type: application/json
 {
   "name": "Ahmed Youssef",
-  "code": "BR001",
   "address": "12 Street A, Nasr City",
   "governate": "Cairo",
   "email": "ahmed.youssef@mail.com",

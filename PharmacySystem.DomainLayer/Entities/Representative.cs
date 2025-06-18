@@ -1,10 +1,13 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace PharmacySystem.DomainLayer.Entities
 {
     public class Representative : BaseEntity
     {
+        [Required]
+        [StringLength(6)]
         public string Code { get; set; }
 
         public string Name {get; set;}
