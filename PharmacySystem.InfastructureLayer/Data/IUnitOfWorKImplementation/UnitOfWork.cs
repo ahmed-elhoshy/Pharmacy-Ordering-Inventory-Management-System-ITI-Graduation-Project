@@ -13,15 +13,15 @@ namespace E_Commerce.DomainLayer
     {
         #region DBContext
         private readonly PharmaDbContext context;
-        #endregion
-
         private IMedicinRepository _MedicineRepository;
+        private IOrderRepository _orderRepository;
         private IRepresentativeRepository _representativeRepository;
         private IPharmacyRepository _pharmacyRepository;
         private IGenericRepository<Governate> _governateRepository;
         private IAreaRepository _areaRepository;
         //private IGenericRepository<Area> _areaRepository;
         private IAdminRepository _adminRepository;
+        #endregion
 
         public IMedicinRepository medicineRepository
         {
@@ -33,6 +33,7 @@ namespace E_Commerce.DomainLayer
             }
             set => _MedicineRepository = value;
         }
+
         public IRepresentativeRepository representativeRepository
         {
             get
@@ -66,8 +67,6 @@ namespace E_Commerce.DomainLayer
             set => _areaRepository = value;
         }
 
-
-
         public IGenericRepository<Governate> GovernateRepository
         {
             get
@@ -79,7 +78,6 @@ namespace E_Commerce.DomainLayer
             set => _governateRepository = value;
         }
 
-
         public IAdminRepository AdminRepository
         {
             get
@@ -89,6 +87,17 @@ namespace E_Commerce.DomainLayer
                 return _adminRepository;
             }
             set => _adminRepository = value;
+        }
+
+        public IOrderRepository orderRepository 
+        {
+            get
+            {
+                if(_orderRepository == null)
+                    _orderRepository = new OrderRepository(context);
+                return _orderRepository;
+            }
+            set => _orderRepository = value;
         }
 
         public UnitOfWork(PharmaDbContext context)
