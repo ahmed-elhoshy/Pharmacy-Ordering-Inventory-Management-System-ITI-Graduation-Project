@@ -2,14 +2,20 @@
 using E_Commerce.DomainLayer.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using PharmacySystem.ApplicationLayer.DTOs.OrderDetails;
+using PharmacySystem.ApplicationLayer.DTOs.Orders;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
+using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies;
+using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrderDetails;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
-using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies;
-using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrderDetails;
+using PharmacySystem.ApplicationLayer.DTOs.RepresentativeOrder;
+using PharmacySystem.ApplicationLayer.DTOs.WarehouseOrders;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
 using PharmacySystem.DomainLayer.Entities;
+using PharmacySystem.DomainLayer.Entities.Constants;
+using PharmacySystem.DomainLayer.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -107,15 +113,6 @@ namespace PharmacySystem.ApplicationLayer.Services
 
             return _mapper.Map<GetRepresentatitvePharmaciesCountDto>(rep);
         }
-
-        public async Task<GetRepresentatitvePharmaciesCountDto> GetPharmaciesCountByCode(string code)
-        {
-            var rep = _unitOfWork.representativeRepository.GetCountOfPharmaciesWithRepresentativeCode(code)
-                .FirstOrDefault(x => x.Code == code);
-
-            return _mapper.Map<GetRepresentatitvePharmaciesCountDto>(rep);
-        }
-
         public async Task<GetOrdersPharmaciesCountDto> GetOrdersCountById(int id)
         {
             var rep = _unitOfWork.representativeRepository.GetCountOfOrders(id)
@@ -177,5 +174,64 @@ namespace PharmacySystem.ApplicationLayer.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        #region Get Orders Stats Async
+        public async Task<RepresentativeOrderStatsDto> GetOrdersStatsAsync(int representativeId)
+        {
+            var orders = await _unitOfWork.orderRepository.GetOrdersByRepresentativeIdIncludingPharmicesAsync(representativeId); 
+
+            int pharmacyCount = orders.Select(o => o.PharmacyId).Distinct().Count();
+
+            decimal revenue = orders.Where(o => o.Status == OrderStatus.Delivered)
+                .Sum(o => o.TotalPrice);
+
+            var stats = Enum.GetValues(typeof(OrderStatus))
+                .Cast<OrderStatus>()
+                .ToDictionary(
+                    status => status.ToString(),
+                    status => orders.Count(o => o.Status == status)
+                );
+
+            return new RepresentativeOrderStatsDto
+            {
+                PharmacyCount = pharmacyCount,
+                Revenue = revenue,
+                Stats = stats
+            };
+        }
+
+
+        #endregion
+
+        #region Get All WareHouse Including List Of Order For Pharmacies
+        public async Task<IEnumerable<WarehouseOrdersDto>> GetRepresentativeWarehouseOrdersAsync(int representativeId)
+        {
+            var orders = await _unitOfWork.orderRepository.GetAllOrdersByRepresentativeIdAsync(representativeId);
+
+            var grouped = orders
+                .GroupBy(o => o.WareHouse.Name)
+                .Select(g => new WarehouseOrdersDto
+                {
+                    WarehouseName = g.Key,
+                    OrdersCount = g.Count(),
+                    TotalPrice = g.Sum(o => o.TotalPrice),
+                    Orders = g.Select(o => new OrderDto
+                    {
+                        OrderId = o.Id,
+                        OrderState = o.Status.ToString(),
+                        PharmacyName = o.Pharmacy.Name,
+                        WarehouseName = o.WareHouse.Name,
+                        OrderDetails = o.OrderDetails.Select(od => new OrderDetailDto
+                        {
+                            MedicineId = od.MedicineId,
+                            Quantity = od.Quntity,
+                            Price = od.Price
+                        }).ToList()
+                    }).ToList()
+                }).ToList();
+
+            return grouped;
+        }
+        #endregion
     }
 }

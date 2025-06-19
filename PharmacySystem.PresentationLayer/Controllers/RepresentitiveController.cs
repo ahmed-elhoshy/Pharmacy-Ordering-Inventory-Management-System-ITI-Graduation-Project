@@ -108,16 +108,6 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Get Pharmacies Count Using RepresentatitveId
-        [HttpGet("GetPharmaciesCountUsingCode")]
-        [EndpointSummary("Get PharmaciesCount For Each Representatitve Using RepresentatitveCode")]
-        public async Task<ActionResult<GetRepresentatitvePharmaciesCountDto>> GetPharmaciesCountUsingCode(string code)
-        {
-            var PharmaciesCount = await  _service.GetPharmaciesCountByCode(code);
-            return Ok(PharmaciesCount);
-        }
-        #endregion
-
-        #region Get Pharmacies Count Using RepresentatitveId
         [HttpGet("GetOrderCountUsingRepresentatitveId")]
         [EndpointSummary("Get Order Count Using RepresentatitveId")]
         public async Task<ActionResult<GetOrdersPharmaciesCountDto>> GetOrderCountUsingRepresentatitveId(int id)
@@ -138,5 +128,21 @@ namespace PharmacySystem.PresentationLayer.Controllers
             return Ok(result);
         }
         #endregion
+
+        [HttpGet("orders-stats/{representativeId}")]
+        [EndpointSummary("Get Stats for All Orders")]
+        public async Task<IActionResult> GetOrdersStatsAsync(int representativeId)
+        {
+            var result = await _service.GetOrdersStatsAsync(representativeId);
+            return Ok(result);
+        }
+
+        [HttpGet("warehouse-orders/{representativeId}")]
+        [EndpointSummary("Get All Warehouse with pharmcies orders using representativeId")]
+        public async Task<IActionResult> GetRepresentativeWarehouseOrdersAsync(int representativeId)
+        {
+            var result = await _service.GetRepresentativeWarehouseOrdersAsync(representativeId);
+            return Ok(result);
+        }
     }
 }

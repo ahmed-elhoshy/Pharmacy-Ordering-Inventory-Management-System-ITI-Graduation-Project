@@ -7,6 +7,7 @@ namespace E_Commerce.DomainLayer.Interfaces
     public interface IUnitOfWork
     {
         public IMedicinRepository medicineRepository { get; set; }
+        public IOrderRepository orderRepository { get; set; }
         public IRepresentativeRepository representativeRepository { get; set; }
         public IPharmacyRepository PharmacyRepository { get; set; }
         public IAdminRepository AdminRepository { get; set; }

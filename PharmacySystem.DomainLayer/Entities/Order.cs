@@ -1,5 +1,5 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
+using PharmacySystem.DomainLayer.Entities.Constants;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PharmacySystem.DomainLayer.Entities
@@ -8,8 +8,7 @@ namespace PharmacySystem.DomainLayer.Entities
     {
         public int Quntity { get; set; }
         public decimal TotalPrice { get; set; }
-
-
+        public OrderStatus Status { get; set; }
 
         [ForeignKey("Pharmacy")]
         public int PharmacyId { get; set; }
