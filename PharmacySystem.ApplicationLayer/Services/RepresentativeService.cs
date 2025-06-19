@@ -57,7 +57,7 @@ namespace PharmacySystem.ApplicationLayer.Services
         public async Task<GetRepresentativeByIdDto> GetByIdAsync(int id)
         {
             var rep = await _unitOfWork.representativeRepository.GetByIdAsync(id);
-            if (rep == null)    return null;
+            if (rep == null) return null;
 
             var result = _mapper.Map<GetRepresentativeByIdDto>(rep);
             return result;
@@ -74,10 +74,10 @@ namespace PharmacySystem.ApplicationLayer.Services
 
             var entity = _mapper.Map<Representative>(dto);
             entity.Code = generatedCode;
-            
+
             // Hash the password before saving
             entity.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
-            
+
             await _unitOfWork.representativeRepository.AddAsync(entity);
             await _unitOfWork.SaveAsync();
 
@@ -178,7 +178,7 @@ namespace PharmacySystem.ApplicationLayer.Services
         #region Get Orders Stats Async
         public async Task<RepresentativeOrderStatsDto> GetOrdersStatsAsync(int representativeId)
         {
-            var orders = await _unitOfWork.orderRepository.GetOrdersByRepresentativeIdIncludingPharmicesAsync(representativeId); 
+            var orders = await _unitOfWork.orderRepository.GetOrdersByRepresentativeIdIncludingPharmicesAsync(representativeId);
 
             int pharmacyCount = orders.Select(o => o.PharmacyId).Distinct().Count();
 
@@ -214,6 +214,9 @@ namespace PharmacySystem.ApplicationLayer.Services
                 {
                     WarehouseName = g.Key,
                     OrdersCount = g.Count(),
+                    DeliveredRevenue = g
+                    .Where(o => o.Status == OrderStatus.Delivered)
+                    .Sum(o => o.TotalPrice),
                     TotalPrice = g.Sum(o => o.TotalPrice),
                     Orders = g.Select(o => new OrderDto
                     {
@@ -224,6 +227,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                         OrderDetails = o.OrderDetails.Select(od => new OrderDetailDto
                         {
                             MedicineId = od.MedicineId,
+                            MedicineName = od.Medicine.Name,
                             Quantity = od.Quntity,
                             Price = od.Price
                         }).ToList()

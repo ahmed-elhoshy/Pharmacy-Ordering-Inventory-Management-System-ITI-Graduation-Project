@@ -18,6 +18,7 @@ using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.ApplicationLayer.DTOs.Governate;
 using PharmacySystem.ApplicationLayer.DTOs.Area;
+using PharmacySystem.ApplicationLayer.DTOs.OrderDetails;
 
 namespace PharmacySystem.ApplicationLayer.MappingConfig
 {
@@ -141,8 +142,8 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<Area, AreaLookupDto>();
             #endregion
 
-
-
+            CreateMap<Medicine, OrderDetailDto>()
+               .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Name));
 
         }
     }

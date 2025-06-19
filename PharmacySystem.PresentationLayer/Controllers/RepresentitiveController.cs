@@ -28,6 +28,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region GetAllRepresentatives
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetAllRepresentatives")]
         [EndpointSummary("Get All Representatives")]
         public async Task<IActionResult> GetAll()
@@ -38,6 +39,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Get Representatitve By Id
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetById")]
         [EndpointSummary("Get Representative By ID")]
         public async Task<IActionResult> GetById(int id)
@@ -50,50 +52,53 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Create Representatitve
-        //[HttpPost("CreateRepresentative")]
-        //[EndpointSummary("Create a new representative with a unique code")]
-        //public async Task<IActionResult> Create(CreateRepresentativeDto dto)
-        //{
-        //    if (!ModelState.IsValid) 
-        //        return BadRequest(ModelState);
+        [Authorize(Roles = "Admin")]
+        [HttpPost("CreateRepresentative")]
+        [EndpointSummary("Create a new representative with a unique code")]
+        public async Task<IActionResult> Create(CreateRepresentativeDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        //    try
-        //    {
-        //        var created = await _service.CreateAsync(dto);
-        //        return CreatedAtAction(nameof(GetById), new { id = created.Representative_Id }, created);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(new { ex.Message });
-        //    }
-        //}
+            try
+            {
+                var created = await _service.CreateAsync(dto);
+                return CreatedAtAction(nameof(GetById), new { id = created.Representative_Id }, created);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
 
         #endregion
 
         #region Update Representatitve
-        //[HttpPut("UpdateRepresentatitve/{id}")]
-        //[EndpointSummary("Update Representatitve")]
-        //public async Task<IActionResult> Update(int id, UpdateRepresentativeDto dto)
-        //{
-        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        [Authorize(Roles = "Admin")]
+        [HttpPut("UpdateRepresentative/{id}")]
+        [EndpointSummary("Update Representative")]
+        public async Task<IActionResult> Update(int id, UpdateRepresentativeDto dto)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        //    var result = await _service.UpdateAsync(id, dto);
-        //    if (result == null)
-        //        return NotFound();
-        //    return Ok(result);
-        //}
+            var result = await _service.UpdateAsync(id, dto);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
 
         #endregion
 
         #region Delete Representatitve
-        //[HttpDelete("DeleteRepresentatitve/{id}")]
-        //[EndpointSummary("Delete Representatitve")]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    return await _service.DeleteAsync(id)
-        //        ? Ok(new { Message = "Deleted" })
-        //        : NotFound();
-        //}
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("DeleteRepresentative/{id}")]
+        [EndpointSummary("Delete Representative")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return await _service.DeleteAsync(id)
+                ? Ok(new { Message = "Deleted" })
+                : NotFound();
+        }
 
         #endregion
 
@@ -108,8 +113,8 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Get Pharmacies Count Using RepresentatitveId
-        [HttpGet("GetOrderCountUsingRepresentatitveId")]
-        [EndpointSummary("Get Order Count Using RepresentatitveId")]
+        [HttpGet("GetOrderCountUsingRepresentativeId")]
+        [EndpointSummary("Get Order Count Using RepresentativeId")]
         public async Task<ActionResult<GetOrdersPharmaciesCountDto>> GetOrderCountUsingRepresentatitveId(int id)
         {
             var OrderCount = await _service.GetOrdersCountById(id);
@@ -138,7 +143,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         }
 
         [HttpGet("warehouse-orders/{representativeId}")]
-        [EndpointSummary("Get All Warehouse with pharmcies orders using representativeId")]
+        [EndpointSummary("Get All Warehouse with pharmacies orders using representativeId")]
         public async Task<IActionResult> GetRepresentativeWarehouseOrdersAsync(int representativeId)
         {
             var result = await _service.GetRepresentativeWarehouseOrdersAsync(representativeId);

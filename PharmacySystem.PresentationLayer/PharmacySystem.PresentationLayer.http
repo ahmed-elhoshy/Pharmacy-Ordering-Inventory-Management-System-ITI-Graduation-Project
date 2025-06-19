@@ -1,4 +1,4 @@
-@PharmacySystem.PresentationLayer_HostAddress = http://localhost:5252
+﻿@PharmacySystem.PresentationLayer_HostAddress = http://localhost:5252
 
 GET {{PharmacySystem.PresentationLayer_HostAddress}}/weatherforecast/
 Accept: application/json
@@ -13,16 +13,16 @@ Content-Type: application/json
   "password": "Pharma123",
   "confirmPassword": "Pharma123",
   "address": "456 Med Street",
-  "governate": "cairo",
+  "governate": "القاهرة",
   "areaId": 5,
-  "representativeCode": "BR001",
+  "representativeCode": "RYHOZF",
   "phoneNumber": "01012345678"
 }
 ###
 POST http://localhost:5252/api/pharmacy/login
 Content-Type: application/json 
 {
-  "email": "pharmacy1@example.com",
+  "email": "pharmacy4@example.com",
   "password": "Pharma123"
 }
 ###

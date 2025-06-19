@@ -13,7 +13,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : ControllerBase
     {
         private readonly IAdminService _adminService;
@@ -91,113 +91,113 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Representative Endpoints
-        [HttpPost("CreateRepresentative")]
-        public async Task<IActionResult> CreateRepresentative([FromBody] CreateRepresentativeDto dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            try
-            {
-                var result = await _adminService.CreateRepresentativeAsync(dto);
-                return CreatedAtAction(nameof(GetRepresentative), new { id = result.Representative_Id }, result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { Message = ex.Message });
-            }
-        }
+        //[HttpPost("CreateRepresentative")]
+        //public async Task<IActionResult> CreateRepresentative([FromBody] CreateRepresentativeDto dto)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
+        //    try
+        //    {
+        //        var result = await _adminService.CreateRepresentativeAsync(dto);
+        //        return CreatedAtAction(nameof(GetRepresentative), new { id = result.Representative_Id }, result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new { Message = ex.Message });
+        //    }
+        //}
 
-        [HttpPut("UpdateRepresentative/{id}")]
-        public async Task<IActionResult> UpdateRepresentative(int id, [FromBody] UpdateRepresentativeDto dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+        //[HttpPut("UpdateRepresentative/{id}")]
+        //public async Task<IActionResult> UpdateRepresentative(int id, [FromBody] UpdateRepresentativeDto dto)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
 
-            var result = await _adminService.UpdateRepresentativeAsync(id, dto);
-            if (result == null)
-                return NotFound();
+        //    var result = await _adminService.UpdateRepresentativeAsync(id, dto);
+        //    if (result == null)
+        //        return NotFound();
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
 
-        [HttpDelete("DeleteRepresentative/{id}")]
-        public async Task<IActionResult> DeleteRepresentative(int id)
-        {
-            var result = await _adminService.DeleteRepresentativeAsync(id);
-            if (!result)
-                return NotFound();
+        //[HttpDelete("DeleteRepresentative/{id}")]
+        //public async Task<IActionResult> DeleteRepresentative(int id)
+        //{
+        //    var result = await _adminService.DeleteRepresentativeAsync(id);
+        //    if (!result)
+        //        return NotFound();
 
-            return Ok(new { Message = "Representative deleted successfully" });
-        }
+        //    return Ok(new { Message = "Representative deleted successfully" });
+        //}
 
-        [HttpGet("GetAllRepresentatives")]
-        public async Task<IActionResult> GetAllRepresentatives()
-        {
-            var representatives = await _adminService.GetAllRepresentativesAsync();
-            return Ok(representatives);
-        }
+        //[HttpGet("GetAllRepresentatives")]
+        //public async Task<IActionResult> GetAllRepresentatives()
+        //{
+        //    var representatives = await _adminService.GetAllRepresentativesAsync();
+        //    return Ok(representatives);
+        //}
 
-        [HttpGet("GetRepresentativeById/{id}")]
-        public async Task<IActionResult> GetRepresentative(int id)
-        {
-            var representative = await _adminService.GetRepresentativeByIdAsync(id);
-            if (representative == null)
-                return NotFound();
+        //[HttpGet("GetRepresentativeById/{id}")]
+        //public async Task<IActionResult> GetRepresentative(int id)
+        //{
+        //    var representative = await _adminService.GetRepresentativeByIdAsync(id);
+        //    if (representative == null)
+        //        return NotFound();
 
-            return Ok(representative);
-        }
+        //    return Ok(representative);
+        //}
         #endregion
 
         #region Warehouse Endpoints
-        [HttpPost("CreateWarehouse")]
-        public async Task<IActionResult> CreateWarehouse([FromBody] CreateWarehouseDTO dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+        //[HttpPost("CreateWarehouse")]
+        //public async Task<IActionResult> CreateWarehouse([FromBody] CreateWarehouseDTO dto)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
 
-            var result = await _adminService.CreateWarehouseAsync(dto);
-            return CreatedAtAction(nameof(GetWarehouse), new { id = result.Id }, result);
-        }
+        //    var result = await _adminService.CreateWarehouseAsync(dto);
+        //    return CreatedAtAction(nameof(GetWarehouse), new { id = result.Id }, result);
+        //}
 
-        [HttpPut("UpdateWarehouse/{id}")]
-        public async Task<IActionResult> UpdateWarehouse(int id, [FromBody] UpdateWareHouseDTO dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+        //[HttpPut("UpdateWarehouse/{id}")]
+        //public async Task<IActionResult> UpdateWarehouse(int id, [FromBody] UpdateWareHouseDTO dto)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
 
-            var result = await _adminService.UpdateWarehouseAsync(id, dto);
-            if (result == null)
-                return NotFound();
+        //    var result = await _adminService.UpdateWarehouseAsync(id, dto);
+        //    if (result == null)
+        //        return NotFound();
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
 
-        [HttpDelete("DeleteWarehouse/{id}")]
-        public async Task<IActionResult> DeleteWarehouse(int id)
-        {
-            var result = await _adminService.DeleteWarehouseAsync(id);
-            if (!result)
-                return NotFound();
+        //[HttpDelete("DeleteWarehouse/{id}")]
+        //public async Task<IActionResult> DeleteWarehouse(int id)
+        //{
+        //    var result = await _adminService.DeleteWarehouseAsync(id);
+        //    if (!result)
+        //        return NotFound();
 
-            return Ok(new { Message = "Warehouse deleted successfully" });
-        }
+        //    return Ok(new { Message = "Warehouse deleted successfully" });
+        //}
 
-        [HttpGet("GetAllWarehouses")]
-        public async Task<IActionResult> GetAllWarehouses()
-        {
-            var warehouses = await _adminService.GetAllWarehousesAsync();
-            return Ok(warehouses);
-        }
+        //[HttpGet("GetAllWarehouses")]
+        //public async Task<IActionResult> GetAllWarehouses()
+        //{
+        //    var warehouses = await _adminService.GetAllWarehousesAsync();
+        //    return Ok(warehouses);
+        //}
 
-        [HttpGet("GetWarehouseById/{id}")]
-        public async Task<IActionResult> GetWarehouse(int id)
-        {
-            var warehouse = await _adminService.GetWarehouseByIdAsync(id);
-            if (warehouse == null)
-                return NotFound();
+        //[HttpGet("GetWarehouseById/{id}")]
+        //public async Task<IActionResult> GetWarehouse(int id)
+        //{
+        //    var warehouse = await _adminService.GetWarehouseByIdAsync(id);
+        //    if (warehouse == null)
+        //        return NotFound();
 
-            return Ok(warehouse);
-        }
+        //    return Ok(warehouse);
+        //}
         #endregion
 
         #region Admin Login
