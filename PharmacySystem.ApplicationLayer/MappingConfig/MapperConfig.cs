@@ -19,6 +19,8 @@ using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.ApplicationLayer.DTOs.Governate;
 using PharmacySystem.ApplicationLayer.DTOs.Area;
 using PharmacySystem.ApplicationLayer.DTOs.OrderDetails;
+using PharmacySystem.ApplicationLayer.DTOs.Representative.Login;
+using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Login;
 
 namespace PharmacySystem.ApplicationLayer.MappingConfig
 {
@@ -37,6 +39,7 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<Representative, GetRepresentativeByIdDto>();
             CreateMap<CreateRepresentativeDto, Representative>();
             CreateMap<UpdateRepresentativeDto, Representative>();
+            CreateMap<Representative, RepresentstiveInfoDto>();
             #endregion
 
             #region Warehouse Mappings
@@ -132,6 +135,8 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
                 .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
                 .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+
+            CreateMap<Pharmacy, PharmacyInfoDto>();
             #endregion
 
             #region Governate
@@ -140,6 +145,10 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
 
             #region Area
             CreateMap<Area, AreaLookupDto>();
+            #endregion
+
+            #region Warehouse
+            CreateMap<WareHouse, WarehouseInfoDto>();
             #endregion
 
             CreateMap<Medicine, OrderDetailDto>()

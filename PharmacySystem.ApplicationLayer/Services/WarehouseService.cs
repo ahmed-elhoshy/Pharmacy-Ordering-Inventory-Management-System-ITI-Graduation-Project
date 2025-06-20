@@ -14,6 +14,7 @@ using PharmacySystem.ApplicationLayer.DTOs.Warehouse.Login;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
+using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Login;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
@@ -163,7 +164,9 @@ namespace PharmacySystem.ApplicationLayer.Services
             {
                 Success = true,
                 Message = "Login successful.",
-                Token = token
+                Token = token,
+                Warehouse = _mapper.Map<WarehouseInfoDto>(warehouse)
+
             };
         }
 
