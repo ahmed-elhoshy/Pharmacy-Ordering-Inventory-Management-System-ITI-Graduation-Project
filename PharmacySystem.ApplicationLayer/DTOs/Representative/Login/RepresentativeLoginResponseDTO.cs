@@ -1,3 +1,5 @@
+using PharmacySystem.ApplicationLayer.DTOs.Representative.Login;
+
 namespace PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login
 {
     public class RepresentativeLoginResponseDTO
@@ -5,5 +7,6 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login
         public string Token { get; set; }
         public string Message { get; set; }
         public bool Success { get; set; }
+        public RepresentstiveInfoDto Representative { get; set; }
     }
 } 

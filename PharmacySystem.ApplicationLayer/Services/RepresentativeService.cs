@@ -10,6 +10,7 @@ using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrd
 using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
+using PharmacySystem.ApplicationLayer.DTOs.Representative.Login;
 using PharmacySystem.ApplicationLayer.DTOs.RepresentativeOrder;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseOrders;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
@@ -148,7 +149,9 @@ namespace PharmacySystem.ApplicationLayer.Services
             {
                 Success = true,
                 Message = "Login successful.",
-                Token = token
+                Token = token,
+                Representative = _mapper.Map<RepresentstiveInfoDto>(representative)
+
             };
         }
 
