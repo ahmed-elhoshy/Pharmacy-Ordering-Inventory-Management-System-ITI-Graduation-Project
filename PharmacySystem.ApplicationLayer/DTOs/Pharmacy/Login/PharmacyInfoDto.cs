@@ -7,6 +7,7 @@ public class PharmacyInfoDto
     public int Id { get; set; }
 
     [Required, MaxLength(100)]
+    public string userName { get; set; }
     public string Name { get; set; }
 
     [Required, EmailAddress]
