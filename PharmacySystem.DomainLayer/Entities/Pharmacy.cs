@@ -5,6 +5,11 @@ namespace PharmacySystem.DomainLayer.Entities
 {
     public class Pharmacy : BaseEntity
     {
+        [Required]
+        [StringLength(20, MinimumLength = 4, ErrorMessage = "Username must be between 4 and 20 characters")]
+        [RegularExpression("^[a-zA-Z0-9_]*$", ErrorMessage = "Username can only contain letters, numbers, and underscores")]
+        public string UserName { get; set; }
+
         [Required, MaxLength(100)]
         public string Name { get; set; }
 
