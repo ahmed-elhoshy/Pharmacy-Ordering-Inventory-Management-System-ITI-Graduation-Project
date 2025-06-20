@@ -141,6 +141,9 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
             existing.Id = updated.Id;
             existing.ApprovedByAdminId = updated.ApprovedByAdminId;
             existing.Name = updated.Name;
+            existing.Email = updated.Email;
+            existing.Phone = updated.Phone;
+            existing.ImageUrl = updated.ImageUrl;
 
             // Replace areas
             _dbContext.WareHouseAreas.RemoveRange(existing.WareHouseAreas);
