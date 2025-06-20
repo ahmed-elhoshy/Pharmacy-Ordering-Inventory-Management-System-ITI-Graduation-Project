@@ -23,6 +23,7 @@ project.assets.json
 # IIS Express
 .vs/
 *.iisexpress/
+.vs/
 
 # Web publish
 *.Publish.xml

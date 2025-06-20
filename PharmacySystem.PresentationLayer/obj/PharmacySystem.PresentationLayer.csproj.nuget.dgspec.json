@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj": {}
+    "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj": {}
   },
   "projects": {
-    "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj": {
+    "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj",
+        "projectUniqueName": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj",
         "projectName": "PharmacySystem.ApplicationLayer",
-        "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj",
-        "packagesPath": "C:\\Users\\Ramboo\\.nuget\\packages\\",
-        "outputPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\obj\\",
+        "projectPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj",
+        "packagesPath": "C:\\Users\\marke\\.nuget\\packages\\",
+        "outputPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.ApplicationLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ramboo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\marke\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj": {
-                "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj"
+              "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj": {
+                "projectPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj"
               }
             }
           }
@@ -48,7 +49,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -75,24 +76,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200-preview.0.25057.12/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj": {
+    "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj",
+        "projectUniqueName": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj",
         "projectName": "PharmacySystem.DomainLayer",
-        "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj",
-        "packagesPath": "C:\\Users\\Ramboo\\.nuget\\packages\\",
-        "outputPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\obj\\",
+        "projectPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj",
+        "packagesPath": "C:\\Users\\marke\\.nuget\\packages\\",
+        "outputPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.DomainLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ramboo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\marke\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -101,6 +102,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -119,7 +121,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -146,24 +148,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200-preview.0.25057.12/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj": {
+    "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj",
+        "projectUniqueName": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj",
         "projectName": "PharmacySystem.InfastructureLayer",
-        "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj",
-        "packagesPath": "C:\\Users\\Ramboo\\.nuget\\packages\\",
-        "outputPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\obj\\",
+        "projectPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj",
+        "packagesPath": "C:\\Users\\marke\\.nuget\\packages\\",
+        "outputPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.InfastructureLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ramboo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\marke\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -172,17 +174,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj": {
-                "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj"
+              "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj": {
+                "projectPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj"
               },
-              "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj": {
-                "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj"
+              "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj": {
+                "projectPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.DomainLayer\\PharmacySystem.DomainLayer.csproj"
               }
             }
           }
@@ -197,7 +200,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -238,24 +241,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200-preview.0.25057.12/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj": {
+    "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj",
+        "projectUniqueName": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj",
         "projectName": "PharmacySystem.PresentationLayer",
-        "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj",
-        "packagesPath": "C:\\Users\\Ramboo\\.nuget\\packages\\",
-        "outputPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.PresentationLayer\\obj\\",
+        "projectPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.PresentationLayer\\PharmacySystem.PresentationLayer.csproj",
+        "packagesPath": "C:\\Users\\marke\\.nuget\\packages\\",
+        "outputPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.PresentationLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ramboo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\marke\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -264,17 +267,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj": {
-                "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj"
+              "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj": {
+                "projectPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.ApplicationLayer\\PharmacySystem.ApplicationLayer.csproj"
               },
-              "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj": {
-                "projectPath": "H:\\Pharmacy Warhouse Graduation Project ITI\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj"
+              "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj": {
+                "projectPath": "E:\\ITI PRO WEB & BI\\Grad Project\\Clone\\project\\PharmacySystem.InfastructureLayer\\PharmacySystem.InfastructureLayer.csproj"
               }
             }
           }
@@ -289,7 +293,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -325,7 +329,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200-preview.0.25057.12/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
