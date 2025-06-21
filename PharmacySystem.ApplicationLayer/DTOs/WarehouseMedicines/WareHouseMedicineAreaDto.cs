@@ -20,6 +20,5 @@ namespace PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines
         public decimal FinalPrice { get; set; }
         public string WareHouseAreaName { get; set; }
         public int Quantity { get; set; }
-    }
-    
+    }  
 }
