@@ -65,7 +65,7 @@ namespace PharmacySystem.ApplicationLayer.Services
             return result;
         }
 
-        public async Task<PaginatedResult<MedicinesbyAreaIdDto>> GetMedicineStatsByAreaAsync(int areaId, int page = 1, int pageSize = 10)
+        public async Task<PaginatedResult<MedicinesbyAreaIdDto>> GetMedicineStatsByAreaAsync(int areaId, int page , int pageSize )
         {
             var paginatedResult = await unitOfWork.medicineRepository
                 .GetMedicinesByAreaAsync(areaId, page, pageSize);
@@ -102,7 +102,57 @@ namespace PharmacySystem.ApplicationLayer.Services
                     finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100)
 
                 };
-            }).ToList();
+            })
+                .OrderBy(dto => dto.MedicineName).ThenBy(dto => dto.Price)
+                .ToList();
+
+            return new PaginatedResult<MedicinesbyAreaIdDto>
+            {
+                Items = resultDtos,
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalCount = paginatedResult.TotalCount
+            };
+        }
+         public async Task<PaginatedResult<MedicinesbyAreaIdDto>> GetMedicineStatsByAreaAsync(int areaId, int page, int pageSize, string searchTerm)
+        {
+            var paginatedResult = await unitOfWork.medicineRepository
+                .SearchMedicinesByAreaAndNameAsync(areaId, page, pageSize,searchTerm);
+
+            var resultDtos = paginatedResult.Items.Select(m =>
+            {
+                var warehouseEntries = m.WareHouseMedicines
+                    .Where(wm => wm.WareHouse.WareHouseAreas.Any(wa => wa.AreaId == areaId))
+                    .ToList();
+
+                var totalQuantity = warehouseEntries.Sum(wm => wm.Quantity);
+                var distributorsCount = warehouseEntries.Select(wm => wm.WareHouseId).Distinct().Count();
+
+                var maxDiscountEntry = warehouseEntries
+                    .OrderByDescending(wm => wm.Discount)
+                    .FirstOrDefault();
+
+                decimal minPrice = maxDiscountEntry?.WareHouse?.WareHouseAreas.Min(wa => wa.MinmumPrice) ?? 0;
+
+                return new MedicinesbyAreaIdDto
+                {
+                    MedicineId = m.Id,
+                    MedicineName = m.ArabicName,
+                    Price = m.Price,
+                    ImageUrl = m.MedicineUrl,
+                    TotalQuantity = totalQuantity,
+                    DistributorsCount = distributorsCount,
+                    MaximumwareHouseAreaName = maxDiscountEntry?.WareHouse?.Address,
+                    WarehouseIdOfMaxDiscount = maxDiscountEntry?.WareHouseId ?? 0,
+                    WarehouseNameOfMaxDiscount = maxDiscountEntry?.WareHouse?.Name,
+                    QuantityInWarehouseWithMaxDiscount = maxDiscountEntry?.Quantity ?? 0,
+                    MaximumDiscount = maxDiscountEntry?.Discount ?? 0,
+                    MinmumPrice = minPrice,
+                    finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100)
+
+                };
+            })
+                  .OrderBy(dto => dto.MedicineName).ThenBy(dto => dto.Price).ToList();
 
             return new PaginatedResult<MedicinesbyAreaIdDto>
             {
