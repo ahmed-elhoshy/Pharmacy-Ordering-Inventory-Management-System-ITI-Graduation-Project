@@ -22,7 +22,7 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
         #endregion
         public IQueryable<Representative> GetCountOfPharmaciesWithRepresentativeId(int RepresentativeId)
         {
-            var getCount = context.Representatives.Include(P => P.pharmacies).Where(x => x.Id == RepresentativeId);
+            var getCount = context.Representatives.AsNoTracking().Include(P => P.pharmacies).ThenInclude(p=>p.Area).Where(x => x.Id == RepresentativeId);
             return getCount;
         }
         public IQueryable<Representative> GetCountOfOrders(int RepresentativeId)

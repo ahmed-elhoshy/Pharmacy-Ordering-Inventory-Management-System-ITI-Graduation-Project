@@ -1,12 +1,16 @@
 using AutoMapper;
 using PharmacySystem.ApplicationLayer.DTOs.Admin;
+using PharmacySystem.ApplicationLayer.DTOs.Area;
+using PharmacySystem.ApplicationLayer.DTOs.Governate;
+using PharmacySystem.ApplicationLayer.DTOs.OrderDetails;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
+using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Register;
+using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies;
+using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrderDetails;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
-using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies;
-using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrderDetails;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouse.Login;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Create;
@@ -16,9 +20,6 @@ using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
 using PharmacySystem.DomainLayer.Entities;
-using PharmacySystem.ApplicationLayer.DTOs.Governate;
-using PharmacySystem.ApplicationLayer.DTOs.Area;
-using PharmacySystem.ApplicationLayer.DTOs.OrderDetails;
 
 namespace PharmacySystem.ApplicationLayer.MappingConfig
 {
@@ -104,19 +105,21 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<PharmacyRegisterDto, Pharmacy>();
             #endregion
 
-            
 
-            // Representative Mappings
+            #region Representative Mappings
+            CreateMap<Pharmacy, PharmacyDto>();
             CreateMap<Representative, GetRepresentatitvePharmaciesCountDto>()
-                .ForMember(dest => dest.RepresentatitveId, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.RepresentatitveName, opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.PharmaciesCount, opt => opt.MapFrom(src => src.pharmacies.Count));
+                .ForMember(dest => dest.RepresentativeId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.RepresentativeName, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.PharmaciesCount, opt => opt.MapFrom(src => src.pharmacies.Count))
+                .ForMember(dest => dest.Pharmacies, opt => opt.MapFrom(src => src.pharmacies));
             //problem
             CreateMap<Representative, GetOrdersPharmaciesCountDto>()
                  .ForMember(dest => dest.PharmaciesName, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().Name))
                 .ForMember(dest => dest.PharmaciesAddress, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().Address))
                 .ForMember(dest => dest.PharmaciesGovernate, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().Governate))
                 .ForMember(dest => dest.OrdersCount, opt => opt.MapFrom(src => src.pharmacies.Sum(p => p.Orders.Count)));
+
             //.ForMember(dest => dest.PharmaciesName, opt => opt.MapFrom(src =>
             //    string.Join(", ", src.pharmacies.Select(p => p.Name))))
             //.ForMember(dest => dest.PharmaciesGovernate, opt => opt.MapFrom(src =>
@@ -125,7 +128,7 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             //    string.Join(", ", src.pharmacies.Select(p => p.Address))))
             //.ForMember(dest => dest.OrdersCount, opt => opt.MapFrom(src =>
             //    src.pharmacies.Sum(p => p.Orders.Count)));
-//#endregion
+            #endregion
 
             #region Pharmacy
             CreateMap<PharmacyRegisterDto, Pharmacy>()
