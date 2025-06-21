@@ -9,6 +9,8 @@ using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
 using PharmacySystem.ApplicationLayer.DTOs.RepresentativeOrder;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseOrders;
+using PharmacySystem.ApplicationLayer.Pagination;
+using PharmacySystem.DomainLayer.Entities.Constants;
 #endregion
 
 
@@ -24,7 +26,7 @@ namespace PharmacySystem.ApplicationLayer.IServiceInterfaces
         Task<GetRepresentatitvePharmaciesCountDto> GetPharmaciesCountById(int id);
         Task<GetOrdersPharmaciesCountDto> GetOrdersCountById(int id);
         Task<RepresentativeLoginResponseDTO> LoginAsync(RepresentativeLoginDTO dto);
-        public Task<IEnumerable<WarehouseOrdersDto>> GetRepresentativeWarehouseOrdersAsync(int representativeId);
+        public Task<PaginatedResult<WarehouseOrdersDto>> GetAllOrdersPaginatedByRepresentativeIdAsync(int representativeId,OrderStatus status,int pageNumber,int pageSize);
         public Task<RepresentativeOrderStatsDto> GetOrdersStatsAsync(int representativeId);
     }
 }

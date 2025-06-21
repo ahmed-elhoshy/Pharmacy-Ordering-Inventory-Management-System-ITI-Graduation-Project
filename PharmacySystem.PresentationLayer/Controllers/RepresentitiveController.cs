@@ -1,17 +1,22 @@
-﻿using AutoMapper;
+﻿#region
+using AutoMapper;
 using E_Commerce.DomainLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PharmacySystem.ApplicationLayer.Common;
+using PharmacySystem.ApplicationLayer.DTOs.OrderDetails;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Register;
+using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies;
+using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrderDetails;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
-using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies;
-using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrderDetails;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
 using PharmacySystem.ApplicationLayer.Services;
 using PharmacySystem.DomainLayer.Entities;
+using PharmacySystem.DomainLayer.Entities.Constants;
+#endregion
 
 namespace PharmacySystem.PresentationLayer.Controllers
 {
@@ -108,6 +113,8 @@ namespace PharmacySystem.PresentationLayer.Controllers
         public async Task<ActionResult<GetRepresentatitvePharmaciesCountDto>> GetPharmaciesCountUsingId(int id)
         {
             var countOfPharmacies = await  _service.GetPharmaciesCountById(id);
+            if (countOfPharmacies == null)
+                return NotFound();
             return Ok(countOfPharmacies);
         }
         #endregion
@@ -134,6 +141,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         }
         #endregion
 
+        #region Get Stats for All Orders
         [HttpGet("orders-stats/{representativeId}")]
         [EndpointSummary("Get Stats for All Orders")]
         public async Task<IActionResult> GetOrdersStatsAsync(int representativeId)
@@ -141,13 +149,17 @@ namespace PharmacySystem.PresentationLayer.Controllers
             var result = await _service.GetOrdersStatsAsync(representativeId);
             return Ok(result);
         }
+        #endregion
 
-        [HttpGet("warehouse-orders/{representativeId}")]
-        [EndpointSummary("Get All Warehouse with pharmacies orders using representativeId")]
-        public async Task<IActionResult> GetRepresentativeWarehouseOrdersAsync(int representativeId)
+        #region Get All Warehouse Paginated with pharmacies orders using representativeId
+        [HttpGet("{representativeId}/orders-by-status")]
+        [EndpointSummary("Get All Warehouse with pharmacies orders using representativeId And Order State")]
+        public async Task<IActionResult> GetOrdersByStatusPaginated(int representativeId,OrderStatus status,
+        [FromQuery] int pageNumber = 1,[FromQuery] int pageSize = 10)
         {
-            var result = await _service.GetRepresentativeWarehouseOrdersAsync(representativeId);
+            var result = await _service.GetAllOrdersPaginatedByRepresentativeIdAsync(representativeId, status, pageNumber, pageSize);
             return Ok(result);
         }
+        #endregion
     }
 }

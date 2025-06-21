@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿#region MyRegion
+using AutoMapper;
 using E_Commerce.DomainLayer.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +15,7 @@ using PharmacySystem.ApplicationLayer.DTOs.Representative.Login;
 using PharmacySystem.ApplicationLayer.DTOs.RepresentativeOrder;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseOrders;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
+using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Entities.Constants;
 using PharmacySystem.DomainLayer.Interfaces;
@@ -24,22 +26,25 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+#endregion
 
 namespace PharmacySystem.ApplicationLayer.Services
 {
     public class RepresentativeService : IRepresentativeService
     {
+        #region  Context
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
-
         public RepresentativeService(IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _configuration = configuration;
         }
+        #endregion
 
+        #region GenerateRepresentativeCode
         private string GenerateRepresentativeCode()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -49,21 +54,24 @@ namespace PharmacySystem.ApplicationLayer.Services
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        public async Task<IEnumerable<GetAllRepresentatitveDto>> GetAllAsync()
+        #endregion
+
+        #region UpdateAsync
+        public async Task<GetRepresentativeByIdDto> UpdateAsync(int id, UpdateRepresentativeDto dto)
         {
-            var reps = await _unitOfWork.representativeRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<GetAllRepresentatitveDto>>(reps);
+            var entity = await _unitOfWork.representativeRepository.GetByIdAsync(id);
+            if (entity == null) return null;
+
+            _mapper.Map(dto, entity);
+            await _unitOfWork.representativeRepository.UpdateAsync(entity);
+            await _unitOfWork.SaveAsync();
+
+            return _mapper.Map<GetRepresentativeByIdDto>(entity);
         }
 
-        public async Task<GetRepresentativeByIdDto> GetByIdAsync(int id)
-        {
-            var rep = await _unitOfWork.representativeRepository.GetByIdAsync(id);
-            if (rep == null) return null;
+        #endregion
 
-            var result = _mapper.Map<GetRepresentativeByIdDto>(rep);
-            return result;
-        }
-
+        #region  CreateAsync
         public async Task<GetRepresentativeByIdDto> CreateAsync(CreateRepresentativeDto dto)
         {
             // Generate a unique code
@@ -85,18 +93,30 @@ namespace PharmacySystem.ApplicationLayer.Services
             return _mapper.Map<GetRepresentativeByIdDto>(entity);
         }
 
-        public async Task<GetRepresentativeByIdDto> UpdateAsync(int id, UpdateRepresentativeDto dto)
+        #endregion
+
+        #region GetByIdAsync
+        public async Task<GetRepresentativeByIdDto> GetByIdAsync(int id)
         {
-            var entity = await _unitOfWork.representativeRepository.GetByIdAsync(id);
-            if (entity == null) return null;
+            var rep = await _unitOfWork.representativeRepository.GetByIdAsync(id);
+            if (rep == null) return null;
 
-            _mapper.Map(dto, entity);
-            await _unitOfWork.representativeRepository.UpdateAsync(entity);
-            await _unitOfWork.SaveAsync();
-
-            return _mapper.Map<GetRepresentativeByIdDto>(entity);
+            var result = _mapper.Map<GetRepresentativeByIdDto>(rep);
+            return result;
         }
 
+        #endregion
+
+        #region GetAllAsync
+        public async Task<IEnumerable<GetAllRepresentatitveDto>> GetAllAsync()
+        {
+            var reps = await _unitOfWork.representativeRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<GetAllRepresentatitveDto>>(reps);
+        }
+
+        #endregion
+
+        #region DeleteAsync
         public async Task<bool> DeleteAsync(int id)
         {
             var entity = await _unitOfWork.representativeRepository.GetByIdAsync(id);
@@ -107,13 +127,20 @@ namespace PharmacySystem.ApplicationLayer.Services
             return true;
         }
 
+        #endregion
+
+        #region Get Pharmacies Count ById
         public async Task<GetRepresentatitvePharmaciesCountDto> GetPharmaciesCountById(int id)
         {
             var rep = _unitOfWork.representativeRepository.GetCountOfPharmaciesWithRepresentativeId(id)
-                .FirstOrDefault(x => x.Id == id);
+                .FirstOrDefault();
+            if (rep == null) return null;
 
             return _mapper.Map<GetRepresentatitvePharmaciesCountDto>(rep);
         }
+        #endregion
+
+        #region Get Orders Count ById
         public async Task<GetOrdersPharmaciesCountDto> GetOrdersCountById(int id)
         {
             var rep = _unitOfWork.representativeRepository.GetCountOfOrders(id)
@@ -121,7 +148,7 @@ namespace PharmacySystem.ApplicationLayer.Services
 
             return _mapper.Map<GetOrdersPharmaciesCountDto>(rep);
         }
-
+        #endregion
         public async Task<RepresentativeLoginResponseDTO> LoginAsync(RepresentativeLoginDTO dto)
         {
             // Retrieve the pharmacy entity by email
@@ -154,7 +181,6 @@ namespace PharmacySystem.ApplicationLayer.Services
 
             };
         }
-
         private string GenerateJwtToken(Representative representative)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
@@ -206,27 +232,32 @@ namespace PharmacySystem.ApplicationLayer.Services
 
         #endregion
 
-        #region Get All WareHouse Including List Of Order For Pharmacies
-        public async Task<IEnumerable<WarehouseOrdersDto>> GetRepresentativeWarehouseOrdersAsync(int representativeId)
+        #region Get Representative Warehouse Orders Paginated
+        public async Task<PaginatedResult<WarehouseOrdersDto>> GetAllOrdersPaginatedByRepresentativeIdAsync
+            (int representativeId, OrderStatus status, int pageNumber,int pageSize)
         {
             var orders = await _unitOfWork.orderRepository.GetAllOrdersByRepresentativeIdAsync(representativeId);
 
-            var grouped = orders
+            var filteredOrders = orders.Where(o => o.Status == status);
+
+            var grouped = filteredOrders
                 .GroupBy(o => o.WareHouse.Name)
                 .Select(g => new WarehouseOrdersDto
                 {
                     WarehouseName = g.Key,
                     OrdersCount = g.Count(),
                     DeliveredRevenue = g
-                    .Where(o => o.Status == OrderStatus.Delivered)
-                    .Sum(o => o.TotalPrice),
+                        .Where(o => o.Status == OrderStatus.Delivered)
+                        .Sum(o => o.TotalPrice),
                     TotalPrice = g.Sum(o => o.TotalPrice),
                     Orders = g.Select(o => new OrderDto
                     {
                         OrderId = o.Id,
                         OrderState = o.Status.ToString(),
                         PharmacyName = o.Pharmacy.Name,
+                        UserName = o.Pharmacy.UserName,
                         WarehouseName = o.WareHouse.Name,
+                        TotalPrice = o.OrderDetails.Sum(od => od.Price * od.Quntity),
                         OrderDetails = o.OrderDetails.Select(od => new OrderDetailDto
                         {
                             MedicineId = od.MedicineId,
@@ -235,9 +266,22 @@ namespace PharmacySystem.ApplicationLayer.Services
                             Price = od.Price
                         }).ToList()
                     }).ToList()
-                }).ToList();
+                })
+                .ToList(); // materialize to apply pagination on in-memory data
 
-            return grouped;
+            var totalCount = grouped.Count;
+            var pagedItems = grouped
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return new PaginatedResult<WarehouseOrdersDto>
+            {
+                Items = pagedItems,
+                TotalCount = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
         }
         #endregion
     }
