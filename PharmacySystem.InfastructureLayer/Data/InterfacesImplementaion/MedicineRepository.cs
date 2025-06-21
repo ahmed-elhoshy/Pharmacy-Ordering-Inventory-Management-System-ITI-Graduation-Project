@@ -2,6 +2,7 @@
 using E_Commerce.InfrastructureLayer.Data.DBContext.Repositories;
 using Microsoft.EntityFrameworkCore;
 using PharmacySystem.ApplicationLayer.DTOs.Medicines;
+using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Interfaces;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
@@ -36,10 +37,10 @@ namespace E_Commerce.InfrastructureLayer.Data.GenericClass
             return await query.ToListAsync();
         }
 
-
-        public async Task<List<Medicine>> GetMedicinesByAreaAsync(int areaId)
+        public async Task<IReadOnlyList<Medicine>> GetMedicinesByAreaAsync(int areaId)
         {
             var medicines = await context.Medicines
+                .AsNoTracking()
           .Include(m => m.WareHouseMedicines)
               .ThenInclude(wm => wm.WareHouse)
                   .ThenInclude(w => w.WareHouseAreas)
@@ -48,6 +49,36 @@ namespace E_Commerce.InfrastructureLayer.Data.GenericClass
           .ToListAsync();
             return medicines.DistinctBy(m => m.Id).ToList();
         }
+        public async Task<PaginatedResult<Medicine>> GetMedicinesByAreaAsync(int areaId, int page, int pageSize)
+        {
+            var query = context.Medicines
+                .AsNoTracking()
+                .Include(m => m.WareHouseMedicines)
+                    .ThenInclude(wm => wm.WareHouse)
+                        .ThenInclude(w => w.WareHouseAreas)
+                .Where(m => m.WareHouseMedicines
+                    .Any(wm => wm.WareHouse.WareHouseAreas.Any(wa => wa.AreaId == areaId)))
+                .OrderBy(m => m.ArabicName)
+                .Distinct();
+
+            var totalCount = await query.CountAsync();
+
+            var pagedMedicines = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PaginatedResult<Medicine>
+            {
+                Items = pagedMedicines,
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalCount = totalCount
+            };
+        }
+
+
+
         public async Task<IReadOnlyList<Medicine>> SearchMedicinesAsync(string? searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
