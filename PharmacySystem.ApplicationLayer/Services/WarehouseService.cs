@@ -137,8 +137,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                     FinalPrice = (medicine?.Medicine.Price ?? 0) * (1 - (medicine?.Discount ?? 0) / 100),
                     Drug = medicine.Medicine.Drug,
                     WarehouseImageUrl = medicine?.WareHouse.ImageUrl
-
-    };
+                };
             }).ToList();
         }
 

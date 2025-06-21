@@ -1,6 +1,5 @@
 ﻿
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Read;
-using PharmacySystem.DomainLayer.Entities;
 
 namespace PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies
 {
