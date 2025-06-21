@@ -47,6 +47,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                 TotalCount = result.TotalCount,
                 PageNumber = result.PageNumber,
                 PageSize = result.PageSize
+
             };
         }
 
@@ -133,8 +134,11 @@ namespace PharmacySystem.ApplicationLayer.Services
                     Quantity = medicine?.Quantity ?? 0,
                     MedicinePrice = medicine?.Medicine.Price ?? 0,
                     Discount = medicine?.Discount ?? 0,
-                    FinalPrice = (medicine?.Medicine.Price ?? 0) * (1 - (medicine?.Discount ?? 0) / 100)
-                };
+                    FinalPrice = (medicine?.Medicine.Price ?? 0) * (1 - (medicine?.Discount ?? 0) / 100),
+                    Drug = medicine.Medicine.Drug,
+                    WarehouseImageUrl = medicine?.WareHouse.ImageUrl
+
+    };
             }).ToList();
         }
 

@@ -1,4 +1,6 @@
 ﻿
+using PharmacySystem.DomainLayer.Entities.Constants;
+
 namespace PharmacySystem.DomainLayer.Entities
 {
     public class Medicine : BaseEntity
@@ -8,6 +10,7 @@ namespace PharmacySystem.DomainLayer.Entities
         public string Description {get; set; }
         public decimal Price {get; set;}
         public string? MedicineUrl { get; set; }
+        public MedicineTypes Drug { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new HashSet<OrderDetail>();
         public virtual ICollection<WareHouseMedicien> WareHouseMedicines { get; set; } = new HashSet<WareHouseMedicien>();
     }

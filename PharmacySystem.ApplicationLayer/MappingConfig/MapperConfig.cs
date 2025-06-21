@@ -92,7 +92,14 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
 
             CreateMap<WareHouseMedicien, WarehouseMedicineDto>()
                 .ForMember(dest => dest.MedicineId, opt => opt.MapFrom(src => src.MedicineId))
-                .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
+                .ForMember(dest => dest.EnglishMedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
+                .ForMember(dest => dest.ArabicMedicineName, opt => opt.MapFrom(src => src.Medicine.ArabicName))
+                .ForMember(dest => dest.price, opt => opt.MapFrom(src => src.Medicine.Price))
+                .ForMember(dest => dest.Drug, opt => opt.MapFrom(src => src.Medicine.Drug))
+                .ForMember(dest => dest.MedicineUrl, opt => opt.MapFrom(src => src.Medicine.MedicineUrl))
+                .ForMember(dest => dest.Finalprice, opt => opt.MapFrom(src => src.Medicine.Price  - (src.Medicine.Price * (src.Discount / 100))))
+
+
                 .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity))
                 .ForMember(dest => dest.Discount, opt => opt.MapFrom(src => src.Discount))
                 .ReverseMap();
