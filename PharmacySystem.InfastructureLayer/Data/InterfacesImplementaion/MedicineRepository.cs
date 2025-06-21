@@ -78,6 +78,42 @@ namespace E_Commerce.InfrastructureLayer.Data.GenericClass
         }
 
 
+        public async Task<PaginatedResult<Medicine>> SearchMedicinesByAreaAndNameAsync(int areaId,  int page, int pageSize, string searchTerm)
+        {
+            var query = context.Medicines
+                .AsNoTracking()
+                .Include(m => m.WareHouseMedicines)
+                    .ThenInclude(wm => wm.WareHouse)
+                        .ThenInclude(w => w.WareHouseAreas)
+                .Where(m =>
+                    m.WareHouseMedicines
+                        .Any(wm => wm.WareHouse.WareHouseAreas.Any(wa => wa.AreaId == areaId))
+                );
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query = query.Where(m =>
+                    m.ArabicName.Contains(searchTerm) ||
+                    m.Name.Contains(searchTerm)
+                );
+            }
+
+            var totalCount = await query.CountAsync();
+
+            var pagedMedicines = await query
+                .OrderBy(m => m.ArabicName)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PaginatedResult<Medicine>
+            {
+                Items = pagedMedicines,
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalCount = totalCount
+            };
+        }
 
         public async Task<IReadOnlyList<Medicine>> SearchMedicinesAsync(string? searchTerm)
         {
