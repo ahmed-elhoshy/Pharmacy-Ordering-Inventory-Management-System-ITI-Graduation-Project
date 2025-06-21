@@ -149,6 +149,8 @@ namespace PharmacySystem.ApplicationLayer.Services
             return _mapper.Map<GetOrdersPharmaciesCountDto>(rep);
         }
         #endregion
+
+        #region LoginAsync
         public async Task<RepresentativeLoginResponseDTO> LoginAsync(RepresentativeLoginDTO dto)
         {
             // Retrieve the pharmacy entity by email
@@ -181,6 +183,9 @@ namespace PharmacySystem.ApplicationLayer.Services
 
             };
         }
+        #endregion
+
+        #region GenerateJwtToken
         private string GenerateJwtToken(Representative representative)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
@@ -203,6 +208,7 @@ namespace PharmacySystem.ApplicationLayer.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        #endregion
 
         #region Get Orders Stats Async
         public async Task<RepresentativeOrderStatsDto> GetOrdersStatsAsync(int representativeId)
@@ -257,6 +263,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                         PharmacyName = o.Pharmacy.Name,
                         UserName = o.Pharmacy.UserName,
                         WarehouseName = o.WareHouse.Name,
+                        Address = o.Pharmacy.Address,
                         TotalPrice = o.OrderDetails.Sum(od => od.Price * od.Quntity),
                         OrderDetails = o.OrderDetails.Select(od => new OrderDetailDto
                         {

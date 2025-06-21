@@ -1,3 +1,4 @@
+#region MyRegion
 using AutoMapper;
 using PharmacySystem.ApplicationLayer.DTOs.Admin;
 using PharmacySystem.ApplicationLayer.DTOs.Area;
@@ -11,8 +12,6 @@ using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrd
 using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
-using PharmacySystem.ApplicationLayer.DTOs.Warehouse.Login;
-using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Create;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Read;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Update;
@@ -20,11 +19,10 @@ using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
 using PharmacySystem.DomainLayer.Entities;
-using PharmacySystem.ApplicationLayer.DTOs.Governate;
-using PharmacySystem.ApplicationLayer.DTOs.Area;
-using PharmacySystem.ApplicationLayer.DTOs.OrderDetails;
 using PharmacySystem.ApplicationLayer.DTOs.Representative.Login;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Login;
+using PharmacySystem.ApplicationLayer.DTOs.Orders;
+#endregion
 
 namespace PharmacySystem.ApplicationLayer.MappingConfig
 {
@@ -36,14 +34,6 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<Admin, AdminResponseDto>();
             CreateMap<CreateAdminDto, Admin>();
             CreateMap<UpdateAdminDto, Admin>();
-            #endregion
-
-            #region Representative Mappings
-            CreateMap<Representative, GetAllRepresentatitveDto>();
-            CreateMap<Representative, GetRepresentativeByIdDto>();
-            CreateMap<CreateRepresentativeDto, Representative>();
-            CreateMap<UpdateRepresentativeDto, Representative>();
-            CreateMap<Representative, RepresentstiveInfoDto>();
             #endregion
 
             #region Warehouse Mappings
@@ -92,7 +82,14 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
 
             CreateMap<WareHouseMedicien, WarehouseMedicineDto>()
                 .ForMember(dest => dest.MedicineId, opt => opt.MapFrom(src => src.MedicineId))
-                .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
+                .ForMember(dest => dest.EnglishMedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
+                .ForMember(dest => dest.ArabicMedicineName, opt => opt.MapFrom(src => src.Medicine.ArabicName))
+                .ForMember(dest => dest.price, opt => opt.MapFrom(src => src.Medicine.Price))
+                .ForMember(dest => dest.Drug, opt => opt.MapFrom(src => src.Medicine.Drug))
+                .ForMember(dest => dest.MedicineUrl, opt => opt.MapFrom(src => src.Medicine.MedicineUrl))
+                .ForMember(dest => dest.Finalprice, opt => opt.MapFrom(src => src.Medicine.Price  - (src.Medicine.Price * (src.Discount / 100))))
+
+
                 .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity))
                 .ForMember(dest => dest.Discount, opt => opt.MapFrom(src => src.Discount))
                 .ReverseMap();
@@ -109,10 +106,16 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             #region Pharmacy Mappings
             CreateMap<Pharmacy, PharmacyLoginResponseDTO>();
             CreateMap<PharmacyRegisterDto, Pharmacy>();
+            CreateMap<Pharmacy, PharmacyDto>();
             #endregion
 
             #region Representative Mappings
-            CreateMap<Pharmacy, PharmacyDto>();
+            CreateMap<Representative, GetAllRepresentatitveDto>();
+            CreateMap<Representative, GetRepresentativeByIdDto>();
+            CreateMap<CreateRepresentativeDto, Representative>();
+            CreateMap<UpdateRepresentativeDto, Representative>();
+            CreateMap<Representative, RepresentstiveInfoDto>();
+            CreateMap<Representative, OrderDto>();
 
             CreateMap<Representative, GetRepresentatitvePharmaciesCountDto>()
                 .ForMember(dest => dest.RepresentativeId, opt => opt.MapFrom(src => src.Id))
@@ -128,14 +131,6 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
                 .ForMember(dest => dest.PharmaciesGovernate, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().Governate))
                 .ForMember(dest => dest.OrdersCount, opt => opt.MapFrom(src => src.pharmacies.Sum(p => p.Orders.Count)));
 
-            //.ForMember(dest => dest.PharmaciesName, opt => opt.MapFrom(src =>
-            //    string.Join(", ", src.pharmacies.Select(p => p.Name))))
-            //.ForMember(dest => dest.PharmaciesGovernate, opt => opt.MapFrom(src =>
-            //    string.Join(", ", src.pharmacies.Select(p => p.Governate))))
-            //.ForMember(dest => dest.PharmaciesAddress, opt => opt.MapFrom(src =>
-            //    string.Join(", ", src.pharmacies.Select(p => p.Address))))
-            //.ForMember(dest => dest.OrdersCount, opt => opt.MapFrom(src =>
-            //    src.pharmacies.Sum(p => p.Orders.Count)));
             #endregion
 
             #region Pharmacy
@@ -159,9 +154,10 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<WareHouse, WarehouseInfoDto>();
             #endregion
 
+            #region Medicine Mappings 
             CreateMap<Medicine, OrderDetailDto>()
                .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Name));
-
+            #endregion
         }
     }
 }

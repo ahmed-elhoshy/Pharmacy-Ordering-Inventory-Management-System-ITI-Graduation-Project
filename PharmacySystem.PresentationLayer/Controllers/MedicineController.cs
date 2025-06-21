@@ -177,15 +177,34 @@ namespace PharmacySystem.PresentationLayer.Controllers
         public async Task<IActionResult> GetMedicinesByArea(
      int areaId,
      [FromQuery] int page = 1,
-     [FromQuery] int pageSize = 10)
+     [FromQuery] int pageSize = 15)
         {
             if (areaId <= 0)
                 return BadRequest("Invalid Area ID");
 
             page = page <= 0 ? 1 : page;
-            pageSize = pageSize <= 0 ? 10 : pageSize;
+            pageSize = pageSize <= 0 ? 15 : pageSize;
 
             var result = await medicineService.GetMedicineStatsByAreaAsync(areaId, page, pageSize);
+
+            return Ok(result);
+        }
+
+        [EndpointSummary("Get Medicines paginated exist in Area")]
+        [HttpGet("SearchNameByAreaPagination/{areaId:int}")]
+        public async Task<IActionResult> GetMedicinesByArea(
+  int areaId,
+  [FromQuery] int page = 1,
+  [FromQuery] int pageSize = 15,
+   [FromQuery] string? search = null)
+        {
+            if (areaId <= 0)
+                return BadRequest("Invalid Area ID");
+
+            page = page <= 0 ? 1 : page;
+            pageSize = pageSize <= 0 ? 15 : pageSize;
+
+            var result = await medicineService.GetMedicineStatsByAreaAsync(areaId, page, pageSize,search);
 
             return Ok(result);
         }

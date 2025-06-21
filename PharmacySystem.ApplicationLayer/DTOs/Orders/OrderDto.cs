@@ -10,6 +10,7 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Orders
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public string OrderState { get; set; }
         public string PharmacyName { get; set; }
+        public string Address { get; set; }
         public string UserName { get; set; }
         public string WarehouseName { get; set; }
         public List<OrderDetailDto> OrderDetails { get; set; }

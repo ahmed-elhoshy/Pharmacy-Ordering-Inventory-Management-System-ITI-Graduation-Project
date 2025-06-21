@@ -10,5 +10,8 @@ namespace PharmacySystem.DomainLayer.Interfaces
         Task<IReadOnlyList<Medicine>> GetMedicinesByAreaAsync(int areaId);
         Task<PaginatedResult<Medicine>> GetMedicinesByAreaAsync(
        int areaId, int page, int pageSize);
+        Task<PaginatedResult<Medicine>> SearchMedicinesByAreaAndNameAsync(
+      int areaId, int page, int pageSize, string searchTerm);
+
     }
 }
