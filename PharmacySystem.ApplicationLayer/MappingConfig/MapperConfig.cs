@@ -20,6 +20,11 @@ using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
 using PharmacySystem.DomainLayer.Entities;
+using PharmacySystem.ApplicationLayer.DTOs.Governate;
+using PharmacySystem.ApplicationLayer.DTOs.Area;
+using PharmacySystem.ApplicationLayer.DTOs.OrderDetails;
+using PharmacySystem.ApplicationLayer.DTOs.Representative.Login;
+using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Login;
 
 namespace PharmacySystem.ApplicationLayer.MappingConfig
 {
@@ -38,6 +43,7 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<Representative, GetRepresentativeByIdDto>();
             CreateMap<CreateRepresentativeDto, Representative>();
             CreateMap<UpdateRepresentativeDto, Representative>();
+            CreateMap<Representative, RepresentstiveInfoDto>();
             #endregion
 
             #region Warehouse Mappings
@@ -105,17 +111,19 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<PharmacyRegisterDto, Pharmacy>();
             #endregion
 
-
             #region Representative Mappings
             CreateMap<Pharmacy, PharmacyDto>();
+
             CreateMap<Representative, GetRepresentatitvePharmaciesCountDto>()
                 .ForMember(dest => dest.RepresentativeId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.RepresentativeName, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().UserName))
                 .ForMember(dest => dest.PharmaciesCount, opt => opt.MapFrom(src => src.pharmacies.Count))
                 .ForMember(dest => dest.Pharmacies, opt => opt.MapFrom(src => src.pharmacies));
             //problem
             CreateMap<Representative, GetOrdersPharmaciesCountDto>()
                  .ForMember(dest => dest.PharmaciesName, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().Name))
+                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().UserName))
                 .ForMember(dest => dest.PharmaciesAddress, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().Address))
                 .ForMember(dest => dest.PharmaciesGovernate, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().Governate))
                 .ForMember(dest => dest.OrdersCount, opt => opt.MapFrom(src => src.pharmacies.Sum(p => p.Orders.Count)));
@@ -135,6 +143,8 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
                 .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
                 .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+
+            CreateMap<Pharmacy, PharmacyInfoDto>();
             #endregion
 
             #region Governate
@@ -143,6 +153,10 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
 
             #region Area
             CreateMap<Area, AreaLookupDto>();
+            #endregion
+
+            #region Warehouse
+            CreateMap<WareHouse, WarehouseInfoDto>();
             #endregion
 
             CreateMap<Medicine, OrderDetailDto>()

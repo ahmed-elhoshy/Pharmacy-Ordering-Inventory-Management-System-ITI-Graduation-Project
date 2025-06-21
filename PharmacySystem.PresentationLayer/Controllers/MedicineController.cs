@@ -156,7 +156,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
             return NoContent();
         }
 
-        [HttpGet("ByArea/{areaId}")]
+        [HttpGet("ByArea/{areaId:int}")]
         [EndpointSummary("Get Medicines exist in Area")]
         public async Task<IActionResult> GetMedicineStatsByArea(int areaId)
         {
@@ -170,6 +170,23 @@ namespace PharmacySystem.PresentationLayer.Controllers
             {
                 return NotFound("No Medicines found ");
             }
+            return Ok(result);
+        }
+        [EndpointSummary("Get Medicines paginated exist in Area")]
+        [HttpGet("ByAreaPagination/{areaId:int}")]
+        public async Task<IActionResult> GetMedicinesByArea(
+     int areaId,
+     [FromQuery] int page = 1,
+     [FromQuery] int pageSize = 10)
+        {
+            if (areaId <= 0)
+                return BadRequest("Invalid Area ID");
+
+            page = page <= 0 ? 1 : page;
+            pageSize = pageSize <= 0 ? 10 : pageSize;
+
+            var result = await medicineService.GetMedicineStatsByAreaAsync(areaId, page, pageSize);
+
             return Ok(result);
         }
     }

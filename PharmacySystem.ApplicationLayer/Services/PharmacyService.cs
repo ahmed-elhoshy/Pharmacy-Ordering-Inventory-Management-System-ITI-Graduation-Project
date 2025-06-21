@@ -103,7 +103,9 @@ public class PharmacyService : IPharmacyService
         {
             Success = true,
             Message = "Login successful.",
-            Token = token
+            Token = token,
+            Pharmacy = _mapper.Map<PharmacyInfoDto>(pharmacy)
+
         };
     }
 

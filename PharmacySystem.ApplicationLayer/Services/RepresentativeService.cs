@@ -11,6 +11,7 @@ using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrd
 using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
+using PharmacySystem.ApplicationLayer.DTOs.Representative.Login;
 using PharmacySystem.ApplicationLayer.DTOs.RepresentativeOrder;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseOrders;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
@@ -175,7 +176,9 @@ namespace PharmacySystem.ApplicationLayer.Services
             {
                 Success = true,
                 Message = "Login successful.",
-                Token = token
+                Token = token,
+                Representative = _mapper.Map<RepresentstiveInfoDto>(representative)
+
             };
         }
         private string GenerateJwtToken(Representative representative)
@@ -252,6 +255,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                         OrderId = o.Id,
                         OrderState = o.Status.ToString(),
                         PharmacyName = o.Pharmacy.Name,
+                        UserName = o.Pharmacy.UserName,
                         WarehouseName = o.WareHouse.Name,
                         TotalPrice = o.OrderDetails.Sum(od => od.Price * od.Quntity),
                         OrderDetails = o.OrderDetails.Select(od => new OrderDetailDto

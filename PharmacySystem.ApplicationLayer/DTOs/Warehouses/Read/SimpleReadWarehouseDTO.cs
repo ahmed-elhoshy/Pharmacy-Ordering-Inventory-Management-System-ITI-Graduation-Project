@@ -14,6 +14,8 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read
         public string? Governate { get; set; }
         public decimal MinmumPrice { get; set; }
 
+        public string? ImageUrl { get; set; }
+
 
     }
 }

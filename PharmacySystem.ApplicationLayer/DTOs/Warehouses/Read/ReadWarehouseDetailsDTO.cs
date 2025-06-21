@@ -16,5 +16,6 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read
         public string Governate { get; set; }
         public List<string> AreaNames { get; set; } = new();
         public List<WarehouseMedicineDto> Medicines { get; set; } = new();
+        public string? ImageUrl { get; set; }
     }
 }
