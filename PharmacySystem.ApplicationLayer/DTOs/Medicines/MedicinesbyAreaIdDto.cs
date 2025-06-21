@@ -13,9 +13,11 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Medicines
         public string MedicineName { get; set; }
         public decimal Price { get; set; }
         public string MaximumwareHouseAreaName { get; set; }
+        public string ImageUrl { get; set; }
+        public decimal finalPrice { get; set; }
         public int TotalQuantity { get; set; }
         public int DistributorsCount { get; set; }
-        public int WarehouseIdOfMaxDiscount { get; set; }      
+        public int WarehouseIdOfMaxDiscount { get; set; }
         public string WarehouseNameOfMaxDiscount { get; set; }
         public int QuantityInWarehouseWithMaxDiscount { get; set; }
         public decimal MaximumDiscount { get; set; }

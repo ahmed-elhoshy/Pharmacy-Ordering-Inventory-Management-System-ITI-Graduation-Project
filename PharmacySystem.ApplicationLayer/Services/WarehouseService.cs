@@ -129,7 +129,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                     WareHouseAreaName = w.Address,
                     MedicineId = medicineId,
                     WarehHouseName = w.Name,
-                    MedicineName = medicine?.Medicine.Name,
+                    MedicineName = medicine?.Medicine.ArabicName,
                     Quantity = medicine?.Quantity ?? 0,
                     MedicinePrice = medicine?.Medicine.Price ?? 0,
                     Discount = medicine?.Discount ?? 0,
