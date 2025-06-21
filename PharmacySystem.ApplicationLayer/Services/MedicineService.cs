@@ -54,8 +54,8 @@ namespace PharmacySystem.ApplicationLayer.Services
                         QuantityInWarehouseWithMaxDiscount = maxDiscountEntry?.Quantity ?? 0,
                         MaximumDiscount = maxDiscountEntry?.Discount ?? 0,
                         MinmumPrice = minimumPricePerOrder,
-                        finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100)
-
+                        finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100),
+                        Drug = m.Drug
 
                     };
                 })
