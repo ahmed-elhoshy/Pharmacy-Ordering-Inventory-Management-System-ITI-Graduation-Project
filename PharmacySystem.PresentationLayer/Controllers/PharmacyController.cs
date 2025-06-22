@@ -23,46 +23,31 @@ public class PharmacyController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] PharmacyRegisterDto dto)
     {
-        var (validation, createdPharmacy) = await _pharmacyService.RegisterPharmacyAsync(dto);
-        
-        if (validation == null)
+        // Step 1: Collect ModelState errors
+        var modelErrors = new ValidationResult();
+        if (!ModelState.IsValid)
         {
-            return Ok(new
+            foreach (var entry in ModelState)
             {
-                message = "Pharmacy registered successfully.",
-                pharmacy = new
-                {
-                    id = createdPharmacy.Id,
-                    userName = createdPharmacy.UserName,
-                    name = createdPharmacy.Name,
-                    email = createdPharmacy.Email,
-                    address = createdPharmacy.Address,
-                    governate = createdPharmacy.Governate,
-                    areaId = createdPharmacy.AreaId,
-                    phoneNumber = createdPharmacy.PhoneNumber,
-                    RepresentativeCode = createdPharmacy.Representative?.Code
-                }
-            });
-           
+                var key = entry.Key;
+                var errors = entry.Value.Errors.Select(e => e.ErrorMessage).ToList();
+                if (errors.Any())
+                    modelErrors.Errors[key] = errors;
+            }
+            return Ok(modelErrors.ToErrorResponse());
+        }
+
+        // Step 2: Manual validation
+        var validation = await _pharmacyService.RegisterPharmacyAsync(dto);
+        if (validation is not null && validation.HasErrors)
+        {
+            return Ok(validation.ToErrorResponse());
         }
 
         return Ok(new
         {
-            validation.Errors,
-            pharmacy = new
-            {
-                id = (int?)null,
-                userName = (string)null,
-                name = (string)null,
-                email = (string)null,
-                address = (string)null,
-                governate = (string)null,
-                areaId = (int?)null,
-                phoneNumber = (string)null,
-                RepresentativeCode = (string)null
-
-
-            }
+            message = "Pharmacy registered successfully.",
+            success = true
         });
     }
 
