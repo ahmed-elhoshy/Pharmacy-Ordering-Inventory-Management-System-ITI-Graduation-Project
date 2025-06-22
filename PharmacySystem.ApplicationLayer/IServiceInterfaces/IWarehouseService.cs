@@ -12,7 +12,7 @@ namespace PharmacySystem.ApplicationLayer.IServiceInterfaces
 {
     public interface IWarehouseService
     {
-        Task<PaginatedResult<WarehouseMedicineDto>> GetWarehouseMedicineDtosAsync(int warehouseId, int page, int pageSize);
+        Task<PaginatedResult<WarehouseMedicineDto>> GetWarehouseMedicineDtosAsync(int warehouseId, int page, int pageSize , string search);
         Task<bool> WarehouseExistsAsync(int id);
         Task<ReadWareHouseDTO> AddAsync(CreateWarehouseDTO dto);
         Task UpdateAsync(UpdateWareHouseDTO dto);
