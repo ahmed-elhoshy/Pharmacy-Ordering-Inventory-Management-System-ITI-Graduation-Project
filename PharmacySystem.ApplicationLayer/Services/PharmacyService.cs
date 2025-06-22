@@ -26,7 +26,7 @@ public class PharmacyService : IPharmacyService
         _configuration = configuration;
     }
 
-    public async Task<ValidationResult?> RegisterPharmacyAsync(PharmacyRegisterDto dto)
+    public async Task<(ValidationResult? Validation, Pharmacy? CreatedPharmacy)> RegisterPharmacyAsync(PharmacyRegisterDto dto)
     {
         var validation = new ValidationResult();
 
@@ -61,7 +61,7 @@ public class PharmacyService : IPharmacyService
 
         // If there are validation errors, return them
         if (validation.HasErrors)
-            return validation;
+            return (validation,null);
 
         // Map DTO to entity
         var pharmacy = _mapper.Map<DomainLayer.Entities.Pharmacy>(dto);
@@ -73,7 +73,8 @@ public class PharmacyService : IPharmacyService
         await _unitOfWork.PharmacyRepository.AddAsync(pharmacy);
         await _unitOfWork.SaveAsync();
 
-        return null; // Success — no errors
+       
+        return (null,pharmacy); // Success — no errors
     }
 
     public async Task<PharmacyLoginResponseDTO> LoginAsync(PharmacyLoginDTO dto)

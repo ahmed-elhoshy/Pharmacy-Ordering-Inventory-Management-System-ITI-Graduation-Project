@@ -4,6 +4,7 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Register;
 
 public class PharmacyRegisterDto
 {
+    //public int Id { get; set; }
     [Required]
     //[StringLength(20, MinimumLength = 4, ErrorMessage = "Username must be between 4 and 20 characters")]
     //[RegularExpression("^[a-zA-Z0-9_]*$", ErrorMessage = "Username can only contain letters, numbers, and underscores")]

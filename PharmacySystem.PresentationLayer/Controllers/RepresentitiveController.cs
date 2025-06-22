@@ -12,6 +12,7 @@ using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrd
 using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
+using PharmacySystem.ApplicationLayer.DTOs.Representative.Login;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
 using PharmacySystem.ApplicationLayer.Services;
 using PharmacySystem.DomainLayer.Entities;
@@ -135,8 +136,25 @@ namespace PharmacySystem.PresentationLayer.Controllers
         {
             var result = await _service.LoginAsync(dto);
             if (!result.Success)
-                return BadRequest(result.Message);
+            {
+                return Ok(new RepresentativeLoginResponseDTO
+                {
+                    Token = null,
+                    Message = "Invalid email or password.",
+                    Success = false,
+                    Representative = new RepresentativeInfoDto
+                    {
+                        Id = null,
 
+                        Code = null,
+                        Name = null,
+                        Address = null,
+                        Governate = null,
+                        Email = null,
+                        Phone = null,
+                    }
+                });
+            }
             return Ok(result);
         }
         #endregion

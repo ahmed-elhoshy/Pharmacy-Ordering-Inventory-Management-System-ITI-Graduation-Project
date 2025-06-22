@@ -114,7 +114,7 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<Representative, GetRepresentativeByIdDto>();
             CreateMap<CreateRepresentativeDto, Representative>();
             CreateMap<UpdateRepresentativeDto, Representative>();
-            CreateMap<Representative, RepresentstiveInfoDto>();
+            CreateMap<Representative, RepresentativeInfoDto>();
             CreateMap<Representative, OrderDto>();
 
             CreateMap<Representative, GetRepresentatitvePharmaciesCountDto>()
