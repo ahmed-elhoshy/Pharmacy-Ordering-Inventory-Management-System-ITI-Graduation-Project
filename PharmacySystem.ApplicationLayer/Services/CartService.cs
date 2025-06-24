@@ -77,6 +77,8 @@ namespace PharmacySystem.ApplicationLayer.Services
                 Warehouses = cart.CartWarehouses.Select(w => new CartWarehouseDto
                 {
                     WarehouseId = w.WareHouseId,
+                    
+                    
                     Items = w.CartItems.Select(i => new CartItemDto
                     {
                         MedicineId = i.MedicineId,
