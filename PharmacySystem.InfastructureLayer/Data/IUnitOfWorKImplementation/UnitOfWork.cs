@@ -25,6 +25,7 @@ namespace E_Commerce.DomainLayer
         private ICartRepository _cartRepository;
         //private IGenericRepository<Area> _areaRepository;
         private IAdminRepository _adminRepository;
+        private IGenericRepository<WareHouseArea> _wareHouseAreaRepository;
         #endregion
 
         public IMedicinRepository medicineRepository
@@ -127,7 +128,7 @@ namespace E_Commerce.DomainLayer
         }
 
         public ICartWarehousesRepository cartWarehousesRepository 
-        {
+        { 
             get 
             {
                 if (_cartWarehousesRepository == null)
@@ -146,6 +147,16 @@ namespace E_Commerce.DomainLayer
                 return _cartItemRepository;
             }
             set => _cartItemRepository = value;
+        }
+
+        public IGenericRepository<WareHouseArea> WareHouseAreaRepository
+        {
+            get
+            {
+                if (_wareHouseAreaRepository == null)
+                    _wareHouseAreaRepository = new GenericRepository<WareHouseArea>(context);
+                return _wareHouseAreaRepository;
+            }
         }
 
         public UnitOfWork(PharmaDbContext context)

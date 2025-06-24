@@ -18,8 +18,13 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
 
         public async Task<Cart?> GetCartWithDetailsByPharmacyIdAsync(int pharmacyId)
         {
-            return await context.Carts.AsNoTracking().Include(c => c.CartWarehouses)
-                .ThenInclude(w => w.CartItems).FirstOrDefaultAsync(c => c.PharmacyId == pharmacyId);
+            return await context.Carts.AsNoTracking()
+                .Include(c => c.CartWarehouses)
+                    .ThenInclude(w => w.CartItems)
+                .Include(c => c.CartWarehouses)
+                    .ThenInclude(w => w.WareHouse)
+                        .ThenInclude(wh => wh.WareHouseAreas)
+                .FirstOrDefaultAsync(c => c.PharmacyId == pharmacyId);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace E_Commerce.DomainLayer.Interfaces
 
         IAreaRepository AreaRepository { get; }
         IGenericRepository<Governate> GovernateRepository { get; }
+        IGenericRepository<WareHouseArea> WareHouseAreaRepository { get; }
         Task<bool> SaveAsync();
     }
 }

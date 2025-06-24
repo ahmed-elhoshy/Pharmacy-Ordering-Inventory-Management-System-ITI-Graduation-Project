@@ -30,6 +30,19 @@ namespace PharmacySystem.ApplicationLayer.Services
             var cart = await unitOfWork.cartRepository.GetCartWithDetailsByPharmacyIdAsync(pharmacyId);
             if (cart == null) return null;
 
+            // Get the pharmacy to retrieve AreaId
+            var pharmacy = await unitOfWork.PharmacyRepository.GetByIdAsync(pharmacyId);
+            decimal? minWarehousePrice = null;
+            if (pharmacy != null)
+            {
+                // Query WareHouseAreas for the pharmacy's area using the repository
+                var wareHouseAreas = unitOfWork.WareHouseAreaRepository.FindAsync(wa => wa.AreaId == pharmacy.AreaId);
+                if (wareHouseAreas.Any())
+                {
+                    minWarehousePrice = wareHouseAreas.Min(wa => wa.MinmumPrice);
+                }
+            }
+
             var now = DateTime.UtcNow;
             bool modified = false;
 
@@ -74,21 +87,28 @@ namespace PharmacySystem.ApplicationLayer.Services
                 TotalQuantity = cart.TotalQuantity,
                 TotalPriceBeforeDisscount = cart.TotalPrice,
                 TotalPriceAfterDisscount = totalPriceAfterDiscount,
-                Warehouses = cart.CartWarehouses.Select(w => new CartWarehouseDto
+                Warehouses = cart.CartWarehouses.Select(w =>
                 {
-                    WarehouseId = w.WareHouseId,
-                    Items = w.CartItems.Select(i => new CartItemDto
+                    // Find the min price for this warehouse in the pharmacy's area
+                    decimal? warehouseMinPrice = w.WareHouse?.WareHouseAreas?.FirstOrDefault(wa => wa.AreaId == pharmacy.AreaId)?.MinmumPrice;
+                    return new CartWarehouseDto
                     {
-                        MedicineId = i.MedicineId,
-                        ArabicMedicineName = i.ArabicMedicineName,
-                        EnglishMedicineName = i.EnglishMedicineName,
-                        MedicineUrl = i.MedicineUrl,
-                        Quantity = i.Quantity,
-                        PriceBeforeDiscount = i.Price,
-                        Discount = i.Discount,
-                        PriceAfterDiscount = i.Price - (i.Price * (i.Discount / 100m)),
-                        
-                    }).ToList()
+                        WarehouseId = w.WareHouseId,
+                        Name = w.WareHouse?.Name,
+                        WarehouseUrl = w.WareHouse?.ImageUrl,
+                        MinWarehousePriceInPharmacyArea = warehouseMinPrice,
+                        Items = w.CartItems.Select(i => new CartItemDto
+                        {
+                            MedicineId = i.MedicineId,
+                            ArabicMedicineName = i.ArabicMedicineName,
+                            EnglishMedicineName = i.EnglishMedicineName,
+                            MedicineUrl = i.MedicineUrl,
+                            Quantity = i.Quantity,
+                            PriceBeforeDiscount = i.Price,
+                            Discount = i.Discount,
+                            PriceAfterDiscount = i.Price - (i.Price * (i.Discount / 100m)),
+                        }).ToList()
+                    };
                 }).ToList()
             };
         }
