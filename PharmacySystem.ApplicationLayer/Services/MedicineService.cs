@@ -56,7 +56,6 @@ namespace PharmacySystem.ApplicationLayer.Services
                         MinmumPrice = minimumPricePerOrder,
                         finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100),
                         Drug = m.Drug
-
                     };
                 })
                 .OrderBy(dto => dto.MedicineName).ThenBy(dto => dto.Price)
@@ -100,8 +99,9 @@ namespace PharmacySystem.ApplicationLayer.Services
                     MaximumDiscount = maxDiscountEntry?.Discount ?? 0,
                     MinmumPrice = minPrice,
                     finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100),
-                    ArabicMedicineName = m.ArabicName
-
+                    ArabicMedicineName = m.ArabicName,
+                    Drug = m.Drug
+                    
                 };
             })
                 .OrderBy(dto => dto.MedicineName).ThenBy(dto => dto.Price)
@@ -150,7 +150,8 @@ namespace PharmacySystem.ApplicationLayer.Services
                     MaximumDiscount = maxDiscountEntry?.Discount ?? 0,
                     MinmumPrice = minPrice,
                     finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100),
-                    ArabicMedicineName = m.ArabicName
+                    ArabicMedicineName = m.ArabicName,
+                    Drug = m.Drug
                 };
             })
                   .OrderBy(dto => dto.MedicineName).ThenBy(dto => dto.Price).ToList();

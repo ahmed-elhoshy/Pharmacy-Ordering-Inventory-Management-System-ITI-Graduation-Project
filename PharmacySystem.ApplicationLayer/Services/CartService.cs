@@ -7,6 +7,7 @@ using PharmacySystem.ApplicationLayer.IServiceInterfaces;
 using PharmacySystem.DomainLayer.Common;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Entities.Constants;
+using PharmacySystem.DomainLayer.Interfaces;
 
 namespace PharmacySystem.ApplicationLayer.Services
 {
@@ -14,10 +15,12 @@ namespace PharmacySystem.ApplicationLayer.Services
     {
         #region
         private readonly IUnitOfWork unitOfWork;
+        private readonly IWarehouseRepository warehouseRepository;
         private readonly IMapper mapper;
-        public CartService(IUnitOfWork unitOfWork , IMapper mapper)
+        public CartService(IUnitOfWork unitOfWork ,IWarehouseRepository warehouseRepository, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
+            this.warehouseRepository = warehouseRepository;
             this.mapper = mapper;
         }
         #endregion
@@ -127,7 +130,7 @@ namespace PharmacySystem.ApplicationLayer.Services
         {
             var cart = await unitOfWork.cartRepository.GetCartWithDetailsByPharmacyIdAsync(pharmacyId);
             if (cart == null || !cart.CartWarehouses.Any())
-                return OperationResult<bool>.Failure("❌ Cart is empty or not found");
+                return OperationResult<bool>.Failure("Cart is empty or not found");
 
             foreach (var cartWarehouse in cart.CartWarehouses)
             {
