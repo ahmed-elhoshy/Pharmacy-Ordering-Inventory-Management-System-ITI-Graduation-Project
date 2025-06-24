@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
 
 #nullable disable
 
-namespace PharmacySystem.InfastructureLayer.Migrations
+namespace PharmacySystem.InfastructureLayer.Data.Migrations
 {
     [DbContext(typeof(PharmaDbContext))]
-    partial class PharmaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250623191730_AddChanges")]
+    partial class AddChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +103,6 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("TotalQuantity")
@@ -187,7 +189,6 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("TotalQuantity")
@@ -571,7 +572,7 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                     b.HasOne("PharmacySystem.DomainLayer.Entities.CartWarehouse", "CartWarehouse")
                         .WithMany("CartItems")
                         .HasForeignKey("CartWarehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("PharmacySystem.DomainLayer.Entities.Medicine", "Medicine")

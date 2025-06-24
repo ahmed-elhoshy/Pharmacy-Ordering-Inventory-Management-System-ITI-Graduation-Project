@@ -7,7 +7,6 @@ namespace PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmacies
     {
         public int RepresentativeId { get; set; }
         public string RepresentativeName { get; set; }
-        public string UserName { get; set; }
         public int PharmaciesCount { get; set; }
         public List<PharmacyDto> Pharmacies { get; set; } = new();
     }

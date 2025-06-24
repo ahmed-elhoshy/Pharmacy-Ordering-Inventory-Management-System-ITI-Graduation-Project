@@ -37,5 +37,11 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                 .Include(o => o.Pharmacy)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Order>> GetOrdersByWarehouseIdAsync(int warehouseId)
+        {
+            return await context.Orders.AsNoTracking().Where(p => p.WareHouseId == warehouseId)
+                .Include(o => o.OrderDetails).ToListAsync();
+        }
     }
 }

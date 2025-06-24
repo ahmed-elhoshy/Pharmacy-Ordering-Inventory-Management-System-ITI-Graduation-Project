@@ -7,4 +7,5 @@ public interface IPharmacyRepository : IGenericRepository<Pharmacy>
 {
     Task<bool> EmailExistsAsync(string email);
     Task<Pharmacy?> FindByEmailAsync(string email);
+    public Task<List<Pharmacy>> GetPharmaciesByRepresentativeIdAsync(int representativeId);
 }

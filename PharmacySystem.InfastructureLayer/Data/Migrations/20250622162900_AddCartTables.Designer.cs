@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
 
 #nullable disable
 
-namespace PharmacySystem.InfastructureLayer.Migrations
+namespace PharmacySystem.InfastructureLayer.Data.Migrations
 {
     [DbContext(typeof(PharmaDbContext))]
-    partial class PharmaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250622162900_AddCartTables")]
+    partial class AddCartTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,13 +102,6 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                     b.Property<int>("PharmacyId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("TotalPrice")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("TotalQuantity")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -113,7 +109,7 @@ namespace PharmacySystem.InfastructureLayer.Migrations
 
                     b.HasIndex("PharmacyId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.CartItem", b =>
@@ -124,11 +120,6 @@ namespace PharmacySystem.InfastructureLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ArabicMedicineName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<int>("CartWarehouseId")
                         .HasColumnType("int");
 
@@ -136,22 +127,17 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Discount")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<string>("EnglishMedicineName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("MedicineId")
                         .HasColumnType("int");
 
-                    b.Property<string>("MedicineUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("MedicineName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
@@ -160,16 +146,13 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("WarehouseUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CartWarehouseId");
 
                     b.HasIndex("MedicineId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItem");
                 });
 
             modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.CartWarehouse", b =>
@@ -187,7 +170,6 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("TotalQuantity")
@@ -205,7 +187,7 @@ namespace PharmacySystem.InfastructureLayer.Migrations
 
                     b.HasIndex("WareHouseId");
 
-                    b.ToTable("CartWarehouses");
+                    b.ToTable("CartWarehouse");
                 });
 
             modelBuilder.Entity("PharmacySystem.DomainLayer.Entities.Governate", b =>
@@ -577,7 +559,7 @@ namespace PharmacySystem.InfastructureLayer.Migrations
                     b.HasOne("PharmacySystem.DomainLayer.Entities.Medicine", "Medicine")
                         .WithMany()
                         .HasForeignKey("MedicineId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CartWarehouse");

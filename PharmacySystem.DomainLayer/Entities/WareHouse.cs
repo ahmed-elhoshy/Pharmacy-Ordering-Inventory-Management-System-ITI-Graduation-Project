@@ -33,6 +33,7 @@ namespace PharmacySystem.DomainLayer.Entities
         public virtual ICollection<WareHouseArea> WareHouseAreas { get; set; } = new HashSet<WareHouseArea>();
         public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
         public virtual ICollection<WareHouseMedicien> WareHouseMedicines { get; set; } = new HashSet<WareHouseMedicien>();
+        public virtual ICollection<CartWarehouse> CartWarehouses { get; set; } = new HashSet<CartWarehouse>();
 
 
         // For Warehouse accounts

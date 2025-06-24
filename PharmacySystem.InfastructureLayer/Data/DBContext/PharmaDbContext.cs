@@ -23,6 +23,9 @@ namespace PharmacySystem.InfastructureLayer.Data.DBContext
         public DbSet<WareHouseMedicien> WareHouseMediciens { get; set; }
         public DbSet<WareHouseArea> WareHouseAreas { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<CartWarehouse> CartWarehouses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +39,43 @@ namespace PharmacySystem.InfastructureLayer.Data.DBContext
             modelBuilder.ApplyConfiguration(new WareHouseAreaConfiguration());
             modelBuilder.ApplyConfiguration(new OrderDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
+
+            modelBuilder.Entity<CartWarehouse>()
+        .HasOne(cw => cw.Cart)
+        .WithMany(c => c.CartWarehouses)
+        .HasForeignKey(cw => cw.CartId)
+        .OnDelete(DeleteBehavior.Cascade); // عند حذف Cart، احذف CartWarehouses
+
+            // العلاقة بين CartWarehouse و CartItems
+            modelBuilder.Entity<CartWarehouse>()
+                .HasMany(cw => cw.CartItems)
+                .WithOne(ci => ci.CartWarehouse)
+                .HasForeignKey(ci => ci.CartWarehouseId)
+                .OnDelete(DeleteBehavior.Cascade); // عند حذف CartWarehouse، احذف CartItems
+
+            // العلاقة بين CartItem و Medicine (نمنع الحذف)
+            modelBuilder.Entity<CartItem>()
+                .HasOne(ci => ci.Medicine)
+                .WithMany()
+                .HasForeignKey(ci => ci.MedicineId)
+                .OnDelete(DeleteBehavior.Restrict); // لا تحذف Medicine المرتبط به CartItem
+
+            // تحديد الدقة للحقول العشرية
+            modelBuilder.Entity<CartItem>()
+                .Property(p => p.Price)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<CartItem>()
+                .Property(p => p.Discount)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<CartWarehouse>()
+                .Property(p => p.TotalPrice)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Cart>()
+                .Property(p => p.TotalPrice)
+                .HasPrecision(18, 2);
         }
     }
 }
