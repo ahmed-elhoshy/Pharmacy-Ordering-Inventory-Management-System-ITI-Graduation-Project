@@ -7,5 +7,6 @@ namespace PharmacySystem.DomainLayer.Interfaces
     {
         Task<IEnumerable<Order>> GetAllOrdersByRepresentativeIdAsync(int representativeId);
         Task<List<Order>> GetOrdersByRepresentativeIdIncludingPharmicesAsync(int representativeId);
+        Task<IEnumerable<Order>> GetOrdersByWarehouseIdAsync (int warehouseId);
     }
 }

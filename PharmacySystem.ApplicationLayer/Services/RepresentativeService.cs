@@ -213,13 +213,21 @@ namespace PharmacySystem.ApplicationLayer.Services
         #region Get Orders Stats Async
         public async Task<RepresentativeOrderStatsDto> GetOrdersStatsAsync(int representativeId)
         {
-            var orders = await _unitOfWork.orderRepository.GetOrdersByRepresentativeIdIncludingPharmicesAsync(representativeId);
+            // Get All pharmacies
+            var pharmacies = await _unitOfWork.PharmacyRepository
+                .GetPharmaciesByRepresentativeIdAsync(representativeId);
 
-            int pharmacyCount = orders.Select(o => o.PharmacyId).Distinct().Count();
+            int pharmacyCount = pharmacies.Count;
 
-            decimal revenue = orders.Where(o => o.Status == OrderStatus.Delivered)
+            // Get All pharmacies Which is place order
+            var orders = await _unitOfWork.orderRepository
+                .GetOrdersByRepresentativeIdIncludingPharmicesAsync(representativeId);
+
+            decimal revenue = orders
+                .Where(o => o.Status == OrderStatus.Delivered)
                 .Sum(o => o.TotalPrice);
 
+            // Get count of each state
             var stats = Enum.GetValues(typeof(OrderStatus))
                 .Cast<OrderStatus>()
                 .ToDictionary(
@@ -234,6 +242,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                 Stats = stats
             };
         }
+
 
 
         #endregion
@@ -268,7 +277,8 @@ namespace PharmacySystem.ApplicationLayer.Services
                         OrderDetails = o.OrderDetails.Select(od => new OrderDetailDto
                         {
                             MedicineId = od.MedicineId,
-                            MedicineName = od.Medicine.Name,
+                            EnglishMedicineName = od.Medicine.Name,
+                            ArabicMedicineName = od.Medicine.ArabicName,
                             Quantity = od.Quntity,
                             Price = od.Price
                         }).ToList()

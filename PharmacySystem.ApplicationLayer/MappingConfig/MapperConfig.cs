@@ -2,8 +2,10 @@
 using AutoMapper;
 using PharmacySystem.ApplicationLayer.DTOs.Admin;
 using PharmacySystem.ApplicationLayer.DTOs.Area;
+using PharmacySystem.ApplicationLayer.DTOs.Cart.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Governate;
 using PharmacySystem.ApplicationLayer.DTOs.OrderDetails;
+using PharmacySystem.ApplicationLayer.DTOs.Orders;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Register;
@@ -12,16 +14,15 @@ using PharmacySystem.ApplicationLayer.DTOs.RepresentatitvePharmaciesOrdersAndOrd
 using PharmacySystem.ApplicationLayer.DTOs.representative.Create;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Read;
 using PharmacySystem.ApplicationLayer.DTOs.representative.Update;
+using PharmacySystem.ApplicationLayer.DTOs.Representative.Login;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Create;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Read;
 using PharmacySystem.ApplicationLayer.DTOs.WarehouseMedicines.Update;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Create;
+using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Login;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Read;
 using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Update;
 using PharmacySystem.DomainLayer.Entities;
-using PharmacySystem.ApplicationLayer.DTOs.Representative.Login;
-using PharmacySystem.ApplicationLayer.DTOs.Warehouses.Login;
-using PharmacySystem.ApplicationLayer.DTOs.Orders;
 #endregion
 
 namespace PharmacySystem.ApplicationLayer.MappingConfig
@@ -120,7 +121,6 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             CreateMap<Representative, GetRepresentatitvePharmaciesCountDto>()
                 .ForMember(dest => dest.RepresentativeId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.RepresentativeName, opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.pharmacies.FirstOrDefault().UserName))
                 .ForMember(dest => dest.PharmaciesCount, opt => opt.MapFrom(src => src.pharmacies.Count))
                 .ForMember(dest => dest.Pharmacies, opt => opt.MapFrom(src => src.pharmacies));
             //problem
@@ -156,7 +156,27 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
 
             #region Medicine Mappings 
             CreateMap<Medicine, OrderDetailDto>()
-               .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Name));
+               .ForMember(dest => dest.EnglishMedicineName, opt => opt.MapFrom(src => src.Name))
+               .ForMember(dest => dest.ArabicMedicineName, opt => opt.MapFrom(src => src.ArabicName));
+            #endregion
+
+            #region  Cart
+            CreateMap<Cart, CartDto>()
+                .ForMember(dest => dest.TotalPriceBeforeDisscount, opt => opt.MapFrom(src => src.TotalPrice))
+                .ForMember(dest => dest.TotalQuantity, opt => opt.MapFrom(src => src.TotalQuantity))
+                .ForMember(dest => dest.Warehouses, opt => opt.MapFrom(src => src.CartWarehouses));
+            #endregion
+
+            #region  CartItem
+            CreateMap<CartWarehouse, CartWarehouseDto>()
+                .ForMember(dest => dest.WarehouseId, opt => opt.MapFrom(src => src.WareHouseId))
+                .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.CartItems));
+            #endregion
+
+            #region  CartWarehouse
+            CreateMap<CartItem, CartItemDto>()
+                .ForMember(dest => dest.PriceBeforeDiscount, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.PriceAfterDiscount, opt => opt.MapFrom(src => src.Price - (src.Price * (src.Discount / 100m))));
             #endregion
         }
     }

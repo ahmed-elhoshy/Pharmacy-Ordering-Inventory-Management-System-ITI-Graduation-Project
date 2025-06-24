@@ -43,6 +43,7 @@ namespace PharmacySystem.DomainLayer.Entities
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public virtual ICollection<Cart> Carts { get; set; } = new HashSet<Cart>();
         public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     }
 }

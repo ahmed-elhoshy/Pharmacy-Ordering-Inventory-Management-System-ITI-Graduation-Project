@@ -8,20 +8,26 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion;
 
 public class PharmacyRepository : GenericRepository<Pharmacy>, IPharmacyRepository
 {
-    private readonly PharmaDbContext _context;
+        private readonly PharmaDbContext _context;
 
-    public PharmacyRepository(PharmaDbContext context) : base(context)
-    {
-        _context = context;
-    }
+        public PharmacyRepository(PharmaDbContext context) : base(context)
+        {
+            _context = context;
+        }
 
-    public async Task<bool> EmailExistsAsync(string email)
-    {
-        return await _context.Pharmacies.AnyAsync(p => p.Email == email);
-    }
-    public async Task<Pharmacy?> FindByEmailAsync(string email)
-    {
-        return await _context.Set<Pharmacy>()
-            .FirstOrDefaultAsync(p => p.Email == email);
-    }
+        public async Task<bool> EmailExistsAsync(string email)
+        {
+            return await _context.Pharmacies.AnyAsync(p => p.Email == email);
+        }
+        public async Task<Pharmacy?> FindByEmailAsync(string email)
+        {
+            return await _context.Set<Pharmacy>()
+                .FirstOrDefaultAsync(p => p.Email == email);
+        }
+        public async Task<List<Pharmacy>> GetPharmaciesByRepresentativeIdAsync(int representativeId)
+        {
+            return await _context.Pharmacies
+                .Where(p => p.RepresentativeId == representativeId)
+                .ToListAsync();
+        }
 }

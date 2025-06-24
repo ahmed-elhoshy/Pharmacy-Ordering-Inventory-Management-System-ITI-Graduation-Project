@@ -30,6 +30,8 @@ builder.Services.AddScoped<IPharmacyService, PharmacyService>();
 builder.Services.AddScoped<IGovernateService, GovernateService>();
 builder.Services.AddScoped<IAreaRepository, AreaRepository>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 #endregion
 
@@ -51,6 +53,7 @@ builder.Services.AddCors(options =>
     });
 });
 #endregion
+
 builder.Services.AddControllers();
 //Do not automatically return 400 if ModelState is invalid — let me handle it myself inside the action.
 builder.Services.Configure<ApiBehaviorOptions>(options =>

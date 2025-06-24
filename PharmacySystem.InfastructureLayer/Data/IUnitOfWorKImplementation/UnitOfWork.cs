@@ -14,11 +14,15 @@ namespace E_Commerce.DomainLayer
         #region DBContext
         private readonly PharmaDbContext context;
         private IMedicinRepository _MedicineRepository;
+        private ICartItemRepository _cartItemRepository;
+        private ICartWarehousesRepository _cartWarehousesRepository;
+        private IWarehouseMedicineRepository _warehouseMedicineRepository;
         private IOrderRepository _orderRepository;
         private IRepresentativeRepository _representativeRepository;
         private IPharmacyRepository _pharmacyRepository;
         private IGenericRepository<Governate> _governateRepository;
         private IAreaRepository _areaRepository;
+        private ICartRepository _cartRepository;
         //private IGenericRepository<Area> _areaRepository;
         private IAdminRepository _adminRepository;
         #endregion
@@ -98,6 +102,50 @@ namespace E_Commerce.DomainLayer
                 return _orderRepository;
             }
             set => _orderRepository = value;
+        }
+
+        public ICartRepository cartRepository
+        {
+            get
+            {
+                if (_cartRepository == null)
+                    _cartRepository = new CartRepository(context);
+                return _cartRepository;
+            }
+            set => _cartRepository = value;
+        }
+
+        public IWarehouseMedicineRepository warehouseMedicineRepository 
+        {
+            get
+            {
+                if (_warehouseMedicineRepository == null)
+                    _warehouseMedicineRepository = new WarehouseMedicineRepository(context);
+                return _warehouseMedicineRepository;
+            }
+            set => _warehouseMedicineRepository = value;
+        }
+
+        public ICartWarehousesRepository cartWarehousesRepository 
+        {
+            get 
+            {
+                if (_cartWarehousesRepository == null)
+                    _cartWarehousesRepository = new CartWarehousesRepository(context);
+                return _cartWarehousesRepository;
+            }
+            set => _cartWarehousesRepository = value; 
+        }
+
+        public ICartItemRepository cartItemRepository 
+        { 
+            get 
+            {
+                if (_cartItemRepository == null)
+                    _cartItemRepository = new CartItemRepository(context);
+                return _cartItemRepository;
+            }
+            set => _cartItemRepository = value;
         }
 
         public UnitOfWork(PharmaDbContext context)
