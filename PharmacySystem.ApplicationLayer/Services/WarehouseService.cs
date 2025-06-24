@@ -37,9 +37,9 @@ namespace PharmacySystem.ApplicationLayer.Services
             this._configuration = configuration;
         }
 
-        public async Task<PaginatedResult<WarehouseMedicineDto>> GetWarehouseMedicineDtosAsync(int warehouseId, int page, int pageSize)
+        public async Task<PaginatedResult<WarehouseMedicineDto>> GetWarehouseMedicineDtosAsync(int warehouseId, int page, int pageSize , string ? search)
         {
-            var result = await warehouseRepository.GetWarehouseMedicinesAsync(warehouseId, page, pageSize);
+            var result = await warehouseRepository.GetWarehouseMedicinesAsync(warehouseId, page, pageSize , search);
             var dtoItems = _mapper.Map<List<WarehouseMedicineDto>>(result.Items);
             return new PaginatedResult<WarehouseMedicineDto>
             {

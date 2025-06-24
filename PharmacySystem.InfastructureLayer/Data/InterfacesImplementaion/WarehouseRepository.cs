@@ -89,12 +89,16 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                 .FirstOrDefaultAsync(w => w.Id == id);
         }
 
-        public async Task<PaginatedResult<WareHouseMedicien>> GetWarehouseMedicinesAsync(int warehouseId, int page, int pageSize)
+        public async Task<PaginatedResult<WareHouseMedicien>> GetWarehouseMedicinesAsync(int warehouseId, int page, int pageSize , string ? search)
         {
             var query = _dbContext.WareHouseMediciens
                 .Where(wm => wm.WareHouseId == warehouseId)
                 .Include(wm => wm.Medicine)
                 .AsQueryable();
+            if(!string.IsNullOrWhiteSpace(search))
+            {
+                query = query.Where(q => q.Medicine.Name!= null && q.Medicine.Name.Contains(search) || q.Medicine.ArabicName != null && q.Medicine.ArabicName.Contains(search)).OrderBy(m => m.Discount);
+            }
 
             var totalCount = await query.CountAsync();
 

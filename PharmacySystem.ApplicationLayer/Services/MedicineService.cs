@@ -88,7 +88,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                 return new MedicinesbyAreaIdDto
                 {
                     MedicineId = m.Id,
-                    MedicineName = m.ArabicName,
+                    MedicineName = m.Name,
                     Price = m.Price,
                     ImageUrl = m.MedicineUrl,
                     TotalQuantity = totalQuantity,
@@ -99,7 +99,8 @@ namespace PharmacySystem.ApplicationLayer.Services
                     QuantityInWarehouseWithMaxDiscount = maxDiscountEntry?.Quantity ?? 0,
                     MaximumDiscount = maxDiscountEntry?.Discount ?? 0,
                     MinmumPrice = minPrice,
-                    finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100)
+                    finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100),
+                    ArabicMedicineName = m.ArabicName
 
                 };
             })
@@ -137,7 +138,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                 return new MedicinesbyAreaIdDto
                 {
                     MedicineId = m.Id,
-                    MedicineName = m.ArabicName,
+                    MedicineName = m.Name,
                     Price = m.Price,
                     ImageUrl = m.MedicineUrl,
                     TotalQuantity = totalQuantity,
@@ -148,8 +149,8 @@ namespace PharmacySystem.ApplicationLayer.Services
                     QuantityInWarehouseWithMaxDiscount = maxDiscountEntry?.Quantity ?? 0,
                     MaximumDiscount = maxDiscountEntry?.Discount ?? 0,
                     MinmumPrice = minPrice,
-                    finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100)
-
+                    finalPrice = (maxDiscountEntry?.Medicine?.Price ?? m.Price) * (1 - (maxDiscountEntry?.Discount ?? 0) / 100),
+                    ArabicMedicineName = m.ArabicName
                 };
             })
                   .OrderBy(dto => dto.MedicineName).ThenBy(dto => dto.Price).ToList();

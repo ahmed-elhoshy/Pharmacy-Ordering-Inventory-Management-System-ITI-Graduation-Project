@@ -179,7 +179,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                 Success = true,
                 Message = "Login successful.",
                 Token = token,
-                Representative = _mapper.Map<RepresentstiveInfoDto>(representative)
+                Representative = _mapper.Map<RepresentativeInfoDto>(representative)
 
             };
         }

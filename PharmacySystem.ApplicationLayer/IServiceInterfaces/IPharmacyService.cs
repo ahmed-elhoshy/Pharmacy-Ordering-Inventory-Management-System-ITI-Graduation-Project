@@ -1,6 +1,7 @@
 ﻿using PharmacySystem.ApplicationLayer.Common;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Register;
+using PharmacySystem.DomainLayer.Entities;
 
 namespace PharmacySystem.ApplicationLayer.IServiceInterfaces;
 

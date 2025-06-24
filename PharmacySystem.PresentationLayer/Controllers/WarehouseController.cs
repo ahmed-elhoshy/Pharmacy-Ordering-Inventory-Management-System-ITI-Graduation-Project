@@ -72,12 +72,12 @@ namespace PharmacySystem.PresentationLayer.Controllers
         // GET: api/warehouses/GetWarehousMedicines/5/medicines?page=1&pageSize=10
         [HttpGet("GetWarehousMedicines/{warehouseId:int}/medicines")]
         public async Task<IActionResult> GetWarehouseMedicines(
-            int warehouseId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+            int warehouseId, string? search  , [FromQuery] int page = 1, [FromQuery] int pageSize = 10 )
         {
             if (page <= 0 || pageSize <= 0)
                 return BadRequest("Page and pageSize must be greater than 0.");
 
-            var result = await _service.GetWarehouseMedicineDtosAsync(warehouseId, page, pageSize);
+            var result = await _service.GetWarehouseMedicineDtosAsync(warehouseId, page, pageSize , search);
             return Ok(result);
         }
 

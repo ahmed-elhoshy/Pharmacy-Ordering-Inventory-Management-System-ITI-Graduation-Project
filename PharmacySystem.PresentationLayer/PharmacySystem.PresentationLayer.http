@@ -10,7 +10,7 @@ Content-Type: application/json
 {
   "name": "Pharmacy four",
   "username": "ahmed baiomy",
-  "email": "pharmacy6@example.com",
+  "email": "pharmacy8@example.com",
   "password": "Pharma123",
   "confirmPassword": "Pharma123",
   "address": "456 Med Street",
@@ -42,7 +42,7 @@ POST http://localhost:5252/api/representative/login
 Content-Type: application/json 
 {
   "email": "ahmed.youssef@mail.com",
-  "password": "Rep123456"
+  "password": "Rep12345"
 }###
 POST http://localhost:5252/api/warehouse/CreateWareHouse
 Content-Type: application/json

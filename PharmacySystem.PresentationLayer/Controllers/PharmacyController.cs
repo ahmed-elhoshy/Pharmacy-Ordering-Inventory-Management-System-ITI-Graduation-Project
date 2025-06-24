@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PharmacySystem.ApplicationLayer.Common;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Register;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
@@ -7,7 +8,7 @@ using PharmacySystem.ApplicationLayer.Services;
 namespace PharmacySystem.PresentationLayer.Controllers;
 
 [Route("api/[controller]")]
-[ApiController]
+//[ApiController]
 public class PharmacyController : ControllerBase
 {
     private readonly IPharmacyService _pharmacyService;
@@ -22,11 +23,32 @@ public class PharmacyController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] PharmacyRegisterDto dto)
     {
-        var validation = await _pharmacyService.RegisterPharmacyAsync(dto);
-        if (validation is not null)
-            return new ObjectResult(validation) { StatusCode = 400 };
+        // Step 1: Collect ModelState errors
+        var modelErrors = new ValidationResult();
+        if (!ModelState.IsValid)
+        {
+            foreach (var entry in ModelState)
+            {
+                var key = entry.Key;
+                var errors = entry.Value.Errors.Select(e => e.ErrorMessage).ToList();
+                if (errors.Any())
+                    modelErrors.Errors[key] = errors;
+            }
+            return Ok(modelErrors.ToErrorResponse());
+        }
 
-        return Ok(new { message = "Pharmacy registered successfully." });
+        // Step 2: Manual validation
+        var validation = await _pharmacyService.RegisterPharmacyAsync(dto);
+        if (validation is not null && validation.HasErrors)
+        {
+            return Ok(validation.ToErrorResponse());
+        }
+
+        return Ok(new
+        {
+            message = "Pharmacy registered successfully.",
+            success = true
+        });
     }
 
     [HttpGet("register")]
@@ -47,8 +69,26 @@ public class PharmacyController : ControllerBase
     {
         var result = await _pharmacyService.LoginAsync(dto);
         if (!result.Success)
-            return BadRequest(result.Message);
-
+        {
+            return Ok(new PharmacyLoginResponseDTO
+            {
+                Token = null,
+                Message = "Invalid email or password.",
+                Success = false,
+                Pharmacy = new PharmacyInfoDto
+                {
+                    Id = null,
+                    userName =null,
+                    Name = null,
+                    Email = null,
+                    Address = null,
+                    Governate = null,
+                    AreaId = null,
+                    PhoneNumber = null,
+                    RepresentativeId = null,
+                }
+            });
+        }
         return Ok(result);
     }
 }

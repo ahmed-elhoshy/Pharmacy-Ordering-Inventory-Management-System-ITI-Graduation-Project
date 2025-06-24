@@ -1,5 +1,6 @@
 using E_Commerce.DomainLayer;
 using E_Commerce.DomainLayer.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
 using PharmacySystem.ApplicationLayer.MappingConfig;
@@ -54,6 +55,11 @@ builder.Services.AddCors(options =>
 #endregion
 
 builder.Services.AddControllers();
+//Do not automatically return 400 if ModelState is invalid — let me handle it myself inside the action.
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
