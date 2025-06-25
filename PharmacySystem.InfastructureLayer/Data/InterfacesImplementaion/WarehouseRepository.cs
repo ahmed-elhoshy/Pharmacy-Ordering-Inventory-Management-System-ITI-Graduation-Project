@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
+using PharmacySystem.DomainLayer.Entities.Constants;
 using PharmacySystem.DomainLayer.Interfaces;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
 
@@ -85,16 +86,27 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                 .FirstOrDefaultAsync(w => w.Id == id);
         }
 
-        public async Task<PaginatedResult<WareHouseMedicien>> GetWarehouseMedicinesAsync(int warehouseId, int page, int pageSize , string ? search)
+        public async Task<PaginatedResult<WareHouseMedicien>> GetWarehouseMedicinesAsync(
+    int warehouseId, int page, int pageSize, string? search, string? type)
         {
             var query = _dbContext.WareHouseMediciens
                 .Where(wm => wm.WareHouseId == warehouseId)
                 .Include(wm => wm.Medicine)
                 .AsQueryable();
-            if(!string.IsNullOrWhiteSpace(search))
+
+            if (!string.IsNullOrWhiteSpace(search))
             {
-                query = query.Where(q => q.Medicine.Name!= null && q.Medicine.Name.Contains(search) || q.Medicine.ArabicName != null && q.Medicine.ArabicName.Contains(search)).OrderBy(m => m.Discount);
+                query = query.Where(q =>
+                    (q.Medicine.Name != null && q.Medicine.Name.Contains(search)) ||
+                    (q.Medicine.ArabicName != null && q.Medicine.ArabicName.Contains(search)));
             }
+
+            if (!string.IsNullOrWhiteSpace(type) && Enum.TryParse<MedicineTypes>(type, true, out var medicineType))
+            {
+                query = query.Where(q => q.Medicine.Drug == medicineType);
+            }
+
+            query = query.OrderBy(m => m.Discount);
 
             var totalCount = await query.CountAsync();
 
@@ -111,6 +123,7 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                 TotalCount = totalCount
             };
         }
+
 
         public async Task AddAsync(WareHouse warehouse)
         {
