@@ -115,10 +115,10 @@ namespace PharmacySystem.ApplicationLayer.Services
                 TotalCount = paginatedResult.TotalCount
             };
         }
-         public async Task<PaginatedResult<MedicinesbyAreaIdDto>> GetMedicineStatsByAreaAsync(int areaId, int page, int pageSize, string searchTerm)
+         public async Task<PaginatedResult<MedicinesbyAreaIdDto>> GetMedicineStatsByAreaAsync(int areaId, int page, int pageSize, string searchTerm , string type)
         {
             var paginatedResult = await unitOfWork.medicineRepository
-                .SearchMedicinesByAreaAndNameAsync(areaId, page, pageSize,searchTerm);
+                .SearchMedicinesByAreaAndNameAsync(areaId, page, pageSize,searchTerm , type);
 
             var resultDtos = paginatedResult.Items.Select(m =>
             {
