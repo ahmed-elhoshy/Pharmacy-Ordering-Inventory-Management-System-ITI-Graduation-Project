@@ -1,6 +1,7 @@
 ﻿using E_Commerce.InfrastructureLayer.Data.DBContext.Repositories;
 using Microsoft.EntityFrameworkCore;
 using PharmacySystem.DomainLayer.Entities;
+using PharmacySystem.DomainLayer.Entities.Constants;
 using PharmacySystem.DomainLayer.Interfaces;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
 using System;
@@ -42,6 +43,25 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
         {
             return await context.Orders.AsNoTracking().Where(p => p.WareHouseId == warehouseId)
                 .Include(o => o.OrderDetails).ToListAsync();
+        }
+
+
+        public async Task<IEnumerable<Order>> GetOrderByPharmacyId(int pharmacyId)
+        {
+            return await context.Orders.Include(o => o.WareHouse)
+                .Where(o => o.PharmacyId == pharmacyId).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Order>> GetOrderByPharmacyIdAndStatus(int pharmacyId, OrderStatus status)
+        {
+            return await context.Orders.Include(o => o.WareHouse)
+                .Where(o => o.PharmacyId == pharmacyId&&o.Status==status).ToListAsync();
+        }
+
+        public async Task<IEnumerable<OrderDetail>> GetOrderDetailsById(int orderId)
+        {
+            return await context.OrderDetails.Include(od=>od.Medicine)
+                .Where(od=>od.OrderId==orderId).ToListAsync();
         }
     }
 }

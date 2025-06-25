@@ -34,7 +34,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region GetAllRepresentatives
-        [Authorize(Roles = "Admin")]
+        
         [HttpGet("GetAllRepresentatives")]
         [EndpointSummary("Get All Representatives")]
         public async Task<IActionResult> GetAll()
@@ -58,7 +58,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Create Representatitve
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost("CreateRepresentative")]
         [EndpointSummary("Create a new representative with a unique code")]
         public async Task<IActionResult> Create(CreateRepresentativeDto dto)
@@ -80,7 +80,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Update Representatitve
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("UpdateRepresentative/{id}")]
         [EndpointSummary("Update Representative")]
         public async Task<IActionResult> Update(int id, UpdateRepresentativeDto dto)
@@ -96,7 +96,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region Delete Representatitve
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("DeleteRepresentative/{id}")]
         [EndpointSummary("Delete Representative")]
         public async Task<IActionResult> Delete(int id)
