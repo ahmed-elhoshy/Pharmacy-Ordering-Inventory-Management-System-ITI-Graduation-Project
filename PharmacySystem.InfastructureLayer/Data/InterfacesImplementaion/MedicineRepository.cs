@@ -1,9 +1,11 @@
 ﻿#region MyRegion
 using E_Commerce.InfrastructureLayer.Data.DBContext.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 using PharmacySystem.ApplicationLayer.DTOs.Medicines;
 using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
+using PharmacySystem.DomainLayer.Entities.Constants;
 using PharmacySystem.DomainLayer.Interfaces;
 using PharmacySystem.InfastructureLayer.Data.DBContext;
 #endregion
@@ -78,7 +80,7 @@ namespace E_Commerce.InfrastructureLayer.Data.GenericClass
         }
 
 
-        public async Task<PaginatedResult<Medicine>> SearchMedicinesByAreaAndNameAsync(int areaId,  int page, int pageSize, string searchTerm)
+        public async Task<PaginatedResult<Medicine>> SearchMedicinesByAreaAndNameAsync(int areaId,  int page, int pageSize, string searchTerm , string type)
         {
             var query = context.Medicines
                 .AsNoTracking()
@@ -97,6 +99,12 @@ namespace E_Commerce.InfrastructureLayer.Data.GenericClass
                     m.Name.Contains(searchTerm)
                 );
             }
+
+            if (!string.IsNullOrWhiteSpace(type) && Enum.TryParse<MedicineTypes>(type, true, out var parsedType))
+            {
+                query = query.Where(m => m.Drug == parsedType);
+            }
+
 
             var totalCount = await query.CountAsync();
 
