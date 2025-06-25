@@ -9,10 +9,9 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Cart.Read
     public class CartWarehouseDto
     {
         public int WarehouseId { get; set; }
-
         public string? Name { get; set; }
-
         public string? WarehouseUrl { get; set; }   
         public List<CartItemDto> Items { get; set; } = new();
+        public decimal? MinWarehousePriceInPharmacyArea { get; set; }
     }
 }

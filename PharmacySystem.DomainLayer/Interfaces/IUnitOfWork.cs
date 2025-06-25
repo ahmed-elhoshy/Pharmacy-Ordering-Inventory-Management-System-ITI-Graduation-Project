@@ -7,6 +7,7 @@ namespace E_Commerce.DomainLayer.Interfaces
     public interface IUnitOfWork
     {
         public IMedicinRepository medicineRepository { get; set; }
+        public ICartWarehouseRepository cartWarehouseRepository { get; set; }
         public ICartItemRepository cartItemRepository { get; set; }
         public ICartWarehousesRepository cartWarehousesRepository { get; set; }
         public IWarehouseMedicineRepository warehouseMedicineRepository { get; set; }
@@ -19,6 +20,7 @@ namespace E_Commerce.DomainLayer.Interfaces
 
         IAreaRepository AreaRepository { get; }
         IGenericRepository<Governate> GovernateRepository { get; }
+        IGenericRepository<WareHouseArea> WareHouseAreaRepository { get; }
         Task<bool> SaveAsync();
     }
 }
