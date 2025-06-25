@@ -13,7 +13,7 @@ namespace PharmacySystem.ApplicationLayer.IServiceInterfaces
     {
         Task<CartDto?> GetCartAsync(int pharmacyId);
         Task<OperationResult<bool>> AddToCartAsync(AddToCartDto request);
-        Task<OperationResult<bool>> PlaceOrderAsync(int pharmacyId);
+        Task<OperationResult<bool>> PlaceOrderAsync(int pharmacyId , int? WarehouseId = null);
         Task<OperationResult<bool>> UpdateCartItemQuantityAsync(int pharmacyId, int warehouseId, int medicineId, int newQuantity);
         Task<OperationResult<bool>> RemoveCartItemAsync(int pharmacyId, int warehouseId, int medicineId);
         Task<OperationResult<bool>> RemoveWarehouseFromCartAsync(int pharmacyId, int warehouseId);

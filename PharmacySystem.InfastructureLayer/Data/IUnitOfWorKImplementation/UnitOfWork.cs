@@ -14,6 +14,7 @@ namespace E_Commerce.DomainLayer
         #region DBContext
         private readonly PharmaDbContext context;
         private IMedicinRepository _MedicineRepository;
+        private ICartWarehouseRepository _cartWarehouseRepository;
         private ICartItemRepository _cartItemRepository;
         private ICartWarehousesRepository _cartWarehousesRepository;
         private IWarehouseMedicineRepository _warehouseMedicineRepository;
@@ -157,6 +158,17 @@ namespace E_Commerce.DomainLayer
                     _wareHouseAreaRepository = new GenericRepository<WareHouseArea>(context);
                 return _wareHouseAreaRepository;
             }
+        }
+
+        public ICartWarehouseRepository cartWarehouseRepository 
+        {
+            get
+            {
+                if (_cartWarehouseRepository == null)
+                    _cartWarehouseRepository = new CartWarehouseRepository(context);
+                return _cartWarehouseRepository;
+            }
+                set => _cartWarehouseRepository = value; 
         }
 
         public UnitOfWork(PharmaDbContext context)
