@@ -9,6 +9,7 @@
         public int Quantity { get; set; }
         public decimal PriceAfterDiscount { get; set; }
         public decimal PriceBeforeDiscount { get; set; }
+        public decimal TotalPriceForThisMedicineAfterDiscount { get; set; }
         public decimal Discount { get; set; }
     }
 }

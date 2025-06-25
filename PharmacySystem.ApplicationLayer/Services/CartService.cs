@@ -30,12 +30,10 @@ namespace PharmacySystem.ApplicationLayer.Services
             var cart = await unitOfWork.cartRepository.GetCartWithDetailsByPharmacyIdAsync(pharmacyId);
             if (cart == null) return null;
 
-            // Get the pharmacy to retrieve AreaId
             var pharmacy = await unitOfWork.PharmacyRepository.GetByIdAsync(pharmacyId);
             decimal? minWarehousePrice = null;
             if (pharmacy != null)
             {
-                // Query WareHouseAreas for the pharmacy's area using the repository
                 var wareHouseAreas = unitOfWork.WareHouseAreaRepository.FindAsync(wa => wa.AreaId == pharmacy.AreaId);
                 if (wareHouseAreas.Any())
                 {
@@ -57,7 +55,6 @@ namespace PharmacySystem.ApplicationLayer.Services
                     }
                 }
 
-                // if warehouse become empty will delete also
                 if (!warehouse.CartItems.Any())
                 {
                     cart.CartWarehouses.Remove(warehouse);
@@ -65,8 +62,6 @@ namespace PharmacySystem.ApplicationLayer.Services
                 }
             }
 
-
-            // If Anything updated must update Database
             if (modified)
             {
                 cart.TotalQuantity = cart.CartWarehouses.Sum(w => w.CartItems.Sum(i => i.Quantity));
@@ -75,8 +70,13 @@ namespace PharmacySystem.ApplicationLayer.Services
                 await unitOfWork.SaveAsync();
             }
 
-            // Get total Price After Discount
-            decimal totalPriceAfterDiscount = cart.CartWarehouses.SelectMany(w => w.CartItems)
+            int totalQuantity = cart.CartWarehouses.SelectMany(w => w.CartItems).Sum(i => i.Quantity);
+
+            decimal totalPriceBeforeDiscount = cart.CartWarehouses.SelectMany(w => w.CartItems)
+                .Sum(i => i.Price * i.Quantity);
+
+            decimal totalPriceAfterDiscount = cart.CartWarehouses
+                .SelectMany(w => w.CartItems)
                 .Sum(i => (i.Price - (i.Price * (i.Discount / 100m))) * i.Quantity);
 
             if (!cart.CartWarehouses.Any())
@@ -84,13 +84,14 @@ namespace PharmacySystem.ApplicationLayer.Services
 
             return new CartDto
             {
-                TotalQuantity = cart.TotalQuantity,
-                TotalPriceBeforeDisscount = cart.TotalPrice,
+                TotalQuantity = totalQuantity,
+                TotalPriceBeforeDisscount = totalPriceBeforeDiscount,
                 TotalPriceAfterDisscount = totalPriceAfterDiscount,
                 Warehouses = cart.CartWarehouses.Select(w =>
                 {
-                    // Find the min price for this warehouse in the pharmacy's area
-                    decimal? warehouseMinPrice = w.WareHouse?.WareHouseAreas?.FirstOrDefault(wa => wa.AreaId == pharmacy.AreaId)?.MinmumPrice;
+                    decimal? warehouseMinPrice = w.WareHouse?.WareHouseAreas?
+                        .FirstOrDefault(wa => wa.AreaId == pharmacy.AreaId)?.MinmumPrice;
+
                     return new CartWarehouseDto
                     {
                         WarehouseId = w.WareHouseId,
@@ -104,15 +105,15 @@ namespace PharmacySystem.ApplicationLayer.Services
                             EnglishMedicineName = i.EnglishMedicineName,
                             MedicineUrl = i.MedicineUrl,
                             Quantity = i.Quantity,
-                            PriceBeforeDiscount = i.Price,
                             Discount = i.Discount,
+                            PriceBeforeDiscount = i.Price,
                             PriceAfterDiscount = i.Price - (i.Price * (i.Discount / 100m)),
+                            TotalPriceForThisMedicine = (i.Price - (i.Price * (i.Discount / 100m))) * i.Quantity
                         }).ToList()
                     };
                 }).ToList()
             };
         }
-
         public async Task<OperationResult<bool>> AddToCartAsync(AddToCartDto request)
         {
             var cart = await unitOfWork.cartRepository.GetCartWithDetailsByPharmacyIdAsync(request.PharmacyId);
@@ -287,53 +288,56 @@ namespace PharmacySystem.ApplicationLayer.Services
             }
         }
 
-        private OperationResult<bool> AddItemToCart(Cart cart,int warehouseId,int medicineId,string arabicName, string englishName,
-                                   string medicineUrl, string warehouseUrl, decimal price,int quantity,decimal discountPercentage)
-        {
-            if (price < 0 || discountPercentage < 0 || discountPercentage > 100)
-                return OperationResult<bool>.Failure(" Price or discount value is invalid");
+        private OperationResult<bool> AddItemToCart(Cart cart, int warehouseId, int medicineId, string arabicName, string englishName,
+                    string medicineUrl, string warehouseUrl, decimal price, int quantity, decimal discountPercentage)
+                        {
+                            if (price < 0 || discountPercentage < 0 || discountPercentage > 100)
+                                return OperationResult<bool>.Failure("Price or discount value is invalid");
 
-            var warehouse = cart.CartWarehouses.FirstOrDefault(w => w.WareHouseId == warehouseId);
-            if (warehouse == null)
-            {
-                warehouse = new CartWarehouse
-                {
-                    WareHouseId = warehouseId,
-                    CartItems = new List<CartItem>()
-                };
-                cart.CartWarehouses.Add(warehouse);
-            }
+                            var warehouse = cart.CartWarehouses.FirstOrDefault(w => w.WareHouseId == warehouseId);
+                            if (warehouse == null)
+                            {
+                                warehouse = new CartWarehouse
+                                {
+                                    WareHouseId = warehouseId,
+                                    CartItems = new List<CartItem>()
+                                };
+                                cart.CartWarehouses.Add(warehouse);
+                            }
 
-            decimal discountedPrice = price - (price * discountPercentage / 100m);
+                            var item = warehouse.CartItems.FirstOrDefault(i => i.MedicineId == medicineId);
+                            if (item != null)
+                            {
+                                // in case item increase i will increase his quantity in database not his price or discount
+                                item.Quantity += quantity;
+                            }
+                            else
+                            {
+                                // store medicine for the first time 
+                                warehouse.CartItems.Add(new CartItem
+                                {
+                                    MedicineId = medicineId,
+                                    ArabicMedicineName = arabicName,
+                                    EnglishMedicineName = englishName,
+                                    MedicineUrl = medicineUrl,
+                                    WarehouseUrl = warehouseUrl,
+                                    Quantity = quantity,
+                                    Price = price,   // store the original price in database
+                                    Discount = discountPercentage,
+                                    CreatedAt = DateTime.UtcNow
+                                });
+                            }
 
-            var item = warehouse.CartItems.FirstOrDefault(i => i.MedicineId == medicineId);
-            if (item != null)
-            {
-                item.Quantity += quantity;
-                item.Price = discountedPrice;
-            }
-            else
-            {
-                warehouse.CartItems.Add(new CartItem
-                {
-                    MedicineId = medicineId,
-                    ArabicMedicineName = arabicName,
-                    EnglishMedicineName = englishName,
-                    MedicineUrl = medicineUrl,
-                    WarehouseUrl = warehouseUrl,
-                    Quantity = quantity,
-                    Price = discountedPrice,
-                    Discount = discountPercentage,                
-                });
-            }
+                            // Update Everything After adding like  (TotalQuantity ,TotalPrice) for warehouse
+                            // and TotalQuantity , TotalPrice for cart
+                            warehouse.TotalQuantity = warehouse.CartItems.Sum(i => i.Quantity);
+                            warehouse.TotalPrice = warehouse.CartItems.Sum(i => i.Quantity * i.Price);
+                            cart.TotalQuantity = cart.CartWarehouses.Sum(w => w.CartItems.Sum(i => i.Quantity));
+                            cart.TotalPrice = cart.CartWarehouses.Sum(w => w.CartItems.Sum(i => i.Quantity * i.Price));
 
-            warehouse.TotalQuantity = warehouse.CartItems.Sum(i => i.Quantity);
-            warehouse.TotalPrice = warehouse.CartItems.Sum(i => i.Quantity * i.Price);
-
-            cart.TotalQuantity = cart.CartWarehouses.Sum(w => w.CartItems.Sum(i => i.Quantity));
-            cart.TotalPrice = cart.CartWarehouses.Sum(w => w.CartItems.Sum(i => i.Quantity * i.Price));
-            return OperationResult<bool>.Success(true);
-        }
+                            return OperationResult<bool>.Success(true);
+                        }
 
     }
+
 }
