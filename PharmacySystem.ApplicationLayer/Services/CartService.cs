@@ -30,17 +30,17 @@ namespace PharmacySystem.ApplicationLayer.Services
             var cart = await unitOfWork.cartRepository.GetCartWithDetailsByPharmacyIdAsync(pharmacyId);
             if (cart == null) return null;
 
-            var pharmacy = await unitOfWork.PharmacyRepository.GetByIdAsync(pharmacyId);
-            decimal? minWarehousePrice = null;
-            if (pharmacy != null)
-            {
-                var wareHouseAreas = unitOfWork.WareHouseAreaRepository.FindAsync(wa => wa.AreaId == pharmacy.AreaId);
-                if (wareHouseAreas.Any())
-                {
-                    minWarehousePrice = wareHouseAreas.Min(wa => wa.MinmumPrice);
-                }
-            }
-
+            //var pharmacy = await unitOfWork.PharmacyRepository.GetByIdAsync(pharmacyId);
+            //decimal? minWarehousePrice = null;
+            //if (pharmacy != null)
+            //{
+            //    var wareHouseAreas = unitOfWork.WareHouseAreaRepository.FindAsync(wa => wa.AreaId == pharmacy.AreaId);
+            //    if (wareHouseAreas.Any())
+            //    {
+            //        minWarehousePrice = wareHouseAreas.Min(wa => wa.MinmumPrice);
+            //    }
+            //}
+            var pharmacyAreaId = cart.Pharmacy?.AreaId;
             var now = DateTime.UtcNow;
             bool modified = false;
 
@@ -62,10 +62,11 @@ namespace PharmacySystem.ApplicationLayer.Services
                 }
             }
 
-            if (modified)
+            if (modified)  // update cart if any update exist
             {
                 cart.TotalQuantity = cart.CartWarehouses.Sum(w => w.CartItems.Sum(i => i.Quantity));
                 cart.TotalPrice = cart.CartWarehouses.Sum(w => w.CartItems.Sum(i => i.Price * i.Quantity));
+
                 await unitOfWork.cartRepository.UpdateAsync(cart);
                 await unitOfWork.SaveAsync();
             }
@@ -90,7 +91,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                 Warehouses = cart.CartWarehouses.Select(w =>
                 {
                     decimal? warehouseMinPrice = w.WareHouse?.WareHouseAreas?
-                        .FirstOrDefault(wa => wa.AreaId == pharmacy.AreaId)?.MinmumPrice;
+                    .FirstOrDefault(wa => wa.AreaId == pharmacyAreaId)?.MinmumPrice;
 
                     return new CartWarehouseDto
                     {
@@ -108,7 +109,7 @@ namespace PharmacySystem.ApplicationLayer.Services
                             Discount = i.Discount,
                             PriceBeforeDiscount = i.Price,
                             PriceAfterDiscount = i.Price - (i.Price * (i.Discount / 100m)),
-                            TotalPriceForThisMedicine = (i.Price - (i.Price * (i.Discount / 100m))) * i.Quantity
+                            TotalPriceForThisMedicineAfterDiscount = (i.Price - (i.Price * (i.Discount / 100m))) * i.Quantity
                         }).ToList()
                     };
                 }).ToList()
@@ -147,51 +148,72 @@ namespace PharmacySystem.ApplicationLayer.Services
             return OperationResult<bool>.Success(true);
         }
 
-        public async Task<OperationResult<bool>> PlaceOrderAsync(int pharmacyId)
+        public async Task<OperationResult<bool>> PlaceOrderAsync(int pharmacyId, int? warehouseId = null)
         {
             var cart = await unitOfWork.cartRepository.GetCartWithDetailsByPharmacyIdAsync(pharmacyId);
             if (cart == null || !cart.CartWarehouses.Any())
-                return OperationResult<bool>.Failure("Cart is empty or not found");
+                return OperationResult<bool>.Failure("Cart is empty or not found.");
 
-            foreach (var cartWarehouse in cart.CartWarehouses)
+            // Simplified warehouse selection
+            var selectedWarehouses = warehouseId.HasValue
+                ? cart.CartWarehouses.Where(cw => cw.WareHouseId == warehouseId).ToList()
+                : cart.CartWarehouses.ToList();
+
+            if (selectedWarehouses.Count == 0)
+                return OperationResult<bool>.Failure("No matching warehouse found in the cart.");
+
+            foreach (var cartWarehouse in selectedWarehouses)
             {
                 var orderItems = new List<OrderDetail>();
 
-                foreach (var item in cartWarehouse.CartItems)
+                foreach (var cartItem in cartWarehouse.CartItems)
                 {
                     var warehouseMedicine = await unitOfWork.warehouseMedicineRepository
-                        .GetWarehouseMedicineAsync(cartWarehouse.WareHouseId, item.MedicineId)
-                        ?? throw new Exception($" Medicine with ID {item.MedicineId} does not exist in this warehouse.");
+                        .GetWarehouseMedicineAsync(cartWarehouse.WareHouseId, cartItem.MedicineId)
+                        ?? throw new Exception($"Medicine {cartItem.MedicineId} not found in warehouse {cartWarehouse.WareHouseId}");
 
-                    if (warehouseMedicine.Quantity < item.Quantity)
-                        throw new Exception($" Not enough quantity available for Medicine ID {item.MedicineId}. Available: {warehouseMedicine.Quantity}");
+                    if (warehouseMedicine.Quantity < cartItem.Quantity)
+                        throw new Exception($"Not enough stock for Medicine {cartItem.MedicineId}. Available: {warehouseMedicine.Quantity}");
 
-                    warehouseMedicine.Quantity -= item.Quantity;
+                    warehouseMedicine.Quantity -= cartItem.Quantity;
 
                     orderItems.Add(new OrderDetail
                     {
-                        MedicineId = item.MedicineId,
-                        Quntity = item.Quantity,
-                        Price = item.Price
+                        MedicineId = cartItem.MedicineId,
+                        Quntity = cartItem.Quantity,
+                        Price = cartItem.Price
                     });
                 }
 
+                // Create order
                 await unitOfWork.orderRepository.AddAsync(new Order
                 {
                     PharmacyId = pharmacyId,
                     WareHouseId = cartWarehouse.WareHouseId,
-                    Quntity = orderItems.Sum(i => i.Quntity),
-                    TotalPrice = orderItems.Sum(i => i.Quntity * i.Price),
+                    Quntity = orderItems.Sum(oi => oi.Quntity),
+                    TotalPrice = orderItems.Sum(oi => oi.Quntity * oi.Price),
                     Status = OrderStatus.Ordered,
                     OrderDetails = orderItems
                 });
+
+                // Directly delete cart items and warehouse
+                foreach (var cartItem in cartWarehouse.CartItems.ToList())
+                {
+                   await unitOfWork.cartItemRepository.DeleteAsync(cartItem);
+                }
+                await unitOfWork.cartWarehouseRepository.DeleteAsync(cartWarehouse);
+                cart.CartWarehouses.Remove(cartWarehouse);
             }
 
-            await unitOfWork.cartRepository.DeleteAsync(cart);
+            // Update or delete cart
+            if (cart.CartWarehouses.Count == 0)
+                await unitOfWork.cartRepository.DeleteAsync(cart);
+            else
+                await unitOfWork.cartRepository.UpdateAsync(cart);
+
             await unitOfWork.SaveAsync();
             return OperationResult<bool>.Success(true);
         }
-
         public async Task<OperationResult<bool>> UpdateCartItemQuantityAsync(int pharmacyId, int warehouseId, int medicineId, int newQuantity)
         {
             try

@@ -48,10 +48,10 @@ namespace PharmacySystem.PresentationLayer.Controllers
         #endregion
 
         #region PlaceOrder
-        [HttpPost("place-order/{pharmacyId}")]
-        public async Task<IActionResult> PlaceOrder(int pharmacyId)
+        [HttpPost("place-order")]
+        public async Task<IActionResult> PlaceOrder([FromQuery]  int pharmacyId , [FromQuery] int ? warehouseId = null)
         {
-            var result = await _cartService.PlaceOrderAsync(pharmacyId);
+            var result = await _cartService.PlaceOrderAsync(pharmacyId , warehouseId);
 
             return Ok(new
             {
