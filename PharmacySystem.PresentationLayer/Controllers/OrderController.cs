@@ -32,26 +32,19 @@ namespace PharmacySystem.PresentationLayer.Controllers
             return Ok(successResponse);
         }
 
-        [HttpGet("getAllOrder/{pharmacyId:int}")]
-        public async Task<IActionResult> returnOrdersByPahrmacyId(int pharmacyId)
-        {
-            var result = await _orderService.GetOrdersForPharmacy(pharmacyId);
-            var successResponse = new CustomResponse<object>("success", result);
-            return Ok(successResponse);
-        }
 
         [HttpGet("getAllOrderByStatus/{pharmacyId:int}")]
-        public async Task<IActionResult> returnOrdersByPahrmacyIdAndStatus(int pharmacyId,OrderStatus status)
+        public async Task<IActionResult> returnOrdersByPahrmacyIdAndStatus(int pharmacyId, [FromQuery] int page = 1,
+          [FromQuery] int pageSize = 15, OrderStatus? status = null)
         {
-            var result = await _orderService.GetOrdersForPharmacyByStatus(pharmacyId,status);
-            var successResponse = new CustomResponse<object>("success", result);
-            return Ok(successResponse);
-        }
-
-        [HttpGet("getAllOrderDetails/{orderId:int}")]
-        public async Task<IActionResult> returnOrderDetails(int orderId)
-        {
-            var result=await _orderService.GetOrdersDetails(orderId);
+            var result = await _orderService.GetOrdersForPharmacyByStatus(pharmacyId, page,pageSize,status);
+            if (result == null || result.Items == null || !result.Items.Any())
+            {
+                var errorResponse = new CustomResponse<object>("fail", null);
+                return NotFound(errorResponse);
+            }
+            page = page <= 0 ? 1 : page;
+            pageSize = pageSize <= 0 ? 15 : pageSize;
             var successResponse = new CustomResponse<object>("success", result);
             return Ok(successResponse);
         }
