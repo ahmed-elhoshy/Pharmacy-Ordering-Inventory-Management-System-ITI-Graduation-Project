@@ -196,7 +196,9 @@ namespace PharmacySystem.PresentationLayer.Controllers
           int areaId,
           [FromQuery] int page = 1,
           [FromQuery] int pageSize = 15,
-           [FromQuery] string? search = null)
+          [FromQuery] string? type = null,
+           [FromQuery] string? search = null
+            )
         {
             if (areaId <= 0)
                 return BadRequest("Invalid Area ID");
@@ -204,7 +206,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
             page = page <= 0 ? 1 : page;
             pageSize = pageSize <= 0 ? 15 : pageSize;
 
-            var result = await medicineService.GetMedicineStatsByAreaAsync(areaId, page, pageSize,search);
+            var result = await medicineService.GetMedicineStatsByAreaAsync(areaId, page, pageSize,search , type);
 
             return Ok(result);
         }

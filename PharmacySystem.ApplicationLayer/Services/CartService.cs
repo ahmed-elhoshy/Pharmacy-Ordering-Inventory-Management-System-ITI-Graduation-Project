@@ -177,11 +177,12 @@ namespace PharmacySystem.ApplicationLayer.Services
 
                     warehouseMedicine.Quantity -= cartItem.Quantity;
 
+                    decimal discountedPrice = cartItem.Price * (1 - cartItem.Discount / 100m);
                     orderItems.Add(new OrderDetail
                     {
                         MedicineId = cartItem.MedicineId,
                         Quntity = cartItem.Quantity,
-                        Price = cartItem.Price
+                        Price = discountedPrice
                     });
                 }
 

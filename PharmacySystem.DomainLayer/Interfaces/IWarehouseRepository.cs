@@ -16,7 +16,7 @@ namespace PharmacySystem.DomainLayer.Interfaces
         Task<WareHouse?> GetByIdAsync(int id);
         Task<WareHouse?> GetWarehouseByIdDetailsAsync(int id);
         Task<PaginatedResult<WareHouseMedicien>> GetWarehouseMedicinesAsync(
-        int warehouseId, int page, int pageSize , string search);
+        int warehouseId, int page, int pageSize , string search , string type);
         Task AddAsync(WareHouse warehouse);
         Task UpdateAsync(WareHouse warehouse);
         Task DeleteAsync(int id);
