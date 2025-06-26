@@ -1,5 +1,6 @@
 ﻿using E_Commerce.InfrastructureLayer.Data.DBContext.Repositories;
 using Microsoft.EntityFrameworkCore;
+using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Entities.Constants;
 using PharmacySystem.DomainLayer.Interfaces;
@@ -45,23 +46,28 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                 .Include(o => o.OrderDetails).ToListAsync();
         }
 
-
-        public async Task<IEnumerable<Order>> GetOrderByPharmacyId(int pharmacyId)
+        public async Task<PaginatedResult<Order>> GetOrderByPharmacyIdAndStatus(int pharmacyId, int page, int pageSize, OrderStatus? status = null)
         {
-            return await context.Orders.Include(o => o.WareHouse)
-                .Where(o => o.PharmacyId == pharmacyId).ToListAsync();
-        }
+            var query = context.Orders
+                .Include(o => o.WareHouse)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(d => d.Medicine)
+                .Where(o => o.PharmacyId == pharmacyId && (status == null || o.Status == status));
+            var totalCount=await query.CountAsync();
 
-        public async Task<IEnumerable<Order>> GetOrderByPharmacyIdAndStatus(int pharmacyId, OrderStatus status)
-        {
-            return await context.Orders.Include(o => o.WareHouse)
-                .Where(o => o.PharmacyId == pharmacyId&&o.Status==status).ToListAsync();
-        }
+            var pagedOrders = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
 
-        public async Task<IEnumerable<OrderDetail>> GetOrderDetailsById(int orderId)
-        {
-            return await context.OrderDetails.Include(od=>od.Medicine)
-                .Where(od=>od.OrderId==orderId).ToListAsync();
+            return new PaginatedResult<Order>
+            {
+                Items = pagedOrders,
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalCount = totalCount
+            };
+
         }
     }
 }

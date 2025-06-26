@@ -2,6 +2,7 @@
 using PharmacySystem.ApplicationLayer.DTOs.Medicines;
 using PharmacySystem.ApplicationLayer.DTOs.Orders;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
+using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Entities.Constants;
 using System;
@@ -41,58 +42,46 @@ namespace PharmacySystem.ApplicationLayer.Services
             }).ToList();
         }
 
-        public async Task<List<OrderMedicineDto>> GetOrdersForPharmacy(int pharmacyId)
+
+        public async Task<PaginatedResult<OrderMedicineDto>> GetOrdersForPharmacyByStatus(int pharmacyId, int page, int pageSize, OrderStatus? status = null)
         {
-            var orders = await _unitOfWork.orderRepository.GetOrderByPharmacyId(pharmacyId);
-            return orders.Select(o => new OrderMedicineDto
+            var orders = await _unitOfWork.orderRepository.GetOrderByPharmacyIdAndStatus(pharmacyId,page,pageSize, status);
+          var results=orders.Items.Select(o => new OrderMedicineDto
             {
-                OrderId = o.Id,
+                
                 WareHouseName = o.WareHouse.Name,
                 Status = o.Status.ToString(),
                 Quantity = o.Quntity,
                 TotalPrice = o.TotalPrice,
                 CreatedAt = o.CreatedAt,
-                WareHouseImage=o.WareHouse.ImageUrl
-            }).ToList();
-        }
+                WareHouseImage = o.WareHouse.ImageUrl,
+                Details = o.OrderDetails.Select(d => {
+                    var originalTotal = d.Medicine.Price * d.Quntity;
+                    var discountAmount = originalTotal - (d.Price * d.Quntity);
+                    var discountPercentage = originalTotal != 0 ? (discountAmount / originalTotal) * 100 : 0;
+                    return new OrderDetailsDto
+                    {
+                        MedicineName = d.Medicine.Name,
+                        ArabicMedicineName = d.Medicine.ArabicName,
+                        MedicineImage = d.Medicine.MedicineUrl,
+                        MedicinePrice = d.Medicine.Price,
+                        Quantity = d.Quntity,
+                        TotalPriceBeforeDisccount = originalTotal,
+                        TotalPriceAfterDisccount = d.Price * d.Quntity,
+                        DiscountAmount =discountAmount,
 
-        public async Task<List<OrderMedicineDto>> GetOrdersForPharmacyByStatus(int pharmacyId, OrderStatus status)
-        {
-            var orders = await _unitOfWork.orderRepository.GetOrderByPharmacyIdAndStatus(pharmacyId,status);
-            return orders.Select(o => new OrderMedicineDto
+                        discountPercentage = discountPercentage
+                    };
+                }).ToList()
+            }).ToList();
+            return new PaginatedResult<OrderMedicineDto>
             {
-                OrderId = o.Id,
-                WareHouseName = o.WareHouse.Name,
-                Status = o.Status.ToString(),
-                Quantity = o.Quntity,
-                TotalPrice = o.TotalPrice,
-                CreatedAt = o.CreatedAt,
-                WareHouseImage = o.WareHouse.ImageUrl
-            }).ToList();
+                Items = results,
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalCount = orders.TotalCount
+            };
         }
 
-        public async Task<List<OrderDetailsDto>> GetOrdersDetails(int orderId)
-        {
-           var details=await _unitOfWork.orderRepository.GetOrderDetailsById(orderId);
-            return details.Select(o =>
-            {
-                var originalTotal = o.Medicine.Price * o.Quntity;
-                var discountAmount = originalTotal - o.Price;
-
-                return new OrderDetailsDto
-                {
-                    MedicineName = o.Medicine.Name,
-                    ArabicMedicineName = o.Medicine.ArabicName,
-                    MedicineImage=o.Medicine.MedicineUrl,
-                    Quantity = o.Quntity,
-                    TotalPriceAfterDisccount = o.Price,
-                    TotalPriceBeforeDisccount = o.Medicine.Price*o.Quntity,
-                    MedicinePrice = o.Medicine.Price,
-                    DiscountAmount = discountAmount,
-                    
-                };
-            }).ToList();
-
-        }
     }
 }

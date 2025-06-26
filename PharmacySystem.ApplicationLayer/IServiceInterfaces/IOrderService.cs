@@ -1,4 +1,5 @@
 ﻿using PharmacySystem.ApplicationLayer.DTOs.Orders;
+using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Entities.Constants;
 using System;
@@ -12,8 +13,6 @@ namespace PharmacySystem.ApplicationLayer.IServiceInterfaces
     public interface IOrderService
     {
         Task<List<OrderToWarehouseDto>> GetOrdersForWarehouseAsync(int warehouseId);
-        Task<List<OrderMedicineDto>> GetOrdersForPharmacy(int pharmacyId);
-        Task<List<OrderMedicineDto>> GetOrdersForPharmacyByStatus(int pharmacyId,OrderStatus status);
-        Task<List<OrderDetailsDto>> GetOrdersDetails(int orderId);
+        Task<PaginatedResult<OrderMedicineDto>> GetOrdersForPharmacyByStatus(int pharmacyId, int page, int pageSize, OrderStatus? status = null);
     }
 }
