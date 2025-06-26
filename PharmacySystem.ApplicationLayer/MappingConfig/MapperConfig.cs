@@ -170,7 +170,8 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
             #region  CartItem
             CreateMap<CartWarehouse, CartWarehouseDto>()
                 .ForMember(dest => dest.WarehouseId, opt => opt.MapFrom(src => src.WareHouseId))
-                .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.CartItems));
+                .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.CartItems))
+                .ForMember(dest => dest.Name , opt => opt.MapFrom(src => src.WareHouse.Name));
             #endregion
 
             #region  CartWarehouse
