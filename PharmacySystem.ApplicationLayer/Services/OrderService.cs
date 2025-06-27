@@ -1,4 +1,5 @@
 ﻿using E_Commerce.DomainLayer.Interfaces;
+using Microsoft.Extensions.Options;
 using PharmacySystem.ApplicationLayer.DTOs.Medicines;
 using PharmacySystem.ApplicationLayer.DTOs.Orders;
 using PharmacySystem.ApplicationLayer.IServiceInterfaces;
@@ -48,7 +49,7 @@ namespace PharmacySystem.ApplicationLayer.Services
             var orders = await _unitOfWork.orderRepository.GetOrderByPharmacyIdAndStatus(pharmacyId,page,pageSize, status);
           var results=orders.Items.Select(o => new OrderMedicineDto
             {
-                
+                OrderId=o.Id,
                 WareHouseName = o.WareHouse.Name,
                 Status = o.Status.ToString(),
                 Quantity = o.Quntity,
@@ -69,7 +70,6 @@ namespace PharmacySystem.ApplicationLayer.Services
                         TotalPriceBeforeDisccount = originalTotal,
                         TotalPriceAfterDisccount = d.Price * d.Quntity,
                         DiscountAmount =discountAmount,
-
                         discountPercentage = discountPercentage
                     };
                 }).ToList()
@@ -83,5 +83,30 @@ namespace PharmacySystem.ApplicationLayer.Services
             };
         }
 
+
+        public async Task<List<OrderDetailsDto>> GetOrdersDetails(int orderId)
+        {
+            var details = await _unitOfWork.orderRepository.GetOrderDetailsById(orderId); 
+            return details.Select(o =>
+            {
+                var originalTotal = o.Medicine.Price * o.Quntity;
+                var discountAmount = originalTotal - (o.Price * o.Quntity);
+                var discountPercentage = originalTotal != 0 ? (discountAmount / originalTotal) * 100 : 0;
+
+                return new OrderDetailsDto
+                {
+                    MedicineName = o.Medicine.Name,
+                    ArabicMedicineName = o.Medicine.ArabicName,
+                    MedicineImage = o.Medicine.MedicineUrl,
+                    MedicinePrice = o.Medicine.Price,
+                    Quantity = o.Quntity,
+                    TotalPriceBeforeDisccount = originalTotal,
+                    TotalPriceAfterDisccount = o.Price * o.Quntity,
+                    DiscountAmount = discountAmount,
+                    discountPercentage = discountPercentage
+
+                };
+            }).ToList();
+        }
     }
 }

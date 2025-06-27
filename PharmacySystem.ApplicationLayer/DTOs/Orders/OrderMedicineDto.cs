@@ -8,7 +8,7 @@ namespace PharmacySystem.ApplicationLayer.DTOs.Orders
 {
     public class OrderMedicineDto
     {
-    
+        public int OrderId { get; set; }
         public int Quantity { get; set; }
         public decimal TotalPrice { get; set; }
         public string WareHouseName { get; set; }

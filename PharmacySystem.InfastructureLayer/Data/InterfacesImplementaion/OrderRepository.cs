@@ -1,5 +1,6 @@
 ﻿using E_Commerce.InfrastructureLayer.Data.DBContext.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PharmacySystem.ApplicationLayer.Pagination;
 using PharmacySystem.DomainLayer.Entities;
 using PharmacySystem.DomainLayer.Entities.Constants;
@@ -68,6 +69,12 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
                 TotalCount = totalCount
             };
 
+        }
+
+        public async Task<IEnumerable<OrderDetail>> GetOrderDetailsById(int orderId)
+        {
+            return await context.OrderDetails.Include(od => od.Medicine)
+                .Where(od => od.OrderId == orderId).ToListAsync();
         }
     }
 }
