@@ -48,5 +48,13 @@ namespace PharmacySystem.PresentationLayer.Controllers
             var successResponse = new CustomResponse<object>("success", result);
             return Ok(successResponse);
         }
+
+        [HttpGet("getAllOrderDetails/{orderId:int}")] 
+        public async Task<IActionResult> returnOrderDetails(int orderId)
+        {
+            var result = await _orderService.GetOrdersDetails(orderId);
+            var successResponse = new CustomResponse<object>("success", result);
+            return Ok(successResponse);
+        }
     }
 }

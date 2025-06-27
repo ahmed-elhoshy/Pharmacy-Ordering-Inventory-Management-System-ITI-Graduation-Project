@@ -11,6 +11,7 @@ namespace PharmacySystem.DomainLayer.Interfaces
         Task<List<Order>> GetOrdersByRepresentativeIdIncludingPharmicesAsync(int representativeId);
         Task<IEnumerable<Order>> GetOrdersByWarehouseIdAsync (int warehouseId);
         Task<PaginatedResult<Order>> GetOrderByPharmacyIdAndStatus(int pharmacyId, int page, int pageSize, OrderStatus? status = null);
+        Task<IEnumerable<OrderDetail>> GetOrderDetailsById(int orderId);
 
     }
 }
