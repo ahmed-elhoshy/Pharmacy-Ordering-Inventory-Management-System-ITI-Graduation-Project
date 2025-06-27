@@ -7,6 +7,8 @@ namespace PharmacySystem.DomainLayer.Entities.Constants
         Ordered,
         Delivered,
         Cancelled,
-        Returned
+        Returned,
+        Preparing,
+        Delivering
     }
 }

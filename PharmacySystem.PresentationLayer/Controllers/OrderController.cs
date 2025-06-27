@@ -41,7 +41,7 @@ namespace PharmacySystem.PresentationLayer.Controllers
             if (result == null || result.Items == null || !result.Items.Any())
             {
                 var errorResponse = new CustomResponse<object>("fail", null);
-                return NotFound(errorResponse);
+                return Ok(errorResponse);
             }
             page = page <= 0 ? 1 : page;
             pageSize = pageSize <= 0 ? 15 : pageSize;
