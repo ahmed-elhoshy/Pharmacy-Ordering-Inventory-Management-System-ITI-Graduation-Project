@@ -3,6 +3,7 @@ using AutoMapper;
 using E_Commerce.DomainLayer.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using PharmacySystem.ApplicationLayer.Common;
 using PharmacySystem.ApplicationLayer.DTOs.OrderDetails;
 using PharmacySystem.ApplicationLayer.DTOs.Orders;
 using PharmacySystem.ApplicationLayer.DTOs.Pharmacy.Login;
@@ -36,11 +37,13 @@ namespace PharmacySystem.ApplicationLayer.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
-        public RepresentativeService(IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration)
+        private readonly IEmailService _emailService;
+        public RepresentativeService(IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _configuration = configuration;
+            _emailService = emailService;
         }
         #endregion
 
@@ -299,6 +302,66 @@ namespace PharmacySystem.ApplicationLayer.Services
                 PageNumber = pageNumber,
                 PageSize = pageSize
             };
+        }
+        #endregion
+
+        #region ForgotPasswordAsync
+        public async Task<ValidationResult?> ForgotPasswordAsync(PharmacySystem.ApplicationLayer.DTOs.Representative.Login.ForgotPasswordRequestDto dto)
+        {
+            var validation = new ValidationResult();
+            var representative = await _unitOfWork.representativeRepository.FindByEmailAsync(dto.Email);
+            if (representative == null)
+            {
+                validation.Errors.Add("Email", ["No representative found with this email."]);
+                return validation;
+            }
+            
+            // Store the provided OTP (handled by mobile app)
+            representative.PasswordResetOTP = dto.OTP;
+            representative.PasswordResetOTPExpiry = DateTime.UtcNow.AddMinutes(10); // 10 minutes expiry
+            await _unitOfWork.representativeRepository.UpdateAsync(representative);
+            await _unitOfWork.SaveAsync();
+            
+            // Send the OTP via email
+            var subject = "Representative Password Reset OTP";
+            var body = $"<p>Your password reset OTP is: <strong>{dto.OTP}</strong></p><p>This OTP will expire in 10 minutes.</p>";
+            await _emailService.SendEmailAsync(representative.Email, subject, body);
+            
+            return null; // Success
+        }
+        #endregion
+
+        #region ResetPasswordAsync
+        public async Task<ValidationResult?> ResetPasswordAsync(PharmacySystem.ApplicationLayer.DTOs.Representative.Login.ResetPasswordRequestDto dto)
+        {
+            var validation = new ValidationResult();
+            var representative = await _unitOfWork.representativeRepository.FindByEmailAsync(dto.Email);
+            if (representative == null)
+            {
+                validation.Errors.Add("Email", ["No representative found with this email."]);
+                return validation;
+            }
+            
+            if (representative.PasswordResetOTP != dto.OTP || representative.PasswordResetOTPExpiry == null || representative.PasswordResetOTPExpiry < DateTime.UtcNow)
+            {
+                validation.Errors.Add("OTP", ["Invalid or expired OTP."]);
+                return validation;
+            }
+            
+            if (dto.NewPassword != dto.ConfirmPassword)
+            {
+                validation.Errors.Add("ConfirmPassword", ["Passwords do not match."]);
+                return validation;
+            }
+            
+            // Update password and clear OTP
+            representative.Password = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
+            representative.PasswordResetOTP = null;
+            representative.PasswordResetOTPExpiry = null;
+            await _unitOfWork.representativeRepository.UpdateAsync(representative);
+            await _unitOfWork.SaveAsync();
+            
+            return null; // Success
         }
         #endregion
     }

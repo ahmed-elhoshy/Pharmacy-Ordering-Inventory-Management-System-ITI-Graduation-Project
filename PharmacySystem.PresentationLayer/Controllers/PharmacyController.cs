@@ -91,4 +91,26 @@ public class PharmacyController : ControllerBase
         }
         return Ok(result);
     }
+
+    [HttpPost("forgot-password")]
+    public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequestDto dto)
+    {
+        var validation = await _pharmacyService.ForgotPasswordAsync(dto);
+        if (validation is not null && validation.HasErrors)
+        {
+            return Ok(validation.ToErrorResponse());
+        }
+        return Ok(new { message = "If the email exists, a password reset link has been sent.", success = true });
+    }
+
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequestDto dto)
+    {
+        var validation = await _pharmacyService.ResetPasswordAsync(dto);
+        if (validation is not null && validation.HasErrors)
+        {
+            return Ok(validation.ToErrorResponse());
+        }
+        return Ok(new { message = "Password has been reset successfully.", success = true });
+    }
 }

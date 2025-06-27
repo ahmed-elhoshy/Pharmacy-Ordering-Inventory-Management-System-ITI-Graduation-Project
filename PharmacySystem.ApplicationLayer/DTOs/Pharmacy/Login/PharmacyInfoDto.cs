@@ -31,4 +31,6 @@ public class PharmacyInfoDto
     [Required]
     public int? RepresentativeId { get; set; }
 
+    public string RepresentativePhone { get; set; }
+
 }

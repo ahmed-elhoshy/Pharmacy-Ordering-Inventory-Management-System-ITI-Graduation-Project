@@ -33,6 +33,7 @@ builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<PharmacySystem.ApplicationLayer.Common.IEmailService, PharmacySystem.ApplicationLayer.Common.EmailService>();
 #endregion
 
 
@@ -55,14 +56,25 @@ builder.Services.AddCors(options =>
 #endregion
 
 builder.Services.AddControllers();
-//Do not automatically return 400 if ModelState is invalid — let me handle it myself inside the action.
+//Do not automatically return 400 if ModelState is invalid ï¿½ let me handle it myself inside the action.
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.CustomSchemaIds(type =>
+    {
+        if (type.FullName != null)
+        {
+            // Use the full type name as schema ID to avoid conflicts
+            return type.FullName.Replace("+", "_").Replace(".", "_");
+        }
+        return type.Name;
+    });
+});
 
 var app = builder.Build();
 

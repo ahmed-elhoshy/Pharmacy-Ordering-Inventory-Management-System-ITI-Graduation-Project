@@ -179,5 +179,31 @@ namespace PharmacySystem.PresentationLayer.Controllers
             return Ok(result);
         }
         #endregion
+
+        #region Forgot Password
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] PharmacySystem.ApplicationLayer.DTOs.Representative.Login.ForgotPasswordRequestDto dto)
+        {
+            var validation = await _service.ForgotPasswordAsync(dto);
+            if (validation is not null && validation.HasErrors)
+            {
+                return Ok(validation.ToErrorResponse());
+            }
+            return Ok(new { message = "If the email exists, a password reset OTP has been sent.", success = true });
+        }
+        #endregion
+
+        #region Reset Password
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] PharmacySystem.ApplicationLayer.DTOs.Representative.Login.ResetPasswordRequestDto dto)
+        {
+            var validation = await _service.ResetPasswordAsync(dto);
+            if (validation is not null && validation.HasErrors)
+            {
+                return Ok(validation.ToErrorResponse());
+            }
+            return Ok(new { message = "Password has been reset successfully.", success = true });
+        }
+        #endregion
     }
 }

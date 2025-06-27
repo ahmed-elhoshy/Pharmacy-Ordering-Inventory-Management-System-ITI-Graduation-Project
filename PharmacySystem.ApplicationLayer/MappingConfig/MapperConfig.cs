@@ -139,7 +139,8 @@ namespace PharmacySystem.ApplicationLayer.MappingConfig
                 .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
 
-            CreateMap<Pharmacy, PharmacyInfoDto>();
+            CreateMap<Pharmacy, PharmacyInfoDto>()
+                .ForMember(dest => dest.RepresentativePhone, opt => opt.MapFrom(src => src.Representative.Phone));
             #endregion
 
             #region Governate

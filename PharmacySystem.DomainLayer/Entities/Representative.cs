@@ -28,6 +28,11 @@ namespace PharmacySystem.DomainLayer.Entities
         [Required]
         [Phone]
         public string Phone { get; set; }
+        
+        // Password reset fields
+        public string? PasswordResetOTP { get; set; }
+        public DateTime? PasswordResetOTPExpiry { get; set; }
+        
         public virtual ICollection<Pharmacy> pharmacies {get; set;} = new HashSet<Pharmacy>();
 
         // For Representative accounts

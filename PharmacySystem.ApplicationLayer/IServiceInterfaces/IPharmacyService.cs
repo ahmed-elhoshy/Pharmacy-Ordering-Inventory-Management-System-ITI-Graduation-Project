@@ -9,4 +9,6 @@ public interface IPharmacyService
 {
     Task<ValidationResult?> RegisterPharmacyAsync(PharmacyRegisterDto dto);
     Task<PharmacyLoginResponseDTO> LoginAsync(PharmacyLoginDTO dto);
+    Task<ValidationResult?> ForgotPasswordAsync(ForgotPasswordRequestDto dto);
+    Task<ValidationResult?> ResetPasswordAsync(ResetPasswordRequestDto dto);
 }

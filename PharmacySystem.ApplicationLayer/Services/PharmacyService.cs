@@ -18,12 +18,14 @@ public class PharmacyService : IPharmacyService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly IConfiguration _configuration;
+    private readonly IEmailService _emailService;
 
-    public PharmacyService(IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration)
+    public PharmacyService(IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration, IEmailService emailService)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _configuration = configuration;
+        _emailService = emailService;
     }
 
     public async Task<ValidationResult?> RegisterPharmacyAsync(PharmacyRegisterDto dto)
@@ -78,8 +80,8 @@ public class PharmacyService : IPharmacyService
 
     public async Task<PharmacyLoginResponseDTO> LoginAsync(PharmacyLoginDTO dto)
     {
-        // Retrieve the pharmacy entity by email
-        var pharmacy = await _unitOfWork.PharmacyRepository.FindByEmailAsync(dto.Email);
+        // Retrieve the pharmacy entity by email with representative details
+        var pharmacy = await _unitOfWork.PharmacyRepository.FindByEmailWithRepresentativeAsync(dto.Email);
 
         if (pharmacy == null)
             return new PharmacyLoginResponseDTO
@@ -130,5 +132,61 @@ public class PharmacyService : IPharmacyService
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public async Task<ValidationResult?> ForgotPasswordAsync(ForgotPasswordRequestDto dto)
+    {
+        var validation = new ValidationResult();
+        var pharmacy = await _unitOfWork.PharmacyRepository.FindByEmailAsync(dto.Email);
+        if (pharmacy == null)
+        {
+            validation.Errors.Add("Email", ["No pharmacy found with this email."]);
+            return validation;
+        }
+        
+        // Store the provided OTP (handled by mobile app)
+        pharmacy.PasswordResetOTP = dto.OTP;
+        pharmacy.PasswordResetOTPExpiry = DateTime.UtcNow.AddMinutes(10); // 10 minutes expiry
+        await _unitOfWork.PharmacyRepository.UpdateAsync(pharmacy);
+        await _unitOfWork.SaveAsync();
+        
+        // Send the OTP via email
+        var subject = "Pharmacy System Password Reset OTP";
+        var body = $"<p>Your password reset OTP is: <strong>{dto.OTP}</strong></p><p>This OTP will expire in 10 minutes.</p>";
+        await _emailService.SendEmailAsync(pharmacy.Email, subject, body);
+        
+        return null; // Success
+    }
+
+    public async Task<ValidationResult?> ResetPasswordAsync(ResetPasswordRequestDto dto)
+    {
+        var validation = new ValidationResult();
+        var pharmacy = await _unitOfWork.PharmacyRepository.FindByEmailAsync(dto.Email);
+        if (pharmacy == null)
+        {
+            validation.Errors.Add("Email", ["No pharmacy found with this email."]);
+            return validation;
+        }
+        
+        if (pharmacy.PasswordResetOTP != dto.OTP || pharmacy.PasswordResetOTPExpiry == null || pharmacy.PasswordResetOTPExpiry < DateTime.UtcNow)
+        {
+            validation.Errors.Add("OTP", ["Invalid or expired OTP."]);
+            return validation;
+        }
+        
+        if (dto.NewPassword != dto.ConfirmPassword)
+        {
+            validation.Errors.Add("ConfirmPassword", ["Passwords do not match."]);
+            return validation;
+        }
+        
+        // Update password and clear OTP
+        pharmacy.Password = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
+        pharmacy.PasswordResetOTP = null;
+        pharmacy.PasswordResetOTPExpiry = null;
+        await _unitOfWork.PharmacyRepository.UpdateAsync(pharmacy);
+        await _unitOfWork.SaveAsync();
+        
+        return null; // Success
     }
 }

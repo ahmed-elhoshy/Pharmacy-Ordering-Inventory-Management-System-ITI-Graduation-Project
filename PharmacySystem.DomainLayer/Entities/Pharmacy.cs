@@ -43,6 +43,11 @@ namespace PharmacySystem.DomainLayer.Entities
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+        // Password reset fields
+        public string? PasswordResetOTP { get; set; }
+        public DateTime? PasswordResetOTPExpiry { get; set; }
+
         public virtual ICollection<Cart> Carts { get; set; } = new HashSet<Cart>();
         public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     }
