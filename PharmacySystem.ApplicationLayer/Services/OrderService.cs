@@ -83,6 +83,29 @@ namespace PharmacySystem.ApplicationLayer.Services
             };
         }
 
+        public async Task<PaginatedResult<OrderMedicineDto>> GetOrdersForPharmacy(int pharmacyId, int page, int pageSize, OrderStatus? status = null)
+        {
+            var orders = await _unitOfWork.orderRepository.GetOrderByPharmacyId(pharmacyId, page, pageSize, status);
+            var results = orders.Items.Select(o => new OrderMedicineDto
+            {
+                OrderId = o.Id,
+                WareHouseName = o.WareHouse.Name,
+                Status = o.Status.ToString(),
+                Quantity = o.Quntity,
+                TotalPrice = o.TotalPrice,
+                CreatedAt = o.CreatedAt,
+                WareHouseImage = o.WareHouse.ImageUrl,
+                Details = null,
+            }).ToList();
+
+            return new PaginatedResult<OrderMedicineDto>
+            {
+                Items = results,
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalCount = orders.TotalCount
+            };
+        }
 
         public async Task<List<OrderDetailsDto>> GetOrdersDetails(int orderId)
         {
@@ -108,5 +131,6 @@ namespace PharmacySystem.ApplicationLayer.Services
                 };
             }).ToList();
         }
+
     }
 }

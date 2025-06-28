@@ -14,6 +14,7 @@ namespace PharmacySystem.ApplicationLayer.IServiceInterfaces
     {
         Task<List<OrderToWarehouseDto>> GetOrdersForWarehouseAsync(int warehouseId);
         Task<PaginatedResult<OrderMedicineDto>> GetOrdersForPharmacyByStatus(int pharmacyId, int page, int pageSize, OrderStatus? status = null);
+        Task<PaginatedResult<OrderMedicineDto>> GetOrdersForPharmacy(int pharmacyId, int page, int pageSize, OrderStatus? status = null);
 
         Task<List<OrderDetailsDto>> GetOrdersDetails(int orderId);
     }

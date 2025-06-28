@@ -48,6 +48,22 @@ namespace PharmacySystem.PresentationLayer.Controllers
             var successResponse = new CustomResponse<object>("success", result);
             return Ok(successResponse);
         }
+        [HttpGet("getAllOrdersWithoutDetails/{pharmacyId:int}")]
+        public async Task<IActionResult> returnOrdersByPahrmacyIdAndStatusWithoutDetails(int pharmacyId, [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 15, OrderStatus? status = null)
+        {
+            var result = await _orderService.GetOrdersForPharmacy(pharmacyId, page, pageSize, status);
+            if (result == null || result.Items == null || !result.Items.Any())
+            {
+                var errorResponse = new CustomResponse<object>("fail", null);
+                return Ok(errorResponse);
+            }
+            page = page <= 0 ? 1 : page;
+            pageSize = pageSize <= 0 ? 15 : pageSize;
+            var successResponse = new CustomResponse<object>("success", result);
+            return Ok(successResponse);
+        }
+
 
         [HttpGet("getAllOrderDetails/{orderId:int}")] 
         public async Task<IActionResult> returnOrderDetails(int orderId)
