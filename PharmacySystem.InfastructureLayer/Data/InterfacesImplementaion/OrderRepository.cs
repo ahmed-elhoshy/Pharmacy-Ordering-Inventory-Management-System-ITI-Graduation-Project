@@ -46,7 +46,26 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
             return await context.Orders.AsNoTracking().Where(p => p.WareHouseId == warehouseId)
                 .Include(o => o.OrderDetails).ToListAsync();
         }
+        public async Task<PaginatedResult<Order>> GetOrderByPharmacyId(int pharmacyId, int page, int pageSize, OrderStatus? status = null)
+        {
+            var query = context.Orders
+                .Include(o => o.WareHouse)
+                .Where(o => o.PharmacyId == pharmacyId && (status == null || o.Status == status));
+            var totalCount = await query.CountAsync();
 
+            var pagedOrders = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PaginatedResult<Order>
+            {
+                Items = pagedOrders,
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalCount = totalCount
+            };
+        }
         public async Task<PaginatedResult<Order>> GetOrderByPharmacyIdAndStatus(int pharmacyId, int page, int pageSize, OrderStatus? status = null)
         {
             var query = context.Orders
@@ -76,5 +95,7 @@ namespace PharmacySystem.InfastructureLayer.Data.InterfacesImplementaion
             return await context.OrderDetails.Include(od => od.Medicine)
                 .Where(od => od.OrderId == orderId).ToListAsync();
         }
+
+     
     }
 }
